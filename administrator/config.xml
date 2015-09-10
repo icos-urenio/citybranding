@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <fieldset addfieldpath="/components/com_citybranding/models/fields" 
+        name="map" 
+        class="form-horizontal" 
+        label="COM_CITYBRANDING_SETTINGS_GOOGLE_MAP_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_GOOGLE_MAP_DESC">
+      <field type="spacer" name="myspacer" hr="true" />  
+      <field
+        name="api_key"
+        type="text"
+        default=""
+        class="inputbox input-xxlarge"
+        label="COM_CITYBRANDING_SETTINGS_APIKEY_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_APIKEY_DESC" />
+
+      <field name="address" type="gmap" 
+            label="COM_CITYBRANDING_SETTINGS_INITIAL_ADDRESS_LABEL"
+            description="COM_CITYBRANDING_SETTINGS_INITIAL_ADDRESS_DESC"
+            latitudefield="latitude" 
+            longitudefield="longitude" 
+            width="50%"
+            height="300px" /> 
+
+      <field
+        name="latitude"
+        type="text"
+        default="40.626449"
+        label="COM_CITYBRANDING_SETTINGS_INITIAL_LATITUDE_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_INITIAL_LATITUDE_DESC"
+      />
+      <field
+        name="longitude"
+        type="text"
+        default="22.948426"        
+        label="COM_CITYBRANDING_SETTINGS_INITIAL_LONGITUDE_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_INITIAL_LONGITUDE_DESC"
+      />
+      <field
+        name="zoom"
+        type="text"
+        default="14"        
+        label="COM_CITYBRANDING_SETTINGS_INITIAL_MAP_ZOOM_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_INITIAL_MAP_ZOOM_DESC"
+      />
+      <field
+        name="maplanguage"
+        type="text"
+        default="en"
+        label="COM_CITYBRANDING_SETTINGS_MAP_LANGUAGE_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_MAP_LANGUAGE_DESC"
+      />      
+      <field
+        name="mapregion"
+        type="text"
+        default="GB"
+        label="COM_CITYBRANDING_SETTINGS_MAP_REGION_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_MAP_REGION_DESC"
+      />
+      <field
+        name="hiddenterm"
+        type="text"
+        default=""
+        label="COM_CITYBRANDING_SETTINGS_HIDDEN_SEARCH_TERM_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_HIDDEN_SEARCH_TERM_DESC"
+      />
+
+      <field name="scrollwheel" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_SCROLLWHEEL_LABEL" description="COM_CITYBRANDING_SETTINGS_SCROLLWHEEL_DESC">
+        <option value="0">JNO</option>
+        <option value="1">JYES</option>
+      </field>      
+
+      <field name="clusterer" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_CLUSTERER_LABEL" description="COM_CITYBRANDING_SETTINGS_CLUSTERER_DESC">
+        <option value="0">JNO</option>
+        <option value="1">JYES</option>
+      </field>
+
+  </fieldset>
+  <fieldset  
+        name="generic" 
+        class="form-horizontal" 
+        label="COM_CITYBRANDING_SETTINGS_GENERIC_LABEL"
+        description="COM_CITYBRANDING_SETTINGS_GENERIC_DESC">
+        
+
+        <field name="newissueneedsmoderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_NEW_ISSUE_MODERATION_LABEL" description="COM_CITYBRANDING_SETTINGS_NEW_ISSUE_MODERATION_DESC">
+          <option value="0">JNO</option>
+          <option value="1">JYES</option>
+        </field>
+
+        <field type="spacer" name="myspacer" hr="true" />
+        <field type="spacer" name="timelinespacer" class="text"
+        label="COM_CITYBRANDING_SETTINGS_TIMELINE_LABEL"
+        />
+
+        <field name="showadmindetailstimeline" type="radio" default="1" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_TIMELINE_SHOW_ADMIN_LABEL" description="COM_CITYBRANDING_SETTINGS_TIMELINE_SHOW_ADMIN_DESC">
+          <option value="0">JNO</option>
+          <option value="1">JYES</option>
+        </field>
+
+        <field name="showuserdetailstimeline" type="radio" default="1" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_TIMELINE_SHOW_USER_LABEL" description="COM_CITYBRANDING_SETTINGS_TIMELINE_SHOW_USER_DESC">
+          <option value="0">JNO</option>
+          <option value="1">JYES</option>
+        </field>
+
+  </fieldset>
+    
+  <fieldset name="permissions"
+      	    description="JCONFIG_PERMISSIONS_DESC"
+	          label="JCONFIG_PERMISSIONS_LABEL">
+
+		<field name="rules" type="rules" component="com_citybranding"
+           class="inputbox" filter="rules" validate="rules"
+           label="JCONFIG_PERMISSIONS_LABEL"
+           section="component" />
+
+	</fieldset>
+
+</config>
+<!--
+########################################################################################
+The following are a list of all the different types of fields you can add to this file
+They are here for copy pasting - neat eh?
+########################################################################################
+
+http://docs.joomla.org/Calendar_parameter_type
+<field name="mycalendar" type="calendar" default="5-10-2008" label="Select a date" description="" format="%d-%m-%Y" />
+
+http://docs.joomla.org/Category_parameter_type
+<field name="mycategory" type="category" label="Select a category" description="" section="3" />
+
+http://docs.joomla.org/Editors_parameter_type
+<field name="myeditor" type="editors" default="none" label="Select an editor" />
+
+http://docs.joomla.org/Filelist_parameter_type
+<field name="myfile" type="filelist" default="" label="Select a file" description="" directory="administrator" filter="" exclude="" stripext="" />
+
+http://docs.joomla.org/Folderlist_parameter_type
+<field name="myfolder" type="folderlist" default="" label="Select a folder" directory="administrator" filter="" exclude="" stripext="" />
+
+http://docs.joomla.org/Helpsites_parameter_type
+<field name="myhelpsite" type="helpsites" default="" label="Select a help site" description="" />
+
+http://docs.joomla.org/Hidden_parameter_type
+<field name="mysecretvariable" type="hidden" default="" />
+
+http://docs.joomla.org/Imagelist_parameter_type
+<field name="myimage" type="imagelist" default="" label="Select an image" description="" directory="" exclude="" stripext="" />
+
+http://docs.joomla.org/Languages_parameter_type
+<field name="mylanguage" type="languages" client="site" default="en-GB" label="Select a language" description="" />
+
+http://docs.joomla.org/List_parameter_type
+<field name="mylistvalue" type="list" default="" label="Select an option" description="">
+  <option value="0">Option 1</option>
+  <option value="1">Option 2</option>
+</field>
+
+http://docs.joomla.org/Menu_parameter_type
+<field name="mymenu" type="menu" default="mainmenu" label="Select a menu" description="Select a menu" />
+
+http://docs.joomla.org/Menuitem_parameter_type
+<field name="mymenuitem" type="menuitem" default="45" label="Select a menu item" description="Select a menu item" />
+
+http://docs.joomla.org/Password_parameter_type
+<field name="mypassword" type="password" default="secret" label="Enter a password" description="" size="5" />
+
+http://docs.joomla.org/Radio_parameter_type
+<field name="myradiovalue" type="radio" default="0" label="Select an option" description="">
+  <option value="0">1</option>
+  <option value="1">2</option>
+</field>
+
+http://docs.joomla.org/Spacer_parameter_type
+<field type="spacer" default="&lt;b&gt;Advanced parameters&lt;/b&gt;" />
+
+http://docs.joomla.org/Sql_parameter_type
+<field name="myfield" type="sql" default="10" label="Select an article" query="SELECT id, title FROM #__content" key_field=”id” value_field=”title” />
+
+http://docs.joomla.org/Text_parameter_type
+<field name="mytextvalue" type="text" default="Some text" label="Enter some text" description="" size="10" />
+
+http://docs.joomla.org/Textarea_parameter_type
+<field name="mytextarea" type="textarea" default="default" label="Enter some text" description="" rows="10" cols="5" />
+
+http://docs.joomla.org/Timezones_parameter_type
+<field name="mytimezone" type="timezones" default="-10" label="Select a timezone" description="" />
+
+http://docs.joomla.org/Usergroup_parameter_type
+<field name="myusergroups" type="usergroup" default="" label="Select a user group" description="" />
+
+
+-->

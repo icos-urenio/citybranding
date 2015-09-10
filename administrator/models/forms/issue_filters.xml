@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_citybranding/models/fields">
+       
+        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_ISSUE_MODERATION" description="COM_CITYBRANDING_FORM_DESC_ISSUE_MODERATION">
+              <option value="0">JNO</option>
+              <option value="1">JYES</option>
+            </field>
+
+        <field name="regnum" type="text"
+                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGNUM"
+                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGNUM" /> 
+
+        <field name="regdate" type="calendar"
+                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGDATE"
+                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGDATE" />
+
+        <field name="responsible" type="text"
+                label="COM_CITYBRANDING_FORM_LBL_ISSUE_RESPONSIBLE"
+                description="COM_CITYBRANDING_FORM_DESC_ISSUE_RESPONSIBLE" /> 
+
+        <field name="acl_category" type="aclcategory"
+            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CATID"
+            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CATID" 
+            extension="com_citybranding" multiple="false"> 
+                <option value="">JALL</option>
+        </field> 
+        
+        <field name="stepid" type="sql" class="inputbox"
+            label="COM_CITYBRANDING_FORM_LBL_ISSUE_STEPID"
+            query="SELECT `id`, `title` AS val FROM `#__citybranding_steps`" 
+            key_field="id" 
+            value_field="val">
+                <option value="">JALL</option>
+        </field> 
+
+        <field name="subgroup" type="subgrouplist"
+            label="COM_CITYBRANDING_FORM_LBL_ISSUE_SUBGROUP"
+            multiple="false"> 
+              <option value="">JALL</option>
+        </field>
+
+        <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+            description="COM_CONTENT_FIELD_LANGUAGE_DESC">
+            <option value="*">JALL</option>
+        </field>
+
+        <field name="state" type="list" label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+            filter="intval" size="1" default="1"
+        >
+            <option value="1">
+                JPUBLISHED</option>
+            <option value="0">
+                JUNPUBLISHED</option>
+        </field>
+
+    </fieldset> 
+
+</form>

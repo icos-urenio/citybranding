@@ -1,0 +1,123 @@
+/*#columns:hover .panel:not(:hover) {	opacity: 0.35; }
+*/
+
+#columns:hover .panel:hover {
+	border-color: #0077BB;
+}
+.citybranding-focus { 
+  border-color: #0077BB;
+  opacity: 1;
+}
+.citybranding-not-focus {
+  border-color: #dddddd;
+  opacity: 0.25;
+}
+
+.panel-body .label {
+  white-space: normal;
+}
+
+/*
+#columns, #columns > div[class*='col-'] {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
+}
+*/
+.citybranding-warning {color: #e21d1d; font-size: small;}
+.citybranding-info {color: #999999; font-size: small;}
+.masonry .panel { position: relative;z-index:90;}
+/*.masonry .panel-body {position: relative;}*/
+.issue-unmoderated { /*background-color: #efefef;*/ }
+
+.ribbon-wrapper-corner {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  z-index:100;
+}
+
+.ribbon-corner {
+  font: 13px Sans-Serif;
+  color: #fff;
+  text-align: center;
+  /*text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;*/
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #0099CC;/* #BFDC7A*/
+/*  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); */
+  /*color: #6a6340;*/
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-corner:before, .ribbon-corner:after {
+  content: "";
+  border-top:   3px solid #0099CC;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-corner:before {
+  left: 0;
+}
+.ribbon-corner:after {
+  right: 0;
+}
+
+
+
+
+
+
+.book-ribbon {
+  font: 12px Sans-Serif;
+  line-height: 16px;
+  padding: 0 0 10px 0;
+  position: absolute;
+  right: 1.0em;
+  top: -0.25em;
+  width: 30px;
+}
+.book-ribbon-left {left: 0.85em;}
+
+.book-ribbon div {
+  background: #0099CC;
+  /*background: linear-gradient(#e74841 0%, #bb3a34 100%);*/
+  color: #fff;
+  padding: 0.5em 0;
+  text-align: center;
+  /*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);*/
+}
+.book-ribbon div:after {
+  border-left: 15px solid #0099CC;
+  border-right: 15px solid #0099CC;
+  border-bottom: 10px solid transparent;
+  bottom: 0;
+  content: '';
+  height: 0;
+  left: 0;
+  position: absolute;
+  width: 0;
+}
+

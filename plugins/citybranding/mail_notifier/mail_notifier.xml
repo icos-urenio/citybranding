@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="citybranding" method="upgrade">
+    <name>Improve My City Mail Notifier</name>
+    <author>Ioannis Tsampoulatidis</author>
+    <creationDate>2015-01-25</creationDate>
+    <copyright>Copyright (C) 2015. All rights reserved.</copyright>
+    <license>GNU AFFERO GENERAL PUBLIC LICENSE Version 3; see LICENSE</license>
+    <authorEmail>tsampoulatidis@gmail.com</authorEmail>
+    <authorUrl>https://github.com/itsam</authorUrl>
+    <version>3.0.0</version>
+    <description>PLG_CITYBRANDING_MAIL_NOTIFIER_XML_DESCRIPTION</description>
+
+    <files>
+        <filename plugin="mail_notifier">mail_notifier.php</filename>
+        <filename>index.html</filename>
+        <filename>language/en-GB/en-GB.plg_citybranding_mail_notifier.sys.ini</filename>
+        <filename>language/el-GR/el-GR.plg_citybranding_mail_notifier.sys.ini</filename>
+    </files>
+
+    <languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_citybranding_mail_notifier.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_citybranding_mail_notifier.sys.ini</language>
+		<language tag="el-GR">el-GR/el-GR.plg_citybranding_mail_notifier.ini</language>
+		<language tag="el-GR">el-GR/el-GR.plg_citybranding_mail_notifier.sys.ini</language>
+    </languages>
+
+    <config>
+        <fields name="params">
+            <fieldset 
+                name="mailnotifications"
+                label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MAIL_NOTIFICATIONS_LABEL"
+                description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MAIL_NOTIFICATIONS_DESC"
+            >
+                <field type="text" name="menualias" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MENU_ALIAS_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MENU_ALIAS_DESC" />
+                <field type="spacer" name="myspacer2" hr="true" /> 
+
+                <field name="mailnewissueuser" type="radio" default="1" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_ISSUE_TO_USER_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_ISSUE_TO_USER_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>            
+                <field name="mailnewissueadmins" type="radio" default="1" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_ISSUE_TO_ADMINS_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_ISSUE_TO_ADMINS_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>  
+
+                <field type="spacer" name="myspacer" hr="true" />          
+
+                <field name="mailnewcommentuser" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_COMMENT_TO_USER_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_COMMENT_TO_USER_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>            
+                <field name="mailnewcommentadmins" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_COMMENT_TO_ADMINS_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_NEW_COMMENT_TO_ADMINS_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>  
+
+                <field type="spacer" name="myspacer2" hr="true" />  
+
+                <field name="mailcategorychangeadmins" type="radio" default="1" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_CATEGORY_TO_ADMINS_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_CATEGORY_TO_ADMINS_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>    
+                <field name="mailcategorychangeuser" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_CATEGORY_TO_USER_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_CATEGORY_TO_USER_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>   
+
+                <field type="spacer" name="myspacer3" hr="true" />
+
+                <field name="mailstatuschangeadmins" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_STATUS_TO_ADMINS_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_STATUS_TO_ADMINS_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>                    
+                <field name="mailstatuschangeuser" type="radio" default="1" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_STATUS_TO_USER_LABEL" description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_ON_CHANGE_STATUS_TO_USER_DESC">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>                    
+            </fieldset>
+            <fieldset 
+                name="messages"
+                label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MESSAGES_LABEL"
+                description="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_MESSAGES_DESC"
+            >
+                <field name="messagesfrontend" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_SHOW_INFO_MSGS_FRONTEND" description="">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>                    
+                <field name="messagesbackend" type="radio" default="0" class="btn-group btn-group-yesno" label="PLG_CITYBRANDING_MAIL_NOTIFIER_SETTINGS_SHOW_INFO_MSGS_BACKEND" description="">
+                  <option value="0">JNO</option>
+                  <option value="1">JYES</option>
+                </field>                    
+
+            </fieldset>
+
+        </fields>
+    </config>    
+</extension>

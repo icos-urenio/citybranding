@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_citybranding/models/fields">
+
+        <field name="id" type="text" default="0" label="COM_CITYBRANDING_FORM_LBL_LOG_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+
+        <field name="action" 
+            type="text" 
+            label="COM_CITYBRANDING_FORM_LBL_LOG_ACTION" 
+            description="COM_CITYBRANDING_FORM_DESC_LOG_ACTION" />
+
+        <field name="issueid" type="foreignkey" class="inputbox readonly"
+            label="COM_CITYBRANDING_FORM_LBL_LOG_ISSUEID"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_ISSUEID" input_type="list" table="#__citybranding_issues" key_field="id" value_field="title"  required="true"  readonly="true" /> 
+
+        <field name="filter_issueid" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Please select issueid -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__citybranding_issues`" key_field="id" value_field="val"
+             /> 
+ 
+        <field name="stepid" 
+            type="step" 
+            label="Step" 
+            description=""
+            required="true" 
+            readonly="true"/> 
+ 
+        <field name="description" 
+            type="textarea"
+            label="COM_CITYBRANDING_FORM_LBL_LOG_DESCRIPTION"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_DESCRIPTION" 
+            cols="100"
+            rows="8" /> 
+
+        <field name="created" type="timecreated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_LOG_CREATED"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_CREATED"  /> 
+
+        <field name="updated" type="timeupdated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_LOG_UPDATED"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_UPDATED"  /> 
+
+        <field name="created_by" type="createdby" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_LOG_CREATED_BY"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_CREATED_BY"  /> 
+
+        <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+            description="COM_CONTENT_FIELD_LANGUAGE_DESC">
+            <option value="*">JALL</option>
+        </field> 
+
+        <field
+            name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="inputbox"
+            size="1"
+            default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field> 
+
+        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out_time" type="hidden" filter="unset" /> 
+
+    </fieldset> 
+
+    <fieldset name="accesscontrol">
+        <field name="asset_id" type="hidden" filter="unset" />
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_citybranding"
+            section="log"
+        />
+	</fieldset>
+
+</form>

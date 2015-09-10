@@ -1,0 +1,3 @@
+#citybranding-map-canvas { width: 100%; height: 500px; }
+#citybranding-mod-map-canvas { position:absolute; width: 100%; height: 100%; }
+.infowindowcontent{ padding: 0 10px 10px 10px; margin: 0 10px 10px 10px;};

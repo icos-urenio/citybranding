@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="params" for categories and name="attribs" for articles-->
+<form>
+	<fields name="params" >
+		<fieldset name="citybranding" label="PLG_CONTENT_CITYBRANDING_TAB_LABEL" addfieldpath="/components/com_citybranding/models/fields">
+            <field name="citybranding_category_usergroup" type="usergroup"
+            	label="PLG_CONTENT_CITYBRANDING_FIELD_CATEGORY_USERGROUP_LABEL"
+            	description="PLG_CONTENT_CITYBRANDING_FIELD_CATEGORY_USERGROUP_DESC"
+            	multiple="true"
+            	/>
+			<field name="citybranding_category_emails"
+				type="textarea"
+				label="PLG_CONTENT_CITYBRANDING_FIELD_CATEGORY_EMAILS_LABEL"
+				description="PLG_CONTENT_CITYBRANDING_FIELD_CATEGORY_EMAILS_DESC"
+				id="citybranding_category_emails"
+	            cols="100"
+	            rows="8"
+	            class="input-xxlarge"
+	            filter="safehtml" />
+		</fieldset>
+	</fields>
+</form>
