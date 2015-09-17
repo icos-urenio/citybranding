@@ -57,8 +57,8 @@ class JFormFieldSubGroupList extends JFormFieldList
 			$db = JFactory::getDbo();
 			$user = JFactory::getUser();
 			$canDo = CitybrandingHelper::getActions();
-			$canShowAllIssues = $canDo->get('citybranding.showall.issues');
-			if($canShowAllIssues){
+			$canShowAllPois = $canDo->get('citybranding.showall.pois');
+			if($canShowAllPois){
 				$query = $db->getQuery(true)
 					->select('a.id AS value')
 					->select('a.title AS text')

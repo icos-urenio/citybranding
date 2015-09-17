@@ -110,7 +110,7 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
                     
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_COMMENTS_ISSUEID', 'a.issueid', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_COMMENTS_POIID', 'a.poiid', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_COMMENTS_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
@@ -180,7 +180,7 @@ if (!empty($this->extra_sidebar)) {
                     
 				<td>
 
-					<?php echo $item->issueid; ?>
+					<?php echo $item->poiid; ?>
 				</td>
 				<td>
 

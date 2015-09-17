@@ -98,7 +98,7 @@
             // therefore the following option adds an overhead for each file used
             // in the limitMultiFileUploadSize configuration:
             limitMultiFileUploadSizeOverhead: 512,
-            // Set the following option to true to issue all file upload requests
+            // Set the following option to true to poi all file upload requests
             // in a sequential order:
             sequentialUploads: false,
             // To limit the number of concurrent uploads,

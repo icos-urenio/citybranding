@@ -122,10 +122,10 @@ class CitybrandingModelVote extends JModelAdmin
 		}
 	}
 
-/*	public function add($issueid, $userid, $modality = 0) {
+/*	public function add($poiid, $userid, $modality = 0) {
         
         $vote = array();
-        $vote['issueid'] = $issueid;
+        $vote['poiid'] = $poiid;
         $vote['created_by'] = $userid;
         $vote['state'] = 1;
         $vote['modality'] = $modality;

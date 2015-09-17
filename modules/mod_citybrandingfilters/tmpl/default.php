@@ -10,18 +10,18 @@
  */
 defined('_JEXEC') or die;
 
-//get state of Issues model
-$issuesModel = JModelLegacy::getInstance( 'Issues', 'CitybrandingModel', array('ignore_request' => false) );
-$state = $issuesModel->getState();
+//get state of Pois model
+$poisModel = JModelLegacy::getInstance( 'Pois', 'CitybrandingModel', array('ignore_request' => false) );
+$state = $poisModel->getState();
 
 $listOrder = $state->get('list.ordering');
 $listDirn  = $state->get('list.direction');
 
 $app = JFactory::getApplication();
-$search = $app->getUserStateFromRequest('com_citybranding.issues.filter.search', 'filter_search');
-$owned = $app->getUserStateFromRequest('com_citybranding.issues.filter.owned', 'filter_owned');
-$cat = $app->getUserStateFromRequest('com_citybranding.issues.filter.category', 'cat', array()); 
-$steps = $app->getUserStateFromRequest('com_citybranding.issues.filter.steps', 'steps', array()); 
+$search = $app->getUserStateFromRequest('com_citybranding.pois.filter.search', 'filter_search');
+$owned = $app->getUserStateFromRequest('com_citybranding.pois.filter.owned', 'filter_owned');
+$cat = $app->getUserStateFromRequest('com_citybranding.pois.filter.category', 'cat', array());
+$steps = $app->getUserStateFromRequest('com_citybranding.pois.filter.steps', 'steps', array());
 
 $jinput = $app->input;
 $option = $jinput->get('option', null);
@@ -39,11 +39,11 @@ $id = $jinput->get('id', null);
 	});
 </script>
 <div class="citybranding-mod-citybrandingfilters-wrapper<?php echo $moduleclass_sfx ?>">
-<form class="form-search form-inline" action="<?php echo JRoute::_('index.php?option=com_citybranding&view=issues'); ?>" method="post" name="citybranding_filter_form" id="adminForm">
+<form class="form-search form-inline" action="<?php echo JRoute::_('index.php?option=com_citybranding&view=pois'); ?>" method="post" name="citybranding_filter_form" id="adminForm">
 	<div class="citybranding_filters_buttons">
-		<?php if ($option == 'com_citybranding' && $view != 'issues') : ?>
+		<?php if ($option == 'com_citybranding' && $view != 'pois') : ?>
 			<span class="citybranding_btn_left">
-				<a href="<?php echo JRoute::_('index.php?option=com_citybranding', false, 2); ?>" class="btn btn-info"><i class="icon-arrow-left"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_RETURN_TO_ISSUES'); ?></a>		
+				<a href="<?php echo JRoute::_('index.php?option=com_citybranding', false, 2); ?>" class="btn btn-info"><i class="icon-arrow-left"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_RETURN_TO_POIS'); ?></a>		
 			</span>				
 		<?php else : ?>
 			<div class="citybranding_btn_left">
@@ -56,8 +56,8 @@ $id = $jinput->get('id', null);
 				    <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ORDERING'); ?> <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
-				    <li><?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_ISSUES_TITLE', 'a.title', $listDirn, $listOrder); ?></li>
-					<li><?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_ISSUES_STEPID', 'a.stepid', $listDirn, $listOrder); ?></li>
+				    <li><?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_TITLE', 'a.title', $listDirn, $listOrder); ?></li>
+					<li><?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_STEPID', 'a.stepid', $listDirn, $listOrder); ?></li>
 					<li><?php echo JHtml::_('grid.sort',  'JDATE', 'a.updated', $listDirn, $listOrder); ?></li>
 				  </ul>
 				</div>
@@ -95,20 +95,20 @@ $id = $jinput->get('id', null);
 
 		<?php $canCreate = JFactory::getUser()->authorise('core.create', 'com_citybranding'); ?>
 		
-		<?php if ($canCreate && $option == 'com_citybranding' && $view == 'issues'): ?>
+		<?php if ($canCreate && $option == 'com_citybranding' && $view == 'pois'): ?>
 			<div class="citybranding_btn_right">
-		    	<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=issue.edit&id=0', false, 2); ?>" class="btn btn-success btn-large btn-lg"><i class="icon-plus"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
+		    	<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id=0', false, 2); ?>" class="btn btn-success btn-large btn-lg"><i class="icon-plus"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
 		    </div>
 		<?php endif; ?>
-		<?php if ($canCreate && $option == 'com_citybranding' && $view == 'issue'): ?>
+		<?php if ($canCreate && $option == 'com_citybranding' && $view == 'poi'): ?>
 			<div class="citybranding_btn_right">
 				<div class="btn-group btn-group-lg" role="group" aria-label="">
 		    	<button id="new-vote" class="btn btn-success btn-large btn-lg"><i class="icon-thumbs-up"></i> +1 <?php echo JText::_('MOD_CITYBRANDINGFILTERS_VOTE'); ?></button>
 		    	<span id="votes-counter" class="btn btn-success btn-large btn-lg disabled"><?php echo ModCitybrandingfiltersHelper::getVotes($id); ?></span>
 		    	</div>
-		    	<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=issue.edit&id=0', false, 2); ?>" class="btn btn-default btn-large btn-lg"><i class="icon-plus"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
+		    	<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id=0', false, 2); ?>" class="btn btn-default btn-large btn-lg"><i class="icon-plus"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
 		    </div>
-		<?php elseif(JFactory::getUser()->guest && $option == 'com_citybranding' && $view == 'issue') : ?>
+		<?php elseif(JFactory::getUser()->guest && $option == 'com_citybranding' && $view == 'poi') : ?>
 			<div class="citybranding_btn_right">
 				<div class="btn-group btn-group-lg" role="group" aria-label="">
 		    	<button class="btn btn-success btn-large btn-lg disabled"><i class="icon-thumbs-up"></i> +1 <?php echo JText::_('MOD_CITYBRANDINGFILTERS_VOTE'); ?></button>
@@ -159,7 +159,7 @@ $id = $jinput->get('id', null);
 
 					<h4>
 						<input type="checkbox" checked="checked" id="selectAllSteps">
-						<?php echo JText::_('MOD_CITYBRANDINGFILTERS_ISSUE_STATUSES');?>
+						<?php echo JText::_('MOD_CITYBRANDINGFILTERS_POI_STATUSES');?>
 					</h4>
 					<div class="container-fluid">
 						<div class="row">

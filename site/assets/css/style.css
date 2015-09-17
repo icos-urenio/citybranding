@@ -2,11 +2,11 @@
   padding: 10px 20px;
   border: 1px solid #e3e3e3;
 }
-.citybranding-issue-title,.citybranding-issue-subtitle {
+.citybranding-poi-title,.citybranding-poi-subtitle {
   color: #365A79;
   font-size: 22px;
 }
-.citybranding-issue-subtitle {
+.citybranding-poi-subtitle {
   font-size: 20px;
   margin-bottom: 10px;
 }

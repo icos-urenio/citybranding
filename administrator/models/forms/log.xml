@@ -11,13 +11,13 @@
             label="COM_CITYBRANDING_FORM_LBL_LOG_ACTION" 
             description="COM_CITYBRANDING_FORM_DESC_LOG_ACTION" />
 
-        <field name="issueid" type="foreignkey" class="inputbox readonly"
-            label="COM_CITYBRANDING_FORM_LBL_LOG_ISSUEID"
-            description="COM_CITYBRANDING_FORM_DESC_LOG_ISSUEID" input_type="list" table="#__citybranding_issues" key_field="id" value_field="title"  required="true"  readonly="true" /> 
+        <field name="poiid" type="foreignkey" class="inputbox readonly"
+            label="COM_CITYBRANDING_FORM_LBL_LOG_POIID"
+            description="COM_CITYBRANDING_FORM_DESC_LOG_POIID" input_type="list" table="#__citybranding_pois" key_field="id" value_field="title"  required="true"  readonly="true" /> 
 
-        <field name="filter_issueid" type="sql" class="inputbox"
+        <field name="filter_poiid" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Please select issueid -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__citybranding_issues`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- Please select poiid -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__citybranding_pois`" key_field="id" value_field="val"
              /> 
  
         <field name="stepid" 

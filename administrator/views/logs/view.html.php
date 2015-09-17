@@ -110,18 +110,18 @@ class CitybrandingViewLogs extends JViewLegacy {
         JHtmlSidebar::setAction('index.php?option=com_citybranding&view=logs');
 
         $this->extra_sidebar = '';
-                //Filter for the field ".issueid;
+                //Filter for the field ".poiid;
         jimport('joomla.form.form');
         $options = array();
         JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
         $form = JForm::getInstance('com_citybranding.log', 'log');
 
-        $field = $form->getField('issueid');
+        $field = $form->getField('poiid');
 
-        $query = $form->getFieldAttribute('filter_issueid','query');
-        $translate = $form->getFieldAttribute('filter_issueid','translate');
-        $key = $form->getFieldAttribute('filter_issueid','key_field');
-        $value = $form->getFieldAttribute('filter_issueid','value_field');
+        $query = $form->getFieldAttribute('filter_poiid','query');
+        $translate = $form->getFieldAttribute('filter_poiid','translate');
+        $key = $form->getFieldAttribute('filter_poiid','key_field');
+        $value = $form->getFieldAttribute('filter_poiid','value_field');
 
         // Get the database object.
         $db = JFactory::getDBO();
@@ -147,9 +147,9 @@ class CitybrandingViewLogs extends JViewLegacy {
         }
 
         JHtmlSidebar::addFilter(
-            JText::_("COM_CITYBRANDING_LOGS_ISSUEID_FILTER"),
-            'filter_issueid',
-            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.issueid'), true)
+            JText::_("COM_CITYBRANDING_LOGS_POIID_FILTER"),
+            'filter_poiid',
+            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.poiid'), true)
 
         );
         
@@ -158,7 +158,7 @@ class CitybrandingViewLogs extends JViewLegacy {
         $steps = JFormHelper::loadFieldType('Step', false);
         $options = $steps->getOptions();
         JHtmlSidebar::addFilter(
-            JText::_("COM_CITYBRANDING_ISSUES_STEPID_FILTER"),
+            JText::_("COM_CITYBRANDING_POIS_STEPID_FILTER"),
             'filter_stepid',
             JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.stepid'), true)
         );
@@ -176,7 +176,7 @@ class CitybrandingViewLogs extends JViewLegacy {
 		return array(
 		'a.id' => JText::_('JGRID_HEADING_ID'),
         'a.action' => JText::_('COM_CITYBRANDING_LOGS_ACTION'),
-		'a.issueid' => JText::_('COM_CITYBRANDING_LOGS_ISSUEID'),
+		'a.poiid' => JText::_('COM_CITYBRANDING_LOGS_POIID'),
 		'a.stepid' => JText::_('COM_CITYBRANDING_LOGS_STEPID'),
 		'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 		'a.state' => JText::_('JSTATUS'),

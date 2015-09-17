@@ -39,7 +39,7 @@ function setMarkers(center, map) {
         jQuery.ajax({ 
             'async': true, 
             'global': false, 
-            'url': "index.php?option=com_citybranding&task=issues.markers&format=json", 
+            'url': "index.php?option=com_citybranding&task=pois.markers&format=json",
             'dataType': "json", 
             'success': function (data) {
                 json = data; 

@@ -68,7 +68,7 @@ class CitybrandingModelLog extends JModelAdmin
 			// Disable fields for display.
 			$form->setFieldAttribute('state', 'disabled', 'true');
 			$form->setFieldAttribute('stepid', 'disabled', 'true');
-			$form->setFieldAttribute('issueid', 'disabled', 'true');
+			$form->setFieldAttribute('poiid', 'disabled', 'true');
 			$form->setFieldAttribute('action', 'disabled', 'true');
 			$form->setFieldAttribute('description', 'disabled', 'true');
 		}

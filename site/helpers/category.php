@@ -25,7 +25,7 @@ class CitybrandingCategories extends JCategories
 	public function __construct($options = array())
 	{
 		//echo 'EXTENDS JCATEGORIES';
-		$options['table'] = '#__citybranding_issues';
+		$options['table'] = '#__citybranding_pois';
 		$options['extension'] = 'com_citybranding';
 		parent::__construct($options);
 	}

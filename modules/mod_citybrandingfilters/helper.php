@@ -16,7 +16,7 @@ class ModCitybrandingfiltersHelper {
     public function getVotes($id) 
     {
         $db = JFactory::getDbo();
-        $db->setQuery('SELECT votes FROM #__citybranding_issues WHERE id='.$id);
+        $db->setQuery('SELECT votes FROM #__citybranding_pois WHERE id='.$id);
         $votes = $db->loadResult();
         return $votes;
     }
@@ -24,9 +24,9 @@ class ModCitybrandingfiltersHelper {
     public static function createStatuses() 
     {
         $app = JFactory::getApplication();
-        $filter_steps = $app->getUserStateFromRequest('com_citybranding.issues.filter.steps', 'steps', array());
+        $filter_steps = $app->getUserStateFromRequest('com_citybranding.pois.filter.steps', 'steps', array());
 
-        //get issue statuses
+        //get poi statuses
         JFormHelper::addFieldPath(JPATH_ROOT . '/components/com_citybranding/models/fields');
         $step = JFormHelper::loadFieldType('Step', false);
         $statuses = $step->getOptions();
@@ -101,7 +101,7 @@ class ModCitybrandingfiltersHelper {
     private static function createFilters($cats = array())
     {
         $app = JFactory::getApplication();
-        $filter_category = $app->getUserStateFromRequest('com_citybranding.issues.filter.category', 'cat', array());
+        $filter_category = $app->getUserStateFromRequest('com_citybranding.pois.filter.category', 'cat', array());
     
         self::$filters .= '<ul class="citybranding_ulist">';
         foreach($cats as $JCatNode){

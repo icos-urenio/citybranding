@@ -22,7 +22,7 @@ $jinput = JFactory::getApplication()->input;
 $option = $jinput->get('option', null);
 $view = $jinput->get('view', null);
 
-if ($option == 'com_citybranding' && $view != 'issues'){
+if ($option == 'com_citybranding' && $view != 'pois'){
 	if($params->get('show_on_details') == 0){
 		$module->showtitle = false;
 		return;

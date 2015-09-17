@@ -109,7 +109,7 @@ if (!empty($this->extra_sidebar)) {
 					</th>
                 <?php endif; ?>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_LOGS_ISSUEID', 'a.issueid', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_LOGS_POIID', 'a.poiid', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_LOGS_ACTION', 'a.action', $listDirn, $listOrder); ?>
@@ -194,9 +194,9 @@ if (!empty($this->extra_sidebar)) {
 					<?php endif; ?>
 					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=log.edit&id='.(int) $item->id); ?>">
-						<?php echo $this->escape($item->issueid); ?></a>
+						<?php echo $this->escape($item->poiid); ?></a>
 					<?php else : ?>
-						<?php echo $this->escape($item->issueid); ?>
+						<?php echo $this->escape($item->poiid); ?>
 					<?php endif; ?>
                 	
                 </td>

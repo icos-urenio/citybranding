@@ -15,7 +15,7 @@ JLoader::register('UploadHandler', JPATH_ROOT . '/components/com_citybranding/mo
 jimport('joomla.application.component.controllerform');
 
 /**
- * Issue controller class.
+ * Poi controller class.
  */
 class CitybrandingControllerUpload extends JControllerForm
 {

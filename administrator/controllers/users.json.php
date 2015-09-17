@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controllerform');
 
 /**
- * Issue controller class.
+ * Poi controller class.
  */
 class CitybrandingControllerUsers extends JControllerLegacy
 {
