@@ -107,18 +107,18 @@ class CitybrandingViewComments extends JViewLegacy {
         JHtmlSidebar::setAction('index.php?option=com_citybranding&view=comments');
 
         $this->extra_sidebar = '';
-                //Filter for the field ".issueid;
+                //Filter for the field ".poiid;
         jimport('joomla.form.form');
         $options = array();
         JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
         $form = JForm::getInstance('com_citybranding.comment', 'comment');
 
-        $field = $form->getField('issueid');
+        $field = $form->getField('poiid');
 
-        $query = $form->getFieldAttribute('filter_issueid','query');
-        $translate = $form->getFieldAttribute('filter_issueid','translate');
-        $key = $form->getFieldAttribute('filter_issueid','key_field');
-        $value = $form->getFieldAttribute('filter_issueid','value_field');
+        $query = $form->getFieldAttribute('filter_poiid','query');
+        $translate = $form->getFieldAttribute('filter_poiid','translate');
+        $key = $form->getFieldAttribute('filter_poiid','key_field');
+        $value = $form->getFieldAttribute('filter_poiid','value_field');
 
         // Get the database object.
         $db = JFactory::getDBO();
@@ -144,9 +144,9 @@ class CitybrandingViewComments extends JViewLegacy {
         }
 
         JHtmlSidebar::addFilter(
-            'Issue',
-            'filter_issueid',
-            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.issueid')),
+            'Poi',
+            'filter_poiid',
+            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.poiid')),
             true
         );
 		JHtmlSidebar::addFilter(
@@ -165,7 +165,7 @@ class CitybrandingViewComments extends JViewLegacy {
 	{
 		return array(
 		'a.id' => JText::_('JGRID_HEADING_ID'),
-		'a.issueid' => JText::_('COM_CITYBRANDING_COMMENTS_ISSUEID'),
+		'a.poiid' => JText::_('COM_CITYBRANDING_COMMENTS_POIID'),
 		'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 		'a.state' => JText::_('JSTATUS'),
 		'a.checked_out' => JText::_('COM_CITYBRANDING_COMMENTS_CHECKED_OUT'),

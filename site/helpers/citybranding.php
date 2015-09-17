@@ -59,26 +59,26 @@ class CitybrandingFrontendHelper
 		}
 	}
 
-	public static function sanitizeIssues($data, $userid)
+	public static function sanitizePois($data, $userid)
 	{
 		if(!is_array($data)){
-			throw new Exception('Issues sanitization bad input');
+			throw new Exception('Pois sanitization bad input');
 		}
 
-		$issues = array();
+		$pois = array();
 
-		foreach ($data as $issue)
+		foreach ($data as $poi)
 		{
-			$issue = self::sanitizeIssue($issue, $userid);
-			array_push($issues, $issue);
+			$poi = self::sanitizePoi($poi, $userid);
+			array_push($pois, $poi);
 		}
-		return $issues;
+		return $pois;
 	}
 
-	public static function sanitizeIssue($data, $userid)
+	public static function sanitizePoi($data, $userid)
 	{
 		if(!is_object($data)){
-            throw new Exception('Issue sanitization bad input');
+            throw new Exception('Poi sanitization bad input');
         }
         //unset overhead
         unset($data->asset_id);
@@ -132,7 +132,7 @@ class CitybrandingFrontendHelper
         $data->updated_TZ = $data->updated == '0000-00-00 00:00:00' ? $data->updated : self::convertFromUTC($data->updated);
         $data->regdate_TZ = $data->regdate == '0000-00-00 00:00:00' ? $data->regdate : self::convertFromUTC($data->regdate);
 
-		$data->myIssue = ($data->created_by == $userid);
+		$data->myPoi = ($data->created_by == $userid);
 
 		//do the casting
 		$data->moderation = (boolean)$data->moderation;

@@ -31,7 +31,7 @@
 .citybranding-info {color: #999999; font-size: small;}
 .masonry .panel { position: relative;z-index:90;}
 /*.masonry .panel-body {position: relative;}*/
-.issue-unmoderated { /*background-color: #efefef;*/ }
+.poi-unmoderated { /*background-color: #efefef;*/ }
 
 .ribbon-wrapper-corner {
   width: 85px;

@@ -2,32 +2,32 @@
 <form>
 	<fieldset addfieldpath="/components/com_citybranding/models/fields">
        
-        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_ISSUE_MODERATION" description="COM_CITYBRANDING_FORM_DESC_ISSUE_MODERATION">
+        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_POI_MODERATION" description="COM_CITYBRANDING_FORM_DESC_POI_MODERATION">
               <option value="0">JNO</option>
               <option value="1">JYES</option>
             </field>
 
         <field name="regnum" type="text"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGNUM"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGNUM" /> 
+                label="COM_CITYBRANDING_FORM_LBL_POI_REGNUM"
+                description="COM_CITYBRANDING_FORM_DESC_POI_REGNUM" /> 
 
         <field name="regdate" type="calendar"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGDATE"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGDATE" />
+                label="COM_CITYBRANDING_FORM_LBL_POI_REGDATE"
+                description="COM_CITYBRANDING_FORM_DESC_POI_REGDATE" />
 
         <field name="responsible" type="text"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_RESPONSIBLE"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_RESPONSIBLE" /> 
+                label="COM_CITYBRANDING_FORM_LBL_POI_RESPONSIBLE"
+                description="COM_CITYBRANDING_FORM_DESC_POI_RESPONSIBLE" /> 
 
         <field name="acl_category" type="aclcategory"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CATID" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_CATID"
+            description="COM_CITYBRANDING_FORM_DESC_POI_CATID" 
             extension="com_citybranding" multiple="false"> 
                 <option value="">JALL</option>
         </field> 
         
         <field name="stepid" type="sql" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_STEPID"
+            label="COM_CITYBRANDING_FORM_LBL_POI_STEPID"
             query="SELECT `id`, `title` AS val FROM `#__citybranding_steps`" 
             key_field="id" 
             value_field="val">
@@ -35,7 +35,7 @@
         </field> 
 
         <field name="subgroup" type="subgrouplist"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_SUBGROUP"
+            label="COM_CITYBRANDING_FORM_LBL_POI_SUBGROUP"
             multiple="false"> 
               <option value="">JALL</option>
         </field>

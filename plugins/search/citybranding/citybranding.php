@@ -67,7 +67,7 @@ class PlgSearchCitybranding extends JPlugin
         
         $rows = array();
         
-        //Search Issues.
+        //Search Pois.
         if ($limit > 0) {
             switch ($phrase) {
                 case 'exact':
@@ -105,7 +105,7 @@ class PlgSearchCitybranding extends JPlugin
             $rows = array();
             $query = $db->getQuery(true);
             
-            $query->clear()->select(array('a.id', 'title AS title', 'created AS created', 'title AS text', '"Issue" AS section', '1 AS browsernav'))->from('#__citybranding_issues AS a')->where('(' . $where . ')')->group('a.id')->order($order);
+            $query->clear()->select(array('a.id', 'title AS title', 'created AS created', 'title AS text', '"Poi" AS section', '1 AS browsernav'))->from('#__citybranding_pois AS a')->where('(' . $where . ')')->group('a.id')->order($order);
             
             $db->setQuery($query, 0, $limit);
             $list = $db->loadObjectList();
@@ -113,7 +113,7 @@ class PlgSearchCitybranding extends JPlugin
             
             if (isset($list)) {
                 foreach ($list as $key => $item) {
-                    $list[$key]->href = JRoute::_('index.php?option=com_citybranding&view=issue&id=' . $item->id, false, 2);
+                    $list[$key]->href = JRoute::_('index.php?option=com_citybranding&view=poi&id=' . $item->id, false, 2);
                 }
             }
             

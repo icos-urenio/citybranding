@@ -24,10 +24,10 @@ class CitybrandingController extends JControllerLegacy {
     public function display($cachable = false, $urlparams = false) {
         require_once JPATH_COMPONENT . '/helpers/citybranding.php';
 
-        $view = JFactory::getApplication()->input->getCmd('view', 'issues');
+        $view = JFactory::getApplication()->input->getCmd('view', 'pois');
         JFactory::getApplication()->input->set('view', $view);
         
-        if($view == 'issue'){
+        if($view == 'poi'){
             $v = $this->getView($view, 'html');
             $v->setModel($this->getModel($view), true); //the default model (true)
             

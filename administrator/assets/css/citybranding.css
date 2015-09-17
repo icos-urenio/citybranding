@@ -1,12 +1,12 @@
 .citybranding-danger {color: red;}
 
-.icon-48-issues {
-      background-image: url(../images/l_issues.png);
+.icon-48-pois {
+      background-image: url(../images/l_pois.png);
       padding-left:60px!important;
 }
 
-.icon-48-issue {
-      background-image: url(../images/l_issues.png);
+.icon-48-poi {
+      background-image: url(../images/l_pois.png);
       padding-left:60px!important;
 }
 

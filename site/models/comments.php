@@ -27,7 +27,7 @@ class CitybrandingModelComments extends JModelList {
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                                 'id', 'a.id',
-                'issueid', 'a.issueid',
+                'poiid', 'a.poiid',
                 'parentid', 'a.parentid',
                 'description', 'a.description',
                 'photo', 'a.photo',
@@ -96,9 +96,9 @@ class CitybrandingModelComments extends JModelList {
     $query->select('uc.name AS editor');
     $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
     
-		// Join over the foreign key 'issueid'
-		$query->select('#__citybranding_issues_1382371.title AS issues_title_1382371');
-		$query->join('LEFT', '#__citybranding_issues AS #__citybranding_issues_1382371 ON #__citybranding_issues_1382371.id = a.issueid');
+		// Join over the foreign key 'poiid'
+		$query->select('#__citybranding_pois_1382371.title AS pois_title_1382371');
+		$query->join('LEFT', '#__citybranding_pois AS #__citybranding_pois_1382371 ON #__citybranding_pois_1382371.id = a.poiid');
 		// Join over the created by field 'created_by'
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
         
@@ -116,10 +116,10 @@ class CitybrandingModelComments extends JModelList {
 
         
 
-		//Filtering issueid
-		$filter_issueid = $this->state->get("filter.issueid");
-		if ($filter_issueid) {
-			$query->where("a.issueid = '".$filter_issueid."'");
+		//Filtering poiid
+		$filter_poiid = $this->state->get("filter.poiid");
+		if ($filter_poiid) {
+			$query->where("a.poiid = '".$filter_poiid."'");
 		}
 
         // Add the list ordering clause.
@@ -137,11 +137,11 @@ class CitybrandingModelComments extends JModelList {
         foreach($items as $item){
 	
 
-			if (isset($item->issueid) && $item->issueid != '') {
-				if(is_object($item->issueid)){
-					$item->issueid = JArrayHelper::fromObject($item->issueid);
+			if (isset($item->poiid) && $item->poiid != '') {
+				if(is_object($item->poiid)){
+					$item->poiid = JArrayHelper::fromObject($item->poiid);
 				}
-				$values = (is_array($item->issueid)) ? $item->issueid : explode(',',$item->issueid);
+				$values = (is_array($item->poiid)) ? $item->poiid : explode(',',$item->poiid);
 
 				$textValue = array();
 				foreach ($values as $value){
@@ -149,7 +149,7 @@ class CitybrandingModelComments extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__citybranding_issues`')
+							->from('`#__citybranding_pois`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -158,7 +158,7 @@ class CitybrandingModelComments extends JModelList {
 					}
 				}
 
-			$item->issueid = !empty($textValue) ? implode(', ', $textValue) : $item->issueid;
+			$item->poiid = !empty($textValue) ? implode(', ', $textValue) : $item->poiid;
 
 			}
 }

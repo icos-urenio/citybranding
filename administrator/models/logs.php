@@ -28,7 +28,7 @@ class CitybrandingModelLogs extends JModelList {
             $config['filter_fields'] = array(
                 'id', 'a.id',
                 'action', 'a.action',
-                'issueid', 'a.issueid',
+                'poiid', 'a.poiid',
                 'stepid', 'a.stepid',
                 'description', 'a.description',
                 'created', 'a.created',
@@ -63,8 +63,8 @@ class CitybrandingModelLogs extends JModelList {
         //Filtering stepid
         $this->setState('filter.stepid', $app->getUserStateFromRequest($this->context.'.filter.stepid', 'filter_stepid', '', 'string'));
 
-		//Filtering issueid
-		$this->setState('filter.issueid', $app->getUserStateFromRequest($this->context.'.filter.issueid', 'filter_issueid', '', 'string'));
+		//Filtering poiid
+		$this->setState('filter.poiid', $app->getUserStateFromRequest($this->context.'.filter.poiid', 'filter_poiid', '', 'string'));
 
 
         // Load the parameters.
@@ -117,9 +117,9 @@ class CitybrandingModelLogs extends JModelList {
 		// Join over the users for the checked out user
 		$query->select("uc.name AS editor");
 		$query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
-		// Join over the foreign key 'issueid'
-		$query->select('#__citybranding_issues_1382355.title AS issues_title_1382355');
-		$query->join('LEFT', '#__citybranding_issues AS #__citybranding_issues_1382355 ON #__citybranding_issues_1382355.id = a.issueid');
+		// Join over the foreign key 'poiid'
+		$query->select('#__citybranding_pois_1382355.title AS pois_title_1382355');
+		$query->join('LEFT', '#__citybranding_pois AS #__citybranding_pois_1382355 ON #__citybranding_pois_1382355.id = a.poiid');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -147,10 +147,10 @@ class CitybrandingModelLogs extends JModelList {
             }
         }
 
-		//Filtering issueid
-		$filter_issueid = $this->state->get("filter.issueid");
-		if ($filter_issueid) {
-			$query->where("a.issueid = '".$db->escape($filter_issueid)."'");
+		//Filtering poiid
+		$filter_poiid = $this->state->get("filter.poiid");
+		if ($filter_poiid) {
+			$query->where("a.poiid = '".$db->escape($filter_poiid)."'");
 		}
 
         //Filtering stepid
@@ -175,8 +175,8 @@ class CitybrandingModelLogs extends JModelList {
         
 		foreach ($items as $oneItem) {
 
-			if (isset($oneItem->issueid)) {
-				$values = explode(',', $oneItem->issueid);
+			if (isset($oneItem->poiid)) {
+				$values = explode(',', $oneItem->poiid);
 
 				$textValue = array();
 				foreach ($values as $value){
@@ -184,7 +184,7 @@ class CitybrandingModelLogs extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__citybranding_issues`')
+							->from('`#__citybranding_pois`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -193,7 +193,7 @@ class CitybrandingModelLogs extends JModelList {
 					}
 				}
 
-			$oneItem->issueid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->issueid;
+			$oneItem->poiid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->poiid;
 
 			}
 
@@ -222,7 +222,7 @@ class CitybrandingModelLogs extends JModelList {
         return $items;
     }
 
-    public function getItemsByIssue($id = null)
+    public function getItemsByPoi($id = null)
     {
 
         $db = $this->getDbo();
@@ -232,10 +232,10 @@ class CitybrandingModelLogs extends JModelList {
         $query->select('a.action, a.description, a.created');
         $query->from('`#__citybranding_log` AS a');
 
-        //-- no point to get the issue title...
-        // Join over the foreign key 'issueid'
-        //$query->select('#__citybranding_issues.title AS issue_title');
-        //$query->join('LEFT', '#__citybranding_issues ON #__citybranding_issues.id = a.issueid');
+        //-- no point to get the poi title...
+        // Join over the foreign key 'poiid'
+        //$query->select('#__citybranding_pois.title AS poi_title');
+        //$query->join('LEFT', '#__citybranding_pois ON #__citybranding_pois.id = a.poiid');
 
         // Join over the user field 'created_by'
         $query->select('u.name AS created_by');
@@ -246,7 +246,7 @@ class CitybrandingModelLogs extends JModelList {
               ->join('LEFT', '#__citybranding_steps AS st ON st.id = a.stepid');
         
         $query->order('a.created', 'desc');
-        $query->where('a.issueid = '.($id == null ? $this->getState('issue.id') : $id) );
+        $query->where('a.poiid = '.($id == null ? $this->getState('poi.id') : $id) );
 
 
         $db->setQuery($query);

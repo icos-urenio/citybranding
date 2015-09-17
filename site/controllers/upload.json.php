@@ -17,7 +17,7 @@ jimport('joomla.application.component.controllerform');
 require_once JPATH_COMPONENT . '/controller.php';
 
 /**
- * Issue controller class.
+ * Poi controller class.
  */
 class CitybrandingControllerUpload extends CitybrandingController
 {

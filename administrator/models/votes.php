@@ -27,7 +27,7 @@ class CitybrandingModelVotes extends JModelList {
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                 'id', 'a.id',
-                'issueid', 'a.issueid',
+                'poiid', 'a.poiid',
                 'created', 'a.created',
                 'updated', 'a.updated',
                 'ordering', 'a.ordering',
@@ -57,8 +57,8 @@ class CitybrandingModelVotes extends JModelList {
         $this->setState('filter.state', $published);
 
         
-		//Filtering issueid
-		$this->setState('filter.issueid', $app->getUserStateFromRequest($this->context.'.filter.issueid', 'filter_issueid', '', 'string'));
+		//Filtering poiid
+		$this->setState('filter.poiid', $app->getUserStateFromRequest($this->context.'.filter.poiid', 'filter_poiid', '', 'string'));
 
 
         // Load the parameters.
@@ -111,9 +111,9 @@ class CitybrandingModelVotes extends JModelList {
 		// Join over the users for the checked out user
 		$query->select("uc.name AS editor");
 		$query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
-		// Join over the foreign key 'issueid'
-		$query->select('#__citybranding_issues_1382359.title AS issues_title_1382359');
-		$query->join('LEFT', '#__citybranding_issues AS #__citybranding_issues_1382359 ON #__citybranding_issues_1382359.id = a.issueid');
+		// Join over the foreign key 'poiid'
+		$query->select('#__citybranding_pois_1382359.title AS pois_title_1382359');
+		$query->join('LEFT', '#__citybranding_pois AS #__citybranding_pois_1382359 ON #__citybranding_pois_1382359.id = a.poiid');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -141,10 +141,10 @@ class CitybrandingModelVotes extends JModelList {
 
         
 
-		//Filtering issueid
-		$filter_issueid = $this->state->get("filter.issueid");
-		if ($filter_issueid) {
-			$query->where("a.issueid = '".$db->escape($filter_issueid)."'");
+		//Filtering poiid
+		$filter_poiid = $this->state->get("filter.poiid");
+		if ($filter_poiid) {
+			$query->where("a.poiid = '".$db->escape($filter_poiid)."'");
 		}
 
 
@@ -163,8 +163,8 @@ class CitybrandingModelVotes extends JModelList {
         
 /*		foreach ($items as $oneItem) {
 
-			if (isset($oneItem->issueid)) {
-				$values = explode(',', $oneItem->issueid);
+			if (isset($oneItem->poiid)) {
+				$values = explode(',', $oneItem->poiid);
 
 				$textValue = array();
 				foreach ($values as $value){
@@ -172,7 +172,7 @@ class CitybrandingModelVotes extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__citybranding_issues`')
+							->from('`#__citybranding_pois`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -181,39 +181,39 @@ class CitybrandingModelVotes extends JModelList {
 					}
 				}
 
-			$oneItem->issueid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->issueid;
+			$oneItem->poiid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->poiid;
 
 			}
 		}*/
         return $items;
     }
 
-    private function hasVoted($issueid, $userid) {
+    private function hasVoted($poiid, $userid) {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select('COUNT(*)');
         $query->from('`#__citybranding_votes` AS a');
-        $query->where('a.issueid    = ' . $db->quote($db->escape($issueid)));
+        $query->where('a.poiid    = ' . $db->quote($db->escape($poiid)));
         $query->where('a.created_by = ' . $db->quote($db->escape($userid)));
         $db->setQuery($query);
         $results = $db->loadResult();
         return $results;
     }
 
-    public function add($issueid, $userid, $modality = 0) {
+    public function add($poiid, $userid, $modality = 0) {
         // check if already voted    
-        if($this->hasVoted($issueid, $userid)){
+        if($this->hasVoted($poiid, $userid)){
             return array('code'=>0, 'msg'=>JText::_('COM_CITYBRANDING_VOTES_ALREADY_VOTED'));
         }
-        $issuesModel = JModelLegacy::getInstance( 'Issues', 'CitybrandingModel', array('ignore_request' => true) );
-        // check if it's own issue
-        if($issuesModel->isOwnIssue($issueid, $userid)){
-            return array('code'=>0, 'msg'=>JText::_('COM_CITYBRANDING_VOTES_OWN_ISSUE'));    
+        $poisModel = JModelLegacy::getInstance( 'Pois', 'CitybrandingModel', array('ignore_request' => true) );
+        // check if it's own poi
+        if($poisModel->isOwnPoi($poiid, $userid)){
+            return array('code'=>0, 'msg'=>JText::_('COM_CITYBRANDING_VOTES_OWN_POI'));    
         }
 
         // Create and populate an object.
         $vote = new stdClass();
-        $vote->issueid = $issueid;
+        $vote->poiid = $poiid;
         $vote->created_by = $userid;
         $vote->state = 1;
         $vote->modality = $modality;
@@ -224,15 +224,15 @@ class CitybrandingModelVotes extends JModelList {
         $db = JFactory::getDbo();
         $result = $db->insertObject('#__citybranding_votes', $vote); 
         if($result){
-            //update issue votes as well
-            $result = $issuesModel->updateVotes($issueid, $userid);
+            //update poi votes as well
+            $result = $poisModel->updateVotes($poiid, $userid);
             if($result){
                 //also return current number of votes 
-                $votes = $issuesModel->getVotes($issueid);
+                $votes = $poisModel->getVotes($poiid);
                 return array('code'=>1, 'msg'=>JText::_('COM_CITYBRANDING_VOTES_ADDED'), 'votes'=>$votes);
             }
             else {
-                return array('code'=>-1, 'msg'=>'failed to update issue');
+                return array('code'=>-1, 'msg'=>'failed to update poi');
             }
         } else {
             return array('code'=>-1, 'msg'=>'failed to insert into votes table');

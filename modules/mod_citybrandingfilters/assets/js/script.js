@@ -72,11 +72,11 @@ function citybranding_toggle_checkboxes(elem) {
 
 
 
-function vote(issue_id, user_id, token){
+function vote(poi_id, user_id, token){
 	jQuery.ajax({ 
 	    'async': true, 
 	    'global': false, 
-	    'url': "index.php?option=com_citybranding&task=votes.add&format=json&issue_id=" + issue_id + "&user_id=" + user_id + "&" + token + "=1", 
+	    'url': "index.php?option=com_citybranding&task=votes.add&format=json&poi_id=" + poi_id + "&user_id=" + user_id + "&" + token + "=1", 
 	    'dataType': "json", 
 	    'success': function (data) {
 	    	var json = data;

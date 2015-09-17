@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 require_once JPATH_COMPONENT.'/controller.php';
 
 /**
- * Issues list controller class.
+ * Pois list controller class.
  */
 class CitybrandingControllerVotes extends CitybrandingController
 {
@@ -37,11 +37,11 @@ class CitybrandingControllerVotes extends CitybrandingController
 		
 		$app = JFactory::getApplication();
 		$jinput = $app->input;
-		$issue_id = $jinput->get('issue_id', null);
+		$poi_id = $jinput->get('poi_id', null);
 		$user_id = $jinput->get('user_id', null);
 
 		try {
-			$result = $this->getModel()->add($issue_id, $user_id);
+			$result = $this->getModel()->add($poi_id, $user_id);
 			//print_r($result);
 			echo new JResponseJson($result);
 		}
@@ -58,7 +58,7 @@ class CitybrandingControllerVotes extends CitybrandingController
 		if(!$user->guest)
 		{
 			//update vote
-			$model = $this->getModel('issue');
+			$model = $this->getModel('poi');
 			if($model->getHasVoted() == 0){
 				$votes = $model->vote(); 
 				if($votes == -1){

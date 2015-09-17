@@ -34,7 +34,7 @@ class JFormFieldMultiphoto extends JFormField
 
 	/**
 	* @var string
-	* instead of JRequest::getVar('id') use the userstate session (e.g. com_citybranding.edit.issue.id)
+	* instead of JRequest::getVar('id') use the userstate session (e.g. com_citybranding.edit.poi.id)
 	* mainly used on front-end edit forms
 	*/
 	protected $userstate;

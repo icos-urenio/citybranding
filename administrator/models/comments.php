@@ -27,7 +27,7 @@ class CitybrandingModelComments extends JModelList {
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                                 'id', 'a.id',
-                'issueid', 'a.issueid',
+                'poiid', 'a.poiid',
                 'parentid', 'a.parentid',
                 'description', 'a.description',
                 'photo', 'a.photo',
@@ -61,8 +61,8 @@ class CitybrandingModelComments extends JModelList {
         $this->setState('filter.state', $published);
 
         
-		//Filtering issueid
-		$this->setState('filter.issueid', $app->getUserStateFromRequest($this->context.'.filter.issueid', 'filter_issueid', '', 'string'));
+		//Filtering poiid
+		$this->setState('filter.poiid', $app->getUserStateFromRequest($this->context.'.filter.poiid', 'filter_poiid', '', 'string'));
 
 
         // Load the parameters.
@@ -115,9 +115,9 @@ class CitybrandingModelComments extends JModelList {
 		// Join over the users for the checked out user
 		$query->select("uc.name AS editor");
 		$query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
-		// Join over the foreign key 'issueid'
-		$query->select('#__citybranding_issues_1382371.title AS issues_title_1382371');
-		$query->join('LEFT', '#__citybranding_issues AS #__citybranding_issues_1382371 ON #__citybranding_issues_1382371.id = a.issueid');
+		// Join over the foreign key 'poiid'
+		$query->select('#__citybranding_pois_1382371.title AS pois_title_1382371');
+		$query->join('LEFT', '#__citybranding_pois AS #__citybranding_pois_1382371 ON #__citybranding_pois_1382371.id = a.poiid');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -145,10 +145,10 @@ class CitybrandingModelComments extends JModelList {
 
         
 
-		//Filtering issueid
-		$filter_issueid = $this->state->get("filter.issueid");
-		if ($filter_issueid) {
-			$query->where("a.issueid = '".$db->escape($filter_issueid)."'");
+		//Filtering poiid
+		$filter_poiid = $this->state->get("filter.poiid");
+		if ($filter_poiid) {
+			$query->where("a.poiid = '".$db->escape($filter_poiid)."'");
 		}
 
 
@@ -167,8 +167,8 @@ class CitybrandingModelComments extends JModelList {
         
 		foreach ($items as $oneItem) {
 
-			if (isset($oneItem->issueid)) {
-				$values = explode(',', $oneItem->issueid);
+			if (isset($oneItem->poiid)) {
+				$values = explode(',', $oneItem->poiid);
 
 				$textValue = array();
 				foreach ($values as $value){
@@ -176,7 +176,7 @@ class CitybrandingModelComments extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__citybranding_issues`')
+							->from('`#__citybranding_pois`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -185,7 +185,7 @@ class CitybrandingModelComments extends JModelList {
 					}
 				}
 
-			$oneItem->issueid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->issueid;
+			$oneItem->poiid = !empty($textValue) ? implode(', ', $textValue) : $oneItem->poiid;
 
 			}
 		}

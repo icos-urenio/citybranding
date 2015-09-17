@@ -36,16 +36,16 @@ class CitybrandingTablecomment extends JTable {
 
         
 
-		//Support for multiple or not foreign key field: issueid
-			if(isset($array['issueid'])){
-				if(is_array($array['issueid'])){
-					$array['issueid'] = implode(',',$array['issueid']);
+		//Support for multiple or not foreign key field: poiid
+			if(isset($array['poiid'])){
+				if(is_array($array['poiid'])){
+					$array['poiid'] = implode(',',$array['poiid']);
 				}
-				else if(strrpos($array['issueid'], ',') != false){
-					$array['issueid'] = explode(',',$array['issueid']);
+				else if(strrpos($array['poiid'], ',') != false){
+					$array['poiid'] = explode(',',$array['poiid']);
 				}
-				else if(empty($array['issueid'])) {
-					$array['issueid'] = '';
+				else if(empty($array['poiid'])) {
+					$array['poiid'] = '';
 				}
 			}
 		$task = JFactory::getApplication()->input->get('task');

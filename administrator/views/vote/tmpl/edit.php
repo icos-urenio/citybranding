@@ -23,13 +23,13 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
     js = jQuery.noConflict();
     js(document).ready(function() {
         
-	js('input:hidden.issueid').each(function(){
+	js('input:hidden.poiid').each(function(){
 		var name = js(this).attr('name');
-		if(name.indexOf('issueidhidden')){
-			js('#jform_issueid option[value="'+js(this).val()+'"]').attr('selected',true);
+		if(name.indexOf('poiidhidden')){
+			js('#jform_poiid option[value="'+js(this).val()+'"]').attr('selected',true);
 		}
 	});
-	js("#jform_issueid").trigger("liszt:updated");
+	js("#jform_poiid").trigger("liszt:updated");
     });
 
     Joomla.submitbutton = function(task)
@@ -65,14 +65,14 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('issueid'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('issueid'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('poiid'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('poiid'); ?></div>
 			</div>
 
 			<?php
-				foreach((array)$this->item->issueid as $value): 
+				foreach((array)$this->item->poiid as $value): 
 					if(!is_array($value)):
-						echo '<input type="hidden" class="issueid" name="jform[issueidhidden]['.$value.']" value="'.$value.'" />';
+						echo '<input type="hidden" class="poiid" name="jform[poiidhidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
 			?>			<div class="control-group">

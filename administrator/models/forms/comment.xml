@@ -6,13 +6,13 @@
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
- <field name="issueid" type="foreignkey" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_COMMENT_ISSUEID"
-            description="COM_CITYBRANDING_FORM_DESC_COMMENT_ISSUEID" input_type="list" table="#__citybranding_issues" key_field="id" value_field="title"  required="true"  /> 
+ <field name="poiid" type="foreignkey" class="inputbox"
+            label="COM_CITYBRANDING_FORM_LBL_COMMENT_POIID"
+            description="COM_CITYBRANDING_FORM_DESC_COMMENT_POIID" input_type="list" table="#__citybranding_pois" key_field="id" value_field="title"  required="true"  /> 
 
-       <field name="filter_issueid" type="sql" class="inputbox"
+       <field name="filter_poiid" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Please select issueid -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__citybranding_issues`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- Please select poiid -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__citybranding_pois`" key_field="id" value_field="val"
              /> 
 
        <field name="parentid" type="text" size="40" class="inputbox"

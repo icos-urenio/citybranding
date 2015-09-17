@@ -83,7 +83,7 @@
         description="COM_CITYBRANDING_SETTINGS_GENERIC_DESC">
         
 
-        <field name="newissueneedsmoderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_NEW_ISSUE_MODERATION_LABEL" description="COM_CITYBRANDING_SETTINGS_NEW_ISSUE_MODERATION_DESC">
+        <field name="newpoineedsmoderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_SETTINGS_NEW_POI_MODERATION_LABEL" description="COM_CITYBRANDING_SETTINGS_NEW_POI_MODERATION_DESC">
           <option value="0">JNO</option>
           <option value="1">JYES</option>
         </field>

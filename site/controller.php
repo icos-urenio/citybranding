@@ -20,7 +20,7 @@ class CitybrandingController extends JControllerLegacy {
     {
         parent::__construct($config);
         $this->model = $this->getModel();
-        $this->view = $this->getView(JFactory::getApplication()->input->get('view', 'issue'), 'html');
+        $this->view = $this->getView(JFactory::getApplication()->input->get('view', 'poi'), 'html');
         $this->view->setModel($this->model, true);
         $this->view->setModel($this->getModel('Logs', 'CitybrandingModel'), false);
         echo 'WOW';
@@ -39,11 +39,11 @@ class CitybrandingController extends JControllerLegacy {
     public function display($cachable = false, $urlparams = false) {
         require_once JPATH_COMPONENT . '/helpers/citybranding.php';
 
-        $view = JFactory::getApplication()->input->getCmd('view', 'issues');
+        $view = JFactory::getApplication()->input->getCmd('view', 'pois');
         JFactory::getApplication()->input->set('view', $view);
 
         // testing some good practices
-        if($view == 'issue'){
+        if($view == 'poi'){
             $v = $this->getView($view, 'html');
             $v->setModel($this->getModel($view), true); //the default model (true)
 
@@ -51,11 +51,11 @@ class CitybrandingController extends JControllerLegacy {
             $logsModel = $this->getModel('Logs', 'CitybrandingModel');
             $v->setModel($logsModel, false);
 
-            //$foo = $logsModel->getItemsByIssue(1);
+            //$foo = $logsModel->getItemsByPoi(1);
             //print_r($foo);
-            //$issueModel = $this->getModel('Issue', 'CitybrandingModel');
-            //$v->setModel($issueModel, false);
-            //$moo = $issueModel->getItem(1);
+            //$poiModel = $this->getModel('Poi', 'CitybrandingModel');
+            //$v->setModel($poiModel, false);
+            //$moo = $poiModel->getItem(1);
             //print_r($moo);
             //$v->display();
         }

@@ -42,9 +42,9 @@
         <menu img="components/com_citybranding/assets/images/s_com_citybranding.png" >COM_CITYBRANDING</menu>
         <submenu>
             
-			<menu link="option=com_citybranding&amp;view=issues" view="issues" img="components/com_citybranding/assets/images/s_issues.png" alt="Citybranding/Issues">COM_CITYBRANDING_TITLE_ISSUES</menu>
+			<menu link="option=com_citybranding&amp;view=pois" view="pois" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Pois">COM_CITYBRANDING_TITLE_POIS</menu>
 
-			<menu link="option=com_categories&amp;extension=com_citybranding" view="categories" img="components/com_citybranding/assets/images/s_issues.png" alt="Citybranding/Categories">COM_CITYBRANDING_ISSUES_CATID</menu>
+			<menu link="option=com_categories&amp;extension=com_citybranding" view="categories" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Categories">COM_CITYBRANDING_POIS_CATID</menu>
 
 			<menu link="option=com_citybranding&amp;view=logs" view="logs" img="components/com_citybranding/assets/images/s_logs.png" alt="Citybranding/Logs">COM_CITYBRANDING_TITLE_LOGS</menu>
 

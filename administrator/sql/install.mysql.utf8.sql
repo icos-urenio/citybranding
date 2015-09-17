@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `#__citybranding_issues` (
+CREATE TABLE IF NOT EXISTS `#__citybranding_pois` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
 `title` VARCHAR(255)  NOT NULL ,
@@ -70,7 +70,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE IF NOT EXISTS `#__citybranding_log` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-`issueid` INT NOT NULL ,
+`poiid` INT NOT NULL ,
 `stepid` TEXT NOT NULL ,
 `description` TEXT NOT NULL ,
 `action` VARCHAR(512) NOT NULL ,
@@ -89,7 +89,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE IF NOT EXISTS `#__citybranding_votes` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-`issueid` INT NOT NULL ,
+`poiid` INT NOT NULL ,
 `ordering` INT(11)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
@@ -105,7 +105,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE IF NOT EXISTS `#__citybranding_comments` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-`issueid` INT NOT NULL ,
+`poiid` INT NOT NULL ,
 `parentid` INT(11)  NOT NULL ,
 `description` TEXT NOT NULL ,
 `photo` VARCHAR(2048)  NOT NULL ,

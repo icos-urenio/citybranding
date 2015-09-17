@@ -172,7 +172,7 @@ class CitybrandingControllerApi extends CitybrandingController
 		}
     }
 
-	public function issues($json = true)
+	public function pois($json = true)
 	{
 		$result = null;
 		$app = JFactory::getApplication();
@@ -181,7 +181,7 @@ class CitybrandingControllerApi extends CitybrandingController
 
 			if($app->input->getMethod() != 'GET')
 			{
-			    throw new Exception('You cannot use other method than GET to fetch issues');
+			    throw new Exception('You cannot use other method than GET to fetch pois');
 			}
 
 			//get necessary arguments
@@ -193,38 +193,38 @@ class CitybrandingControllerApi extends CitybrandingController
 			$lim = $app->input->getInt('lim', 0);
 			$ts = $app->input->getString('ts');
 
-            //get issues model
-            $issuesModel = JModelLegacy::getInstance( 'Issues', 'CitybrandingModel', array('ignore_request' => true) );
+            //get pois model
+            $poisModel = JModelLegacy::getInstance( 'Pois', 'CitybrandingModel', array('ignore_request' => true) );
             //set states
-            $issuesModel->setState('filter.owned', ($owned === 'true' ? 'yes' : 'no'));
-            $issuesModel->setState('filter.citybrandingapi.userid', $userid);
-            //$issuesModel->setState('filter.citybrandingapi.ordering', 'id');
-            //$issuesModel->setState('filter.citybrandingapi.direction', 'DESC');
-            $issuesModel->setState('list.limit', $lim);
+            $poisModel->setState('filter.owned', ($owned === 'true' ? 'yes' : 'no'));
+            $poisModel->setState('filter.citybrandingapi.userid', $userid);
+            //$poisModel->setState('filter.citybrandingapi.ordering', 'id');
+            //$poisModel->setState('filter.citybrandingapi.direction', 'DESC');
+            $poisModel->setState('list.limit', $lim);
 
 			if(!is_null($minLat) && !is_null($maxLat) && !is_null($minLng) && !is_null($maxLng))
 			{
-				$issuesModel->setState('filter.citybrandingapi.minLat', $minLat);
-				$issuesModel->setState('filter.citybrandingapi.maxLat', $maxLat);
-				$issuesModel->setState('filter.citybrandingapi.minLng', $minLng);
-				$issuesModel->setState('filter.citybrandingapi.maxLng', $maxLng);
+				$poisModel->setState('filter.citybrandingapi.minLat', $minLat);
+				$poisModel->setState('filter.citybrandingapi.maxLat', $maxLat);
+				$poisModel->setState('filter.citybrandingapi.minLng', $minLng);
+				$poisModel->setState('filter.citybrandingapi.maxLng', $maxLng);
 			}
 
 			if(!is_null($ts))
 			{
-				$issuesModel->setState('filter.citybrandingapi.ts', $ts);
+				$poisModel->setState('filter.citybrandingapi.ts', $ts);
 			}
 
             //handle unexpected warnings from model
             set_error_handler(array($this, 'exception_error_handler'));
 			//get items and sanitize them
-			$data = $issuesModel->getItems();
-			$result = CitybrandingFrontendHelper::sanitizeIssues($data, $userid);
+			$data = $poisModel->getItems();
+			$result = CitybrandingFrontendHelper::sanitizePois($data, $userid);
 			restore_error_handler();
 
 			if($json)
 			{
-				echo new JResponseJson($result, 'Issues fetched successfully');
+				echo new JResponseJson($result, 'Pois fetched successfully');
 			}
 			else
 			{
@@ -237,7 +237,7 @@ class CitybrandingControllerApi extends CitybrandingController
 		}
 	}	
 
-	public function issue()
+	public function poi()
 	{
 		$result = null;
 		$app = JFactory::getApplication();
@@ -248,49 +248,49 @@ class CitybrandingControllerApi extends CitybrandingController
 
             switch($app->input->getMethod())
             {
-                //fetch existing issue
+                //fetch existing poi
                 case 'GET':
                     if ($id == null){
                         throw new Exception('Id is not set');
                     }
 
-                    //get issue model
-                    $issueModel = JModelLegacy::getInstance( 'Issue', 'CitybrandingModel', array('ignore_request' => true) );
+                    //get poi model
+                    $poiModel = JModelLegacy::getInstance( 'Poi', 'CitybrandingModel', array('ignore_request' => true) );
 
                     //handle unexpected warnings from model
                     set_error_handler(array($this, 'exception_error_handler'));
-                    $data = $issueModel->getData($id);
+                    $data = $poiModel->getData($id);
                     restore_error_handler();
 
                     if(!is_object($data)){
-                        throw new Exception('Issue does not exist');
+                        throw new Exception('Poi does not exist');
                     }
 
-                    $result = CitybrandingFrontendHelper::sanitizeIssue($data, $userid);
+                    $result = CitybrandingFrontendHelper::sanitizePoi($data, $userid);
 
                     //check for any restrictions
-                    if(!$result->myIssue && $result->moderation){
-                        throw new Exception('Issue is under moderation');
+                    if(!$result->myPoi && $result->moderation){
+                        throw new Exception('Poi is under moderation');
                     }
                     if($result->state != 1){
-                        throw new Exception('Issue is not published');
+                        throw new Exception('Poi is not published');
                     }
 
                     //be consistent return as array (of size 1)
                     $result = array($result);
 
                 break;
-                //create new issue
+                //create new poi
                 case 'POST':
                     if ($id != null){
-                        throw new Exception('You cannot use POST to fetch issue. Use GET instead');
+                        throw new Exception('You cannot use POST to fetch poi. Use GET instead');
                     }
 
-                    //guests are not allowed to post issues
+                    //guests are not allowed to post pois
                     //TODO: get this from settings
                     if($userid == 0)
                     {
-                        throw new Exception('Guests are now allowed to post new issues');
+                        throw new Exception('Guests are now allowed to post new pois');
                     }
 
                     //get necessary arguments
@@ -353,23 +353,23 @@ class CitybrandingControllerApi extends CitybrandingController
                         $args['photo'] = json_encode( array('isnew'=>1,'id'=>$tmpTime,'imagedir'=>$imagedir,'files'=>array()) );
                     }
 
-                    //get issueForm model and save
-                    $issueFormModel = JModelLegacy::getInstance( 'IssueForm', 'CitybrandingModel', array('ignore_request' => true) );
+                    //get poiForm model and save
+                    $poiFormModel = JModelLegacy::getInstance( 'PoiForm', 'CitybrandingModel', array('ignore_request' => true) );
 
                     //handle unexpected warnings from model
                     set_error_handler(array($this, 'exception_error_handler'));
-                    $issueFormModel->save($args);
-                    $insertid = JFactory::getApplication()->getUserState('com_citybranding.edit.issue.insertid');
+                    $poiFormModel->save($args);
+                    $insertid = JFactory::getApplication()->getUserState('com_citybranding.edit.poi.insertid');
 
                     //call post save hook
-                    require_once JPATH_COMPONENT . '/controllers/issueform.php';
-                    $issueFormController = new CitybrandingControllerIssueForm();
-                    $issueFormController->postSaveHook($issueFormModel, $args);
+                    require_once JPATH_COMPONENT . '/controllers/poiform.php';
+                    $poiFormController = new CitybrandingControllerPoiForm();
+                    $poiFormController->postSaveHook($poiFormModel, $args);
                     restore_error_handler();
 
-                    $result = array('issueid' => $insertid);
+                    $result = array('poiid' => $insertid);
                 break;
-                //update existing issue
+                //update existing poi
                 case 'PUT':
                 case 'PATCH':
                     if ($id == null){
@@ -380,7 +380,7 @@ class CitybrandingControllerApi extends CitybrandingController
                     throw new Exception('HTTP method is not supported');
             }
 
-            echo new JResponseJson($result, 'Issue action completed successfully');
+            echo new JResponseJson($result, 'Poi action completed successfully');
 		}
 		catch(Exception $e)	{
 			header("HTTP/1.0 202 Accepted");
@@ -568,7 +568,7 @@ class CitybrandingControllerApi extends CitybrandingController
 					}
 
                 break;
-                //update existing issue
+                //update existing poi
                 case 'PUT':
                 case 'PATCH':
                     $id = $app->input->getInt('id', null);
@@ -634,7 +634,7 @@ class CitybrandingControllerApi extends CitybrandingController
 			'newestTS'   => $ts, //used mainly for backwards compatibility
 			'ts'         => $ts,
 			'offset'     => $offsetDate,
-			'issues'     => null,
+			'pois'     => null,
 			'categories' => null,
 			'steps'      => null,
 			'votes'      => null,
@@ -642,7 +642,7 @@ class CitybrandingControllerApi extends CitybrandingController
 		);
 
 		$app->input->set('ts', $ts);
-		//$updates['issues'] = self::issues(false);
+		//$updates['pois'] = self::pois(false);
 		//$updates['categories'] = self::categories(false);
 		//$updates['steps'] = self::steps(false);
 		//$updates['votes'] = self::votes(false);

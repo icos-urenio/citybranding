@@ -98,7 +98,7 @@ class com_citybrandingInstallerScript {
                 if ($result) {
                     $app->enqueueMessage('Plugin ' . $pname . ' was installed successfully');
                 } else {
-                    $app->enqueueMessage('There was an issue installing the plugin ' . $pname, 'error');
+                    $app->enqueueMessage('There was an poi installing the plugin ' . $pname, 'error');
                 }
 
                 $query
@@ -153,7 +153,7 @@ class com_citybrandingInstallerScript {
                     if ($result) {
                         $app->enqueueMessage('Plugin ' . $pname . ' was uninstalled successfully');
                     } else {
-                        $app->enqueueMessage('There was an issue uninstalling the plugin ' . $pname, 'error');
+                        $app->enqueueMessage('There was an poi uninstalling the plugin ' . $pname, 'error');
                     }
                 }
             }
@@ -185,7 +185,7 @@ class com_citybrandingInstallerScript {
                     if ($result) {
                         $app->enqueueMessage('Module ' . $moduleName . ' was installed successfully');
                     } else {
-                        $app->enqueueMessage('There was an issue installing the module ' . $moduleName, 'error');
+                        $app->enqueueMessage('There was an poi installing the module ' . $moduleName, 'error');
                     }
                 }
             }
@@ -227,7 +227,7 @@ class com_citybrandingInstallerScript {
                         if ($result) {
                             $app->enqueueMessage('Module ' . $moduleName . ' was uninstalled successfully');
                         } else {
-                            $app->enqueueMessage('There was an issue uninstalling the module ' . $moduleName, 'error');
+                            $app->enqueueMessage('There was an poi uninstalling the module ' . $moduleName, 'error');
                         }
                     }
                 }
@@ -452,7 +452,7 @@ class com_citybrandingInstallerScript {
                     break;
                 case 'remove':
 
-                    //Check if the field exists first to prevent issue removing the field
+                    //Check if the field exists first to prevent poi removing the field
                     if ($this->existsField($table_name, $field['field_name'])) {
                         $drop_statement = JText::sprintf('ALTER TABLE %s DROP COLUMN %s', $table_name, $field['field_name']);
                         $db->setQuery($drop_statement);
@@ -487,7 +487,7 @@ class com_citybrandingInstallerScript {
 
         $query_generated = false;
 
-        //Check if the field exists first to prevent issues adding the field
+        //Check if the field exists first to prevent pois adding the field
         if ($this->existsField($table_name, $field['field_name'])) {
             if ($this->needsToUpdate($table_name, $field)) {
                 $change_statement = $this->generateChangeFieldStatement($table_name, $field);

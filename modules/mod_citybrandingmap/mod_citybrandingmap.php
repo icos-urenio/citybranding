@@ -47,13 +47,13 @@ if($clusterer){
 ?>
 
 <?php
-// Check if we allow to display the module on details (issue) page
+// Check if we allow to display the module on details (poi) page
 $jinput = JFactory::getApplication()->input;
 $option = $jinput->get('option', null);
 $view = $jinput->get('view', null);
 
-//Show module only on issues list view
-if ($option == 'com_citybranding' && $view != 'issues') {
+//Show module only on pois list view
+if ($option == 'com_citybranding' && $view != 'pois') {
 	
 	$s = "
 	    jQuery(document).ready(function() {

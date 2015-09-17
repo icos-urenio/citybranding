@@ -83,11 +83,11 @@ class CitybrandingModelComment extends JModelItem {
 
         
 
-			if (isset($this->_item->issueid) && $this->_item->issueid != '') {
-				if(is_object($this->_item->issueid)){
-					$this->_item->issueid = JArrayHelper::fromObject($this->_item->issueid);
+			if (isset($this->_item->poiid) && $this->_item->poiid != '') {
+				if(is_object($this->_item->poiid)){
+					$this->_item->poiid = JArrayHelper::fromObject($this->_item->poiid);
 				}
-				$values = (is_array($this->_item->issueid)) ? $this->_item->issueid : explode(',',$this->_item->issueid);
+				$values = (is_array($this->_item->poiid)) ? $this->_item->poiid : explode(',',$this->_item->poiid);
 
 				$textValue = array();
 				foreach ($values as $value){
@@ -95,7 +95,7 @@ class CitybrandingModelComment extends JModelItem {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__citybranding_issues`')
+							->from('`#__citybranding_pois`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -104,7 +104,7 @@ class CitybrandingModelComment extends JModelItem {
 					}
 				}
 
-			$this->_item->issueid = !empty($textValue) ? implode(', ', $textValue) : $this->_item->issueid;
+			$this->_item->poiid = !empty($textValue) ? implode(', ', $textValue) : $this->_item->poiid;
 
 			}
 		if ( isset($this->_item->created_by) ) {

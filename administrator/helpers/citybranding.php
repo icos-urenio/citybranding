@@ -21,9 +21,9 @@ class CitybrandingHelper {
      */
     public static function addSubmenu($vName = '') {
         JHtmlSidebar::addEntry(
-			JText::_('COM_CITYBRANDING_TITLE_ISSUES'),
-			'index.php?option=com_citybranding&view=issues',
-			$vName == 'issues'
+			JText::_('COM_CITYBRANDING_TITLE_POIS'),
+			'index.php?option=com_citybranding&view=pois',
+			$vName == 'pois'
 		);
 		JHtmlSidebar::addEntry(
 			JText::_('COM_CITYBRANDING_TITLE_CATEGORIES'),
@@ -31,7 +31,7 @@ class CitybrandingHelper {
 			$vName == 'categories'
 		);
 		if ($vName=='categories') {
-			JToolBarHelper::title('Improve My City: Categories (Issues)');
+			JToolBarHelper::title('Improve My City: Categories (Pois)');
 		}
 		JHtmlSidebar::addEntry(
 			JText::_('COM_CITYBRANDING_TITLE_LOGS'),
@@ -86,7 +86,7 @@ class CitybrandingHelper {
             'citybranding.manage.keys',
             'citybranding.manage.steps',
             'citybranding.manage.logs',
-            'citybranding.showall.issues'
+            'citybranding.showall.pois'
         );
 
         foreach ($actions as $action) {

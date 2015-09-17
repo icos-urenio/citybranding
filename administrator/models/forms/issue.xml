@@ -2,45 +2,45 @@
 <form>
 	<fieldset addfieldpath="/components/com_citybranding/models/fields">
 
-        <field name="id" type="text" default="0" label="COM_CITYBRANDING_FORM_LBL_ISSUE_ID"
+        <field name="id" type="text" default="0" label="COM_CITYBRANDING_FORM_LBL_POI_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
         <field name="title" type="text"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_TITLE"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_TITLE" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_TITLE"
+            description="COM_CITYBRANDING_FORM_DESC_POI_TITLE" 
             required="true" 
             menu_published="0"
             class="inputbox input-xxlarge input-large-text"
             filter="string" /> 
         
-        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_ISSUE_MODERATION" description="COM_CITYBRANDING_FORM_DESC_ISSUE_MODERATION">
+        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_POI_MODERATION" description="COM_CITYBRANDING_FORM_DESC_POI_MODERATION">
               <option value="0">JNO</option>
               <option value="1">JYES</option>
             </field>
 
         <field name="regnum" type="text"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGNUM"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGNUM" /> 
+                label="COM_CITYBRANDING_FORM_LBL_POI_REGNUM"
+                description="COM_CITYBRANDING_FORM_DESC_POI_REGNUM" /> 
 
         <field name="regdate" type="calendar"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_REGDATE"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_REGDATE" />
+                label="COM_CITYBRANDING_FORM_LBL_POI_REGDATE"
+                description="COM_CITYBRANDING_FORM_DESC_POI_REGDATE" />
 
         <field name="responsible" type="text"
-                label="COM_CITYBRANDING_FORM_LBL_ISSUE_RESPONSIBLE"
-                description="COM_CITYBRANDING_FORM_DESC_ISSUE_RESPONSIBLE" /> 
+                label="COM_CITYBRANDING_FORM_LBL_POI_RESPONSIBLE"
+                description="COM_CITYBRANDING_FORM_DESC_POI_RESPONSIBLE" /> 
 
         <field name="photo" 
             type="multiphoto" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_PHOTOS" 
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_PHOTOS" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_PHOTOS" 
+            description="COM_CITYBRANDING_FORM_DESC_POI_PHOTOS" 
             imagedir="images/citybranding"
             side="backend" />
 
 		<field name="stepid" 
             type="step" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_STEPID" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_STEPID" 
             description="" 
             required="true"
             descriptionfield="step_modified_description"
@@ -59,8 +59,8 @@
 
         <field name="catid" 
             type="cat"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CATID" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_CATID"
+            description="COM_CITYBRANDING_FORM_DESC_POI_CATID" 
             required="true" 
             extension="com_citybranding" 
             descriptionfield="category_modified_description"
@@ -79,23 +79,23 @@
             label="Category modified?" />
 
 		<field name="filter_catid" type="category"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CATID" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_CATID"
+            description="COM_CITYBRANDING_FORM_DESC_POI_CATID" 
             extension="com_citybranding" 
             show_root="1" 
             onchange="this.form.submit();" /> 
 
         <field name="description" 
             type="textarea"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_DESCRIPTION"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_DESCRIPTION" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_DESCRIPTION"
+            description="COM_CITYBRANDING_FORM_DESC_POI_DESCRIPTION" 
             cols="100"
             rows="8"
             class="input-xxlarge"
             filter="safehtml" /> 
 
         <field name="address" type="gmap" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_ADDRESS" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_ADDRESS" 
             latitudefield="latitude" 
             longitudefield="longitude" 
             filter="safehtml" 
@@ -104,29 +104,29 @@
 
         <field name="subgroup" type="subgrouplist"
             showempty="true"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_SUBGROUP" />
+            label="COM_CITYBRANDING_FORM_LBL_POI_SUBGROUP" />
 
         <field name="latitude" type="hidden"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_LATITUDE"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_LATITUDE" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_LATITUDE"
+            description="COM_CITYBRANDING_FORM_DESC_POI_LATITUDE" 
             filter="string" /> 
 
         <field name="longitude" type="hidden"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_LONGITUDE"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_LONGITUDE" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_LONGITUDE"
+            description="COM_CITYBRANDING_FORM_DESC_POI_LONGITUDE" 
             filter="string" /> 
 
         <field name="created" type="timecreated" default="" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CREATED"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CREATED"  /> 
+            label="COM_CITYBRANDING_FORM_LBL_POI_CREATED"
+            description="COM_CITYBRANDING_FORM_DESC_POI_CREATED"  /> 
 
         <field name="updated" type="timeupdated" default="" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_UPDATED"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_UPDATED"  /> 
+            label="COM_CITYBRANDING_FORM_LBL_POI_UPDATED"
+            description="COM_CITYBRANDING_FORM_DESC_POI_UPDATED"  /> 
 
         <field name="created_by" type="createdby" default="" 
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_CREATED_BY"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_CREATED_BY"  /> 
+            label="COM_CITYBRANDING_FORM_LBL_POI_CREATED_BY"
+            description="COM_CITYBRANDING_FORM_DESC_POI_CREATED_BY"  /> 
 
 
         <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
@@ -135,34 +135,34 @@
         </field>
 
         <field name="hits" type="text" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_HITS"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_HITS" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_HITS"
+            description="COM_CITYBRANDING_FORM_DESC_POI_HITS" 
             default="0" 
             readonly="true"
             filter="safehtml" /> 
 
         <field name="votes" type="text" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_VOTES"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_VOTES" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_VOTES"
+            description="COM_CITYBRANDING_FORM_DESC_POI_VOTES" 
             readonly="true"
             filter="safehtml" /> 
 
         <field name="modality" type="hidden" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_MODALITY"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_MODALITY" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_MODALITY"
+            description="COM_CITYBRANDING_FORM_DESC_POI_MODALITY" 
             filter="safehtml" /> 
         
         <field name="note" 
             type="text" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_NOTE"
+            label="COM_CITYBRANDING_FORM_LBL_POI_NOTE"
             description="COM_CITYBRANDING_FORM_DESC_NOTE_HITS" 
             default="" 
             filter="safehtml" /> 
 
         <field name="extra" 
             type="textarea"
-            label="COM_CITYBRANDING_FORM_LBL_ISSUE_EXTRA"
-            description="COM_CITYBRANDING_FORM_DESC_ISSUE_EXTRA" 
+            label="COM_CITYBRANDING_FORM_LBL_POI_EXTRA"
+            description="COM_CITYBRANDING_FORM_DESC_POI_EXTRA" 
             cols="100"
             rows="8"
             class="input-xxlarge"
@@ -198,7 +198,7 @@
             validate="rules"
             class="inputbox"
             component="com_citybranding"
-            section="issue"
+            section="poi"
         />
 
 	</fieldset>

@@ -5,7 +5,7 @@ require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 
 class plgCitybrandingmail_notifier extends JPlugin
 {
-	public function onAfterNewIssueAdded($model, $validData, $id = null)
+	public function onAfterNewPoiAdded($model, $validData, $id = null)
 	{
 		$details = $this->getDetails($id, $model);
 		$app = JFactory::getApplication();
@@ -13,23 +13,23 @@ class plgCitybrandingmail_notifier extends JPlugin
 		$showMsgsFrontend = ($this->params->get('messagesfrontend') && !$app->isAdmin());
 		$showMsgsBackend  = ($this->params->get('messagesbackend') && $app->isAdmin());
 
-		$issueLink =  rtrim(JURI::base(), '/') . JRoute::_('index.php?option=com_citybranding&view=issue&id='.(int) $id); 
+		$poiLink =  rtrim(JURI::base(), '/') . JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $id);
 
 		//Prepare email for admins
-		if ($this->params->get('mailnewissueadmins')){
+		if ($this->params->get('mailnewpoiadmins')){
 			$subject = sprintf(
-				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_ADMINS_NEW_ISSUE_SUBJECT'), 
+				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_ADMINS_NEW_POI_SUBJECT'), 
 				$details->username, 
 				$details->usermail
 			);
 
 			$body = sprintf(
-				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_ADMINS_NEW_ISSUE_BODY'),
+				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_ADMINS_NEW_POI_BODY'),
 				CitybrandingFrontendHelper::getCategoryNameByCategoryId($validData['catid']),
 				$validData['title'],
 				$validData['address']
 			);
-			$body .= '<a href="'.$issueLink.'">'.$issueLink.'</a>';
+			$body .= '<a href="'.$poiLink.'">'.$poiLink.'</a>';
 		
 			if(empty($details->emails) || $details->emails[0] == ''){
 				if($showMsgsBackend)
@@ -49,26 +49,26 @@ class plgCitybrandingmail_notifier extends JPlugin
 		}
 
 		//Prepare email for user
-		if ($this->params->get('mailnewissueuser')) {		
+		if ($this->params->get('mailnewpoiuser')) {		
 			
 			$subject = sprintf(
-				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_USER_NEW_ISSUE_SUBJECT'), 
+				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_USER_NEW_POI_SUBJECT'), 
 				$validData['title']
 			);
 
 			$body = sprintf(
-				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_USER_NEW_ISSUE_BODY'),
+				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_USER_NEW_POI_BODY'),
 				CitybrandingFrontendHelper::getCategoryNameByCategoryId($validData['catid'])
 			);
-			$body .= '<a href="'.$issueLink.'">'.$issueLink.'</a>';
+			$body .= '<a href="'.$poiLink.'">'.$poiLink.'</a>';
 
 			if ($this->sendMail($subject, $body, $details->usermail) ) {
 				if($showMsgsBackend){
-					//do we really want to sent confirmation mail if issue is submitted from backend?
-					$app->enqueueMessage(JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_MAIL_NEW_ISSUE_CONFIRM').$details->usermail . ' (' . $details->username . ')');
+					//do we really want to sent confirmation mail if poi is submitted from backend?
+					$app->enqueueMessage(JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_MAIL_NEW_POI_CONFIRM').$details->usermail . ' (' . $details->username . ')');
 				}
 				if($showMsgsFrontend){
-					$app->enqueueMessage(JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_MAIL_NEW_ISSUE_CONFIRM').$details->usermail . ' (' . $details->username . ')');
+					$app->enqueueMessage(JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_MAIL_NEW_POI_CONFIRM').$details->usermail . ' (' . $details->username . ')');
 				}				
 			}
 			else {
@@ -89,11 +89,11 @@ class plgCitybrandingmail_notifier extends JPlugin
 		$MENUALIAS = $this->params->get('menualias');
 		$appSite = JApplication::getInstance('site');
 		$router = $appSite->getRouter();
-		$uri = $router->build('index.php?option=com_citybranding&view=issue&id='.(int) ($id == null ? $validData['id'] : $id));
+		$uri = $router->build('index.php?option=com_citybranding&view=poi&id='.(int) ($id == null ? $validData['id'] : $id));
 		$parsed_url = $uri->toString();
 		$parsed_url = str_replace('administrator/', '', $parsed_url);
 		$parsed_url = str_replace('component/citybranding', $MENUALIAS, $parsed_url);
-		$issueLink = $_SERVER['HTTP_HOST'] . $parsed_url;
+		$poiLink = $_SERVER['HTTP_HOST'] . $parsed_url;
 
 		//Prepare email for admins
 		if ($this->params->get('mailcategorychangeadmins')){
@@ -140,7 +140,7 @@ class plgCitybrandingmail_notifier extends JPlugin
 				CitybrandingFrontendHelper::getCategoryNameByCategoryId($validData['catid'])
 			);
 			
-			$body .= '<a href="http://'.$issueLink.'">'.$issueLink.'</a>';
+			$body .= '<a href="http://'.$poiLink.'">'.$poiLink.'</a>';
 
 			if ($this->sendMail($subject, $body, $details->usermail) ) {
 				if($showMsgsBackend){
@@ -170,11 +170,11 @@ class plgCitybrandingmail_notifier extends JPlugin
 		$MENUALIAS = $this->params->get('menualias');
 		$appSite = JApplication::getInstance('site');
 		$router = $appSite->getRouter();
-		$uri = $router->build('index.php?option=com_citybranding&view=issue&id='.(int) ($id == null ? $validData['id'] : $id));
+		$uri = $router->build('index.php?option=com_citybranding&view=poi&id='.(int) ($id == null ? $validData['id'] : $id));
 		$parsed_url = $uri->toString();
 		$parsed_url = str_replace('administrator/', '', $parsed_url);
 		$parsed_url = str_replace('component/citybranding', $MENUALIAS, $parsed_url);
-		$issueLink = $_SERVER['HTTP_HOST'] . $parsed_url;
+		$poiLink = $_SERVER['HTTP_HOST'] . $parsed_url;
 
 		//Prepare email for admins
 		if ($this->params->get('mailstatuschangeadmins')){
@@ -220,10 +220,10 @@ class plgCitybrandingmail_notifier extends JPlugin
 				JText::_('PLG_CITYBRANDING_MAIL_NOTIFIER_USER_STEP_MODIFIED_BODY'),
 				$validData['title'],
 				$step['stepid_title'],
-				$issueLink
+				$poiLink
 			);
 
-			$body .= '<a href="http://'.$issueLink.'">'.$issueLink.'</a>';
+			$body .= '<a href="http://'.$poiLink.'">'.$poiLink.'</a>';
 
 			if ($this->sendMail($subject, $body, $details->usermail) ) {
 				if($showMsgsBackend){
@@ -272,27 +272,27 @@ class plgCitybrandingmail_notifier extends JPlugin
 
 	private function getDetails($id, $model) 
 	{
-		//check if issue added from frontend
+		//check if poi added from frontend
 		if($id == null){
-			$issueid = $model->getItem()->get('id');
+			$poiid = $model->getItem()->get('id');
 		} 
 		else {
-			$issueid = $id;
+			$poiid = $id;
 		}
 
-		require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/issue.php';
-		$issueModel = new CitybrandingModelIssue();
+		require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/poi.php';
+		$poiModel = new CitybrandingModelPoi();
 		//JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
-		//$issueModel = JModelLegacy::getInstance( 'Issue', 'CitybrandingModel' );
+		//$poiModel = JModelLegacy::getInstance( 'Poi', 'CitybrandingModel' );
 
-		$emails = $issueModel->getItem($issueid)->get('notification_emails');
+		$emails = $poiModel->getItem($poiid)->get('notification_emails');
 
-		$userid = $issueModel->getItem($issueid)->get('created_by');
+		$userid = $poiModel->getItem($poiid)->get('created_by');
 		$username = JFactory::getUser($userid)->name;
 		$usermail = JFactory::getUser($userid)->email;
 
 		$details = new stdClass();
-		$details->issueid = $issueid;
+		$details->poiid = $poiid;
 		$details->emails = $emails;
 		$details->userid = $userid;
 		$details->username = $username;

@@ -11,18 +11,18 @@
 defined('_JEXEC') or die;
 
 $app = JFactory::getApplication();
-$search = $app->getUserStateFromRequest('com_citybranding.issues.filter.search', 'filter_search');
-$owned = $app->getUserStateFromRequest('com_citybranding.issues.filter.owned', 'filter_owned');
+$search = $app->getUserStateFromRequest('com_citybranding.pois.filter.search', 'filter_search');
+$owned = $app->getUserStateFromRequest('com_citybranding.pois.filter.owned', 'filter_owned');
 ?>
 
 <div class="citybranding_filters_search">
-	<form class="form-search form-inline" action="<?php echo JRoute::_('index.php?option=com_citybranding&view=issues'); ?>" method="post" name="citybranding_filter_form" id="citybranding_filter_form">
+	<form class="form-search form-inline" action="<?php echo JRoute::_('index.php?option=com_citybranding&view=pois'); ?>" method="post" name="citybranding_filter_form" id="citybranding_filter_form">
 	    <input type="text" class="input-medium search-query" name="filter_search" value="<?php echo $search; ?>">
 		<?php if (JFactory::getUser()->id > 0) : ?>
 			<p>
 			<input type="hidden" id="filter_owned_hidden" name="filter_owned" value="no" />
 		    <label class="checkbox inline">
-				<input type="checkbox" id="filter_owned" name="filter_owned" value="yes" <?php echo ($owned == 'yes' ? 'checked="checked"' : ''); ?> > Show only my issues
+				<input type="checkbox" id="filter_owned" name="filter_owned" value="yes" <?php echo ($owned == 'yes' ? 'checked="checked"' : ''); ?> > Show only my pois
 			</label>
 			</p>
 		<?php endif; ?>
