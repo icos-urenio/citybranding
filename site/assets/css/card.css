@@ -1,10 +1,21 @@
-/*#columns:hover .panel:not(:hover) {	opacity: 0.35; }
-*/
-
-#columns:hover .panel:hover {
-	border-color: #0077BB;
+/* grid */
+.grid-sizer,
+.grid-item { width: 32%;}
+.gutter-sizer { width: 2%; }
+.grid-item {margin-bottom: 10px;}
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
 }
-.citybranding-focus { 
+.grid { font-size: 1em; }
+/* hover effect */
+
+/*.grid:hover .citybranding-panel:not(:hover) {	opacity: 0.5; }*/
+.grid:hover .citybranding-panel:hover {
+  border-color: #0077BB;
+}
+.citybranding-focus {
   border-color: #0077BB;
   opacity: 1;
 }
@@ -13,26 +24,37 @@
   opacity: 0.25;
 }
 
-.panel-body .label {
+/* panel card*/
+.citybranding-panel {
+  background-color: #fff;
+  color: #222222;
+  font-size: 0.8em;
+}
+.citybranding-panel-body {
+  padding: 5px;
+}
+.citybranding-panel-body .label {
   white-space: normal;
 }
-
-/*
-#columns, #columns > div[class*='col-'] {  
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex:1 1 auto;
+.citybranding-panel-thumbnail .image img {
+  border-radius: 0px;
 }
-*/
+.citybranding-panel-thumbnail a.image.fit {
+  margin: 0;
+}
+
+
+
+
+
 .citybranding-warning {color: #e21d1d; font-size: small;}
 .citybranding-info {color: #999999; font-size: small;}
-.masonry .panel { position: relative;z-index:90;}
+.masonry .citybranding-panel { position: relative;z-index:90;}
 /*.masonry .panel-body {position: relative;}*/
 .poi-unmoderated { /*background-color: #efefef;*/ }
 
+
+/* ribbon */
 .ribbon-wrapper-corner {
   width: 85px;
   height: 88px;
@@ -85,11 +107,6 @@
   right: 0;
 }
 
-
-
-
-
-
 .book-ribbon {
   font: 12px Sans-Serif;
   line-height: 16px;
@@ -120,4 +137,3 @@
   position: absolute;
   width: 0;
 }
-

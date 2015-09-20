@@ -21,21 +21,27 @@ $userId = $user->get('id');
 <script type="text/javascript">
     js = jQuery.noConflict();
     js(document).ready(function() {
-        var container = document.querySelector('.masonry');
-        var msnry = new Masonry( container, {
-          // options
-          //columnWidth: 70,
-          itemSelector: '.masonry-element'
-        });
 
-        imagesLoaded( container, function() {
-          msnry.layout();
+        var grid = js('.grid').masonry({
+            // set itemSelector so .grid-sizer is not used in layout
+            itemSelector: '.grid-item',
+            // use element for option
+            columnWidth: '.grid-sizer',
+            gutter: '.gutter-sizer',
+            percentPosition: true
         });
+        grid.masonry('layout');
+/*        grid.imagesLoaded().progress( function() {
+            grid.masonry('layout');
+        });*/
     });
 </script>
 
-<div id="columns">
-    <div class="row masonry" id="masonry-sample">
+
+<div class="grid">
+        <!-- width of .grid-sizer used for columnWidth -->
+        <div class="grid-sizer"></div>
+        <div class="gutter-sizer"></div>
         <?php foreach ($this->items as $i => $item) : ?>
             <?php
                 $canCreate = $user->authorise('core.create', 'com_citybranding.poi.'.$item->id);
@@ -58,16 +64,10 @@ $userId = $user->get('id');
                 <?php $canEdit = JFactory::getUser()->id == $item->created_by; ?>
             <?php endif; ?>
                 
-            <div class="col-sm-6 col-md-4 col-xs-12 masonry-element">
-                <div id="citybranding-panel-<?php echo $item->id;?>" class="panel panel-default">
-                    <?php if (JFactory::getUser()->id == $item->created_by) : ?>  
-                      <div class="ribbon-wrapper-corner"><div class="ribbon-corner"><?php echo JText::_('COM_CITYBRANDING_POIS_MY_POI');?></div></div>
-                    <?php else : ?>
-                        <?php if($item->votes > 0) : ?>
-                        <div title="<?php echo JText::_('COM_CITYBRANDING_POIS_VOTES');?>" class="book-ribbon">
-                            <div>+<?php echo $item->votes; ?></div>
-                        </div>
-                        <?php endif; ?>
+            <div class="grid-item">
+                <div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
+                    <?php if ($item->id == 1) : ?>
+                      <div class="ribbon-wrapper-corner"><div class="ribbon-corner">360<sup>o</sup></div></div>
                     <?php endif; ?>
                     
                     <?php //show photo if any
@@ -75,19 +75,19 @@ $userId = $user->get('id');
                         if(isset($attachments->files)){
                             foreach ($attachments->files as $file) {
                                 if (isset($file->thumbnailUrl)){
-                                    echo '<div class="panel-thumbnail">'. "\n";
-                                    echo '<a href="'. JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id).'">';
-                                    echo '<img src="'.$attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name) .'" alt="poi photo" class="img-responsive" />' . "\n";
+                                    echo '<div class="citybranding-panel-thumbnail">'. "\n";
+                                    echo '<a href="'. JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id).'" class="image fit">';
+                                    echo '<img src="'.$attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name) .'" alt="poi photo" class="img-responsivefoo" />' . "\n";
                                     echo '</a>';
                                     echo '</div>'. "\n";
-                                    break;
+                                    break; //on first photo break
                                 }  
                                 $i++;  
                             }
                         }
                     ?>
 
-                    <div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>panel-body">
+                    <div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
                         <p class="lead">
                             <?php if($item->category_image != '') : ?>
                             <img src="<?php echo $item->category_image; ?>" alt="category image" />
@@ -98,39 +98,15 @@ $userId = $user->get('id');
                             <?php else : ?>
                               <?php echo $this->escape($item->title); ?>
                             <?php endif; ?>
-                            <?php /*uncomment if you like to display a lock icon */
-                              /*if (isset($item->checked_out) && $item->checked_out) : ?>
-                              <i class="icon-lock"></i> <?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'pois.', $canCheckin); ?>
-                            <?php endif; */ ?>
                         </p>
 
-                        <?php if($item->updated == $item->created) : ?>
-                        <span class="label label-default" title="<?php echo JText::_('COM_CITYBRANDING_POIS_CREATED');?>"><?php echo CitybrandingFrontendHelper::getRelativeTime($item->created); ?></span>
-                        <?php else : ?>
-                        <span class="label label-info" title="<?php echo JText::_('COM_CITYBRANDING_POIS_UPDATED');?>"><?php echo CitybrandingFrontendHelper::getRelativeTime($item->updated); ?></span>
-                        <?php endif; ?>
-                        <span class="label label-info" style="background-color: <?php echo $item->stepid_color;?>" title="<?php echo JText::_('COM_CITYBRANDING_POIS_STEPID');?>"><?php echo $item->stepid_title; ?></span>
-                        <span class="label label-default" title="<?php echo JText::_('COM_CITYBRANDING_POIS_CATID');?>"><?php echo $item->catid_title; ?></span>
-                        <br /><span class="label label-default" title="<?php echo JText::_('COM_CITYBRANDING_TITLE_COMMENTS');?>"><i class="icon-comment"></i> 0</span>
-                        <?php if (JFactory::getUser()->id == $item->created_by && $item->votes > 0) : ?>
-                        <span class="label label-default" title="<?php echo JText::_('COM_CITYBRANDING_POIS_VOTES');?>">+<?php echo $item->votes; ?></span>
-                        <?php endif; ?>
+                        <?php //echo CitybrandingFrontendHelper::cutString($item->description, 200); ?>
 
-                        <p><?php echo CitybrandingFrontendHelper::cutString($item->description, 200); ?></p>
-
-                        <p><a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id); ?>"><?php echo JText::_('COM_CITYBRANDING_POIS_MORE');?></a></p>
-                        <?php if($item->moderation == 1) : ?>
-                            <hr />
-                            <p class="citybranding-warning"><i class="icon-info-sign"></i> <?php echo JText::_('COM_CITYBRANDING_POIS_NOT_YET_PUBLISHED');?></p>
-                        <?php endif; ?>
-                        <?php if (!$canEditOnStatus && JFactory::getUser()->id == $item->created_by) : ?>
-                            <p class="citybranding-info"><i class="icon-info-sign"></i> <?php echo JText::_('COM_CITYBRANDING_POI_CANNOT_EDIT_ANYMORE'); ?></p>
-                        <?php endif; ?>                        
                     </div>
-                </div><!-- /citybranding-panel-X -->
-            </div><!--/col--> 
+                </div>
+            </div>
         <?php endforeach; ?>
-    </div>
-</div><!-- /columns -->
+
+</div> <!-- grid -->
 
 <?php echo $this->pagination->getListFooter(); ?>
