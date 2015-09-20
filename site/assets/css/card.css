@@ -9,12 +9,18 @@
   clear: both;
 }
 .grid { font-size: 1em; }
+@media screen and (max-width: 736px) {
+  .grid-sizer,
+  .grid-item { width: 49%;}
+}
+
+
 /* hover effect */
 
 /*.grid:hover .citybranding-panel:not(:hover) {	opacity: 0.5; }*/
-.grid:hover .citybranding-panel:hover {
+/*.grid:hover .citybranding-panel:hover {
   border-color: #0077BB;
-}
+}*/
 .citybranding-focus {
   border-color: #0077BB;
   opacity: 1;
@@ -30,21 +36,19 @@
   color: #222222;
   font-size: 0.8em;
 }
-.citybranding-panel-body {
-  padding: 5px;
-}
-.citybranding-panel-body .label {
-  white-space: normal;
-}
-.citybranding-panel-thumbnail .image img {
-  border-radius: 0px;
-}
-.citybranding-panel-thumbnail a.image.fit {
-  margin: 0;
-}
+.citybranding-panel-body { padding: 5px; }
+.citybranding-panel-body .label { white-space: normal; }
+.citybranding-panel-thumbnail .image img { border-radius: 0px; }
+.citybranding-panel-thumbnail a.image.fit { margin: 0; }
 
-
-
+#poi-wrapper .grid-sizer,
+#poi-wrapper .grid-item { width: 20%;}
+#poi-wrapper .grid-item--width2 { width: 40%; }
+#poi-wrapper .grid-item--width4 { width: 80%; }
+#poi-wrapper .grid-item--width100 { width: 100%; }
+#poi-wrapper .grid-item { margin-bottom: 0; }
+#poi-wrapper .image img { border-radius: 0px; }
+#poi-wrapper a.image.fit { margin: 0; }
 
 
 .citybranding-warning {color: #e21d1d; font-size: small;}

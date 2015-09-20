@@ -110,6 +110,13 @@ class CitybrandingViewPoi extends JViewLegacy {
         // TODO: add this <!--[if lt IE 9]><link rel="stylesheet" href="photobox/photobox.ie.css"><![endif]-->
         $this->document->addScript(JURI::root(true).'/components/com_citybranding/assets/js/jquery.photobox.js');
         $this->document->addScript(JURI::root(true).'/components/com_citybranding/assets/js/citybranding.js');
+
+        $this->document->addStyleSheet(JURI::root(true) . '/components/com_citybranding/assets/css/card.css');
+        //$this->document->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/masonry.pkgd.min.js');
+        $this->document->addScript("https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js");
+        $this->document->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/imagesloaded.pkgd.min.js');
+
+
     }
 
 }

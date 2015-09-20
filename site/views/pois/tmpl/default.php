@@ -30,10 +30,11 @@ $userId = $user->get('id');
             gutter: '.gutter-sizer',
             percentPosition: true
         });
-        grid.masonry('layout');
-/*        grid.imagesLoaded().progress( function() {
+        //grid.masonry('layout');
+        grid.imagesLoaded().progress( function() {
             grid.masonry('layout');
-        });*/
+        });
+
     });
 </script>
 
@@ -66,7 +67,7 @@ $userId = $user->get('id');
                 
             <div class="grid-item">
                 <div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
-                    <?php if ($item->id == 1) : ?>
+                    <?php if ($item->id == 4) : //testing ?>
                       <div class="ribbon-wrapper-corner"><div class="ribbon-corner">360<sup>o</sup></div></div>
                     <?php endif; ?>
                     
@@ -77,7 +78,7 @@ $userId = $user->get('id');
                                 if (isset($file->thumbnailUrl)){
                                     echo '<div class="citybranding-panel-thumbnail">'. "\n";
                                     echo '<a href="'. JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id).'" class="image fit">';
-                                    echo '<img src="'.$attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name) .'" alt="poi photo" class="img-responsivefoo" />' . "\n";
+                                    echo '<img src="'.$attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name) .'" alt="poi photo" />' . "\n";
                                     echo '</a>';
                                     echo '</div>'. "\n";
                                     break; //on first photo break
