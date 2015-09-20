@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Check for component
 if (!JComponentHelper::getComponent('com_citybranding', true)->enabled)
 {
-	echo '<div class="alert alert-danger">Improve My City component is not enabled</div>';
+	echo '<div class="alert alert-danger">City Branding component is not enabled</div>';
 	return;
 }
 
@@ -31,6 +31,7 @@ $lng        = $com_citybranding_params->get('longitude');
 $zoom 	    = $com_citybranding_params->get('zoom');
 $language   = $com_citybranding_params->get('maplanguage');
 $clusterer 	= ($com_citybranding_params->get('clusterer') == 1 ? true : false);
+$scrollwheel = ($com_citybranding_params->get('scrollwheel') == 1 ? true : false);
 
 if($api_key == ''){
 	echo '<span style="color: red; font-weight:bold;">Module CITYBRANDING Map :: Google Maps API KEY missing</span>';
@@ -44,30 +45,10 @@ else{
 if($clusterer){
 	$doc->addScript('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js');
 }
-?>
 
-<?php
-// Check if we allow to display the module on details (poi) page
 $jinput = JFactory::getApplication()->input;
 $option = $jinput->get('option', null);
 $view = $jinput->get('view', null);
-
-//Show module only on pois list view
-if ($option == 'com_citybranding' && $view != 'pois') {
-	
-	$s = "
-	    jQuery(document).ready(function() {
-	 		//mod_citybrandingmap advanced settings
-	 		".
-	 		stripcslashes($params->get('execute_js'))
-	 		."
-	    });
-	";
-	JFactory::getDocument()->addScriptDeclaration($s);
-
-	$module->showtitle = false;
-	return;
-}
 ?>
 
 <script type="text/javascript">
@@ -77,7 +58,29 @@ if ($option == 'com_citybranding' && $view != 'pois') {
 	var clusterer = "<?php echo $clusterer;?>" ;
 	var language = "<?php echo $language;?>" ;
 </script>
-<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/script.js" type="text/javascript"></script>
+<?php if ($option == 'com_citybranding' && $view == 'pois') : ?>
+	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/script.js" type="text/javascript"></script>
+<?php else : ?>
+	<?php
+	$id = $jinput->get('id', -1);
+	$poiModel = JModelLegacy::getInstance( 'Poi', 'CitybrandingModel', array('ignore_request' => true) );
+	$data = $poiModel->getData($id);
+
+	$poiLat = $data->latitude;
+	$poiLng = $data->longitude;
+	$poiIcon = ($data->category_image == '' ? '' : JURI::base() . $data->category_image);
+	$poiAddress = $data->address;
+	$poiTitle = $data->title;
+	?>
+	<script type="text/javascript">
+		var poiLat = "<?php echo $poiLat;?>" ;
+		var poiLng = "<?php echo $poiLng;?>" ;
+		var poiIcon = "<?php echo $poiIcon;?>" ;
+		var poiAddress = "<?php echo $poiAddress;?>" ;
+		var poiTitle = "<?php echo $poiTitle;?>" ;
+	</script>
+	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single.js" type="text/javascript"></script>
+<?php endif; ?>
 
 <?php
 //initialize and load map
