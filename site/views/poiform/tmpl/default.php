@@ -85,10 +85,6 @@ if(!$canState && $this->item->id > 0) {
 <div class="row">
 <div class="poi-edit front-end-edit">
     <form id="form-poi" action="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.save'); ?>" method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
-    <div style="float:right;">
-        <button type="submit" class="validate btn btn-primary"><i class="icon-ok"></i> <?php echo JText::_('JSUBMIT'); ?></button>
-        <a class="btn" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poiform.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
-    </div>
 
     <?php if (!empty($this->item->id)): ?>
         <h1><i class="icon-pencil"></i> <?php echo JText::_('COM_CITYBRANDING_POI_EDIT'); ?> #<?php echo $this->item->id; ?></h1>
@@ -227,7 +223,10 @@ if(!$canState && $this->item->id > 0) {
 	    </script>
 	<?php endif; ?>
 
-
+	<div style="float:right;">
+		<button type="submit" class="validate btn btn-primary"><i class="icon-ok"></i> <?php echo JText::_('JSUBMIT'); ?></button>
+		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poiform.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
+	</div>
     
     <input type="hidden" name="option" value="com_citybranding" />
     <input type="hidden" name="task" value="poiform.save" />
