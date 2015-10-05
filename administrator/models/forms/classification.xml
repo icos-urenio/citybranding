@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_citybranding/models/fields">
+
+        <field name="id" type="text" default="0" label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+
+        <field name="title" type="text"
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_TITLE"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_TITLE"
+            required="true" 
+            class="inputbox input-xxlarge input-large-text"
+            filter="string" /> 
+
+        <field name="icon" type="text"
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_ICON"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_ICON" />
+
+        <field name="description" type="textarea"
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_DESCRIPTION"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_DESCRIPTION"
+            cols="100"
+            rows="8"
+            filter="safehtml" /> 
+
+        <field name="created" type="timecreated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_CREATED"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_CREATED"  />
+
+        <field name="updated" type="timeupdated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_UPDATED"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_UPDATED" />
+
+        <field name="created_by" type="createdby" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_CREATED_BY"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_CREATED_BY" />
+
+        <field name="access" type="accesslevel"
+            label="COM_CITYBRANDING_FORM_LBL_CLASSIFICATION_ACCESS"
+            description="COM_CITYBRANDING_FORM_DESC_CLASSIFICATION_ACCESS" />
+            
+        <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+            description="COM_CONTENT_FIELD_LANGUAGE_DESC">
+            <option value="*">JALL</option>
+        </field>
+
+        <field name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="inputbox"
+            size="1"
+            default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+            <option value="2">JARCHIVED</option>
+            <option value="-2">JTRASHED</option>
+        </field> 
+
+        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out_time" type="hidden" filter="unset" /> 
+    </fieldset> 
+
+    <fieldset name="accesscontrol">
+        <field name="asset_id" type="hidden" filter="unset" />
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_citybranding"
+            section="classification"
+        />
+	</fieldset>
+</form>

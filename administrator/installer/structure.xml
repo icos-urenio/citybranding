@@ -10,6 +10,7 @@
     <field field_name="regdate" field_type="DATETIME" description=""/>
     <field field_name="responsible" field_type="TEXT" description=""/>
     <field field_name="description" field_type="TEXT" description=""/>
+    <field action="add" field_name="classifications" field_type="TEXT" description=""/>
     <field field_name="address" field_type="TEXT" description=""/>
     <field field_name="latitude" field_type="DECIMAL" field_length="18,15" description=""/>
     <field field_name="longitude" field_type="DECIMAL" field_length="18,15" description=""/>
@@ -121,5 +122,22 @@
     <field field_name="token" field_type="VARCHAR" field_length="512" description=""/>
     <field field_name="unixtime" field_type="VARCHAR" field_length="12" description=""/>
     <field field_name="created" field_type="TIMESTAMP" description=""/>
+  </table>
+  <table action="add" table_name="#__citybranding_classifications" storage_engine="" collation="utf8_general_ci">
+    <field field_name="id" field_type="INT" field_length="11" is_autoincrement="1" index="primary" description=""/>
+    <field field_name="asset_id" field_type="INT" field_length="10" description=""/>
+    <field field_name="title" field_type="VARCHAR" field_length="255" description=""/>
+    <field field_name="icon" field_type="VARCHAR" field_length="255" description=""/>
+    <field field_name="description" field_type="TEXT" description=""/>
+    <field field_name="ordering" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="state" field_type="TINYINT" field_length="1" index="index" description=""/>
+    <field field_name="checked_out" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="checked_out_time" field_type="DATETIME" description=""/>
+    <field field_name="created" field_type="DATETIME" description=""/>
+    <field field_name="updated" field_type="DATETIME" description=""/>
+    <field field_name="created_by" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="updated_by" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="language" field_type="VARCHAR" field_length="255" description=""/>
+    <field field_name="access" field_type="INT" field_length="11" description=""/>
   </table>
 </component>
