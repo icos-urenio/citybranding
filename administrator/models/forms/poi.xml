@@ -24,7 +24,38 @@
             <option value="1">BRAND</option>
         </field>
 
+        <field name="related" type="sql" label="COM_CITYBRANDING_TITLE_RELATED_POIS" query="SELECT id, title AS value FROM #__citybranding_pois ORDER BY ordering" key_field="id" value_field="value" multiple="true" class="inputbox span12 small" required="false" />
+
         <field name="classifications" type="sql" label="COM_CITYBRANDING_TITLE_CLASSIFICATION" query="SELECT id, title AS value FROM #__citybranding_classifications ORDER BY ordering" key_field="id" value_field="value" multiple="true" class="inputbox span12 small" required="false" />
+
+
+        <field name="panorama" type="repeatable" icon="list"
+               label="Panorama" description=""
+               default=""
+               maximum="99">
+            <fieldset hidden="true" repeat="true">
+                <field name="pano_title" type="text"
+                       label="Title" description="Appears on bottom layer" />
+
+                <field name="pano_video" type="list" default="0"
+                       label="Is video?" description="" >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="pano_settings" type="textarea"
+                       label="Settings" description="Define autoload, autorotate, etc" width="100" />
+
+                <field name="pano_preview" type="media" directory=""
+                       label="Preview image" description="Image to show before loading"/>
+
+                <field name="pano_media" type="media" directory=""
+                       label="Media" description="The panorama media"/>
+
+            </fieldset>
+        </field>
+
+
 
         <field name="regnum" type="text"
                 label="COM_CITYBRANDING_FORM_LBL_POI_REGNUM"

@@ -127,6 +127,13 @@ class CitybrandingModelPoi extends JModelAdmin
 				$data->classifications = explode(',', $data->classifications);
 			}
 
+			// related
+			if(isset($data->related))
+			{
+				$data->related = explode(',', $data->related);
+			}
+
+
 			//Support for multiple or not foreign key field: stepid
 			/* itsam
 			$array = array();
@@ -218,6 +225,12 @@ class CitybrandingModelPoi extends JModelAdmin
 			$table->classifications = implode(',', $table->classifications);
 		}else{
 			$table->classifications = '';
+		}
+
+		if(is_array($table->related)) {
+			$table->related = implode(',', $table->related);
+		}else{
+			$table->related = '';
 		}
 	}
 
