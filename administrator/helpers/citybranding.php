@@ -31,36 +31,18 @@ class CitybrandingHelper {
 			$vName == 'categories'
 		);
 		if ($vName=='categories') {
-			JToolBarHelper::title('Improve My City: Categories (Pois)');
+			JToolBarHelper::title('City Branding: Categories (POIs)');
 		}
-		JHtmlSidebar::addEntry(
-			JText::_('COM_CITYBRANDING_TITLE_LOGS'),
-			'index.php?option=com_citybranding&view=logs',
-			$vName == 'logs'
-		);
-		/*
-		JHtmlSidebar::addEntry(
-			JText::_('COM_CITYBRANDING_TITLE_VOTES'),
-			'index.php?option=com_citybranding&view=votes',
-			$vName == 'votes'
-		);
-		*/
-		JHtmlSidebar::addEntry(
-			JText::_('COM_CITYBRANDING_TITLE_COMMENTS'),
-			'index.php?option=com_citybranding&view=comments',
-			$vName == 'comments'
-		);
-		JHtmlSidebar::addEntry(
-			JText::_('COM_CITYBRANDING_TITLE_STEPS'),
-			'index.php?option=com_citybranding&view=steps',
-			$vName == 'steps'
-		);
+        JHtmlSidebar::addEntry(
+            JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'),
+            'index.php?option=com_citybranding&view=classifications',
+            $vName == 'classifications'
+        );
 		JHtmlSidebar::addEntry(
 			JText::_('COM_CITYBRANDING_TITLE_KEYS'),
 			'index.php?option=com_citybranding&view=keys',
 			$vName == 'keys'
 		);
-
     }
 
     /**

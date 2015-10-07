@@ -52,7 +52,7 @@ class CitybrandingViewClassification extends JViewLegacy {
         }
         $canDo = CitybrandingHelper::getActions();
 
-        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATION'), 'classification.png');
+        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATION'), 'tree-2');
 
         // If not checked out, can save the item.
         if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create')))) {

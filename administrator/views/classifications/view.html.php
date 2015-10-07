@@ -52,7 +52,7 @@ class CitybrandingViewClassifications extends JViewLegacy {
         $state = $this->get('State');
         $canDo = CitybrandingHelper::getActions($state->get('filter.category_id'));
 
-        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'), 'classifications.png');
+        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'), 'tree-2');
 
         //Check if the form exists before showing the add/edit buttons
         $formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/classification';

@@ -41,19 +41,10 @@
     <administration>
         <menu img="components/com_citybranding/assets/images/s_com_citybranding.png" >COM_CITYBRANDING</menu>
         <submenu>
-            
 			<menu link="option=com_citybranding&amp;view=pois" view="pois" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Pois">COM_CITYBRANDING_TITLE_POIS</menu>
-
 			<menu link="option=com_categories&amp;extension=com_citybranding" view="categories" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Categories">COM_CITYBRANDING_POIS_CATID</menu>
-
-			<menu link="option=com_citybranding&amp;view=logs" view="logs" img="components/com_citybranding/assets/images/s_logs.png" alt="Citybranding/Logs">COM_CITYBRANDING_TITLE_LOGS</menu>
-
-			<menu link="option=com_citybranding&amp;view=comments" view="comments" img="components/com_citybranding/assets/images/s_comments.png" alt="Citybranding/Comments">COM_CITYBRANDING_TITLE_COMMENTS</menu>
-
-            <menu link="option=com_citybranding&amp;view=steps" view="steps" img="components/com_citybranding/assets/images/s_steps.png" alt="Citybranding/Steps">COM_CITYBRANDING_TITLE_STEPS</menu>
-
+            <menu link="option=com_citybranding&amp;view=classifications" view="classifications" img="components/com_citybranding/assets/images/s_classifications.png" alt="Citybranding/Classifications">COM_CITYBRANDING_TITLE_CLASSIFICATIONS</menu>
             <menu link="option=com_citybranding&amp;view=keys" view="keys" img="components/com_citybranding/assets/images/s_keys.png" alt="Citybranding/Keys">COM_CITYBRANDING_TITLE_KEYS</menu>
-
         </submenu>
         <files folder="administrator">
             <filename>access.xml</filename>
