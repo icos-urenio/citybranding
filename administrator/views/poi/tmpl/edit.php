@@ -21,19 +21,20 @@ $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.css');
 ?>
 <script type="text/javascript">
-    /*
-    js = jQuery.noConflict();
+
+    //fixes the "map inside tab" problem
+	js = jQuery.noConflict();
     js(document).ready(function() {
-        
-	js('input:hidden.stepid').each(function(){
-		var name = js(this).attr('name');
-		if(name.indexOf('stepidhidden')){
-			js('#jform_stepid option[value="'+js(this).val()+'"]').attr('selected',true);
-		}
-	});
-	js("#jform_stepid").trigger("liszt:updated");
+	    js('a[data-toggle="tab"]').on('shown', function (e) {
+		    if(e.target.hash == '#gmap') {
+			    google.maps.event.trigger(map, 'resize');
+			    map.setCenter(marker.getPosition());
+		    }
+	    });
     });
-    */
+
+
+
     Joomla.submitbutton = function(task)
     {
         if (task == 'poi.cancel') {
@@ -63,59 +64,28 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
             <div class="span6">
                 <fieldset class="adminform">
 	                <div class="control-group">
-	                	<div class="control-label"><?php echo $this->form->getLabel('moderation'); ?></div>
-	                	<div class="controls"><?php echo $this->form->getInput('moderation'); ?></div>
-	                </div>                 
-		            <div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
-					</div>
-					<div class="accordion" id="accordion2">
-					  <div class="accordion-group">
-					    <div class="accordion-heading">
-					      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-					        <i class="icon-download"></i> <?php echo JText::_('COM_CITYBRANDING_FORM_DESC_POI_REGNUM');?>
-					      </a>
-					    </div>
-					    <div id="collapseOne" class="accordion-body collapse">
-					      <div class="accordion-inner">
-					        
-					        <div class="alert alert-warning" style="width:80%;">
-					        	<div class="control-group">
-					        		<div class="control-label"><?php echo $this->form->getLabel('regnum'); ?></div>
-					        		<div class="controls"><?php echo $this->form->getInput('regnum'); ?></div>
-					        	</div>
-					        	<div class="control-group">
-					        		<div class="control-label"><?php echo $this->form->getLabel('regdate'); ?></div>
-					        		<div class="controls"><?php echo $this->form->getInput('regdate'); ?></div>
-					        	</div>
-					        	<div class="control-group">
-					        		<div class="control-label"><?php echo $this->form->getLabel('responsible'); ?></div>
-					        		<div class="controls"><?php echo $this->form->getInput('responsible'); ?></div>
-					        	</div>
-					        	<div class="control-group">
-					        		<div class="control-label"><?php echo $this->form->getLabel('subgroup'); ?></div>
-					        		<div class="controls"><?php echo $this->form->getInput('subgroup'); ?></div>
-					        	</div>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					  
-					</div>
+		                <div class="control-label"><?php echo $this->form->getLabel('poitype'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('poitype'); ?></div>
+	                </div>
+	                <div class="control-group">
+		                <div id="class1" style="color: green;"></div>
+		                <div class="control-label"><?php echo $this->form->getLabel('classifications'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('classifications'); ?></div>
+	                </div>
 
-					<div class="control-group">
+	                <?php /*
+	                <div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('stepid'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('stepid'); ?></div>
 					</div>
 
-					<?php
+
 						foreach((array)$this->item->stepid as $value): 
 							if(!is_array($value)):
 								echo '<input type="hidden" class="stepid" name="jform[stepidhidden]['.$value.']" value="'.$value.'" />';
 							endif;
 						endforeach;
-					?>			
+					*/?>
 					<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('catid'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('catid'); ?></div>
@@ -124,74 +94,40 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 						<div class="control-label"><?php echo $this->form->getLabel('description'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('description'); ?></div>
 					</div>
-					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('photo'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('photo'); ?></div>
-					</div>
+
                 </fieldset>
             </div>
             <div class="span6">
                 <fieldset class="adminform">
-					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('address'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('address'); ?></div>
-						<?php echo $this->form->getInput('latitude'); ?>
-						<?php echo $this->form->getInput('longitude'); ?>
-					</div>
+	                <div class="control-group">
+		                <div class="control-label"><?php echo $this->form->getLabel('photo'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('photo'); ?></div>
+	                </div>
 
-					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('extra'); ?></div>
-						<div class="controls">
-							<div class="alert alert-warning">
-								<p><strong><?php echo JText::_('COM_CITYBRANDING_USER_DETAILS');?>:</strong></p>
-								<?php 
-								foreach ($this->item->creatorDetails as $key => $value) {
-									echo $key.':'.$value . '<br />';
-								}
-								?>
-							<?php echo $this->form->getInput('extra'); ?>
-							</div>
-						</div>
-					</div>
-                </fieldset>	
+                </fieldset>
 			</div>
         </div>
         <?php echo JHtml::_('bootstrap.endTab'); ?>
         
-        <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'logging', JText::_('COM_CITYBRANDING_TITLE_LOGS', true)); ?>
+        <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'gmap', JText::_('COM_CITYBRANDING_SETTINGS_GOOGLE_MAP_LABEL', true)); ?>
         	<div class="span12">
-	        	<table class="table table-striped">
-	        		<thead>
-	        			<tr>
-	        				<th><?php echo JText::_("JDATE");?></th>
-	        				<th><?php echo JText::_("COM_CITYBRANDING_FORM_LBL_LOG_ACTION");?></th>
-	        				<th><?php echo JText::_("COM_CITYBRANDING_LOGS_CREATED_BY");?></th>
-	        				<th><?php echo JText::_("COM_CITYBRANDING_TITLE_STEP");?></th>
-	        				<th><?php echo JText::_("COM_CITYBRANDING_LOGS_DESCRIPTION");?></th>
-	        				</tr>
-	        		</thead>
-	        		<tbody>
-	        			<?php foreach ($this->logs as $log) : ?>
-	        			<tr>
-	        				<td><?php echo $log['created']; ?></td>
-	        				<td><?php echo $log['action']; ?></td>
-	        				<td><?php echo $log['created_by']; ?></td>
-	        				<td>
-	        					<span style="font-size: 20px;color: <?php echo $log['stepid_color']; ?>">&marker;</span>
-	        					<?php echo $log['stepid_title']; ?>
-	        				</td>
-	        				<td><?php echo $log['description']; ?></td>
-	        			</tr>
-	        			<?php endforeach; ?>
-	        		</tbody>
-	        	</table>
-
+		        <div class="control-group">
+			        <div class="control-label"><?php echo $this->form->getLabel('address'); ?></div>
+			        <div class="controls"><?php echo $this->form->getInput('address'); ?></div>
+			        <?php echo $this->form->getInput('latitude'); ?>
+			        <?php echo $this->form->getInput('longitude'); ?>
+		        </div>
         	</div>
         <?php echo JHtml::_('bootstrap.endTab'); ?>
 
         <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
             <div class="span6">
                 <fieldset class="adminform">
+	                <div class="control-group">
+		                <div class="control-label"><?php echo $this->form->getLabel('moderation'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('moderation'); ?></div>
+	                </div>
+
 					<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
@@ -224,6 +160,10 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 			</div>		
             <div class="span6">
                 <fieldset class="adminform">
+	                <div class="control-group">
+		                <div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('id'); ?></div>
+	                </div>
 					<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('created'); ?></div>
 						<div class="controls"><strong><?php echo $this->form->getInput('created'); ?></strong></div>
