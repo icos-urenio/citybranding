@@ -46,6 +46,7 @@ class CitybrandingModelPois extends JModelList {
                 'note', 'a.note',
                 'votes', 'a.votes',
                 'modality', 'a.modality',
+                'classifications', 'a.classifications'
 
             );
         }

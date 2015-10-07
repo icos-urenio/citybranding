@@ -120,7 +120,12 @@ class CitybrandingModelPoi extends JModelAdmin
 
 		if (empty($data)) {
 			$data = $this->getItem();
-            
+
+			// classifications
+			if(isset($data->classifications))
+			{
+				$data->classifications = explode(',', $data->classifications);
+			}
 
 			//Support for multiple or not foreign key field: stepid
 			/* itsam
@@ -207,6 +212,12 @@ class CitybrandingModelPoi extends JModelAdmin
 				$table->ordering = $max+1;
 			}
 
+		}
+
+		if(is_array($table->classifications)) {
+			$table->classifications = implode(',', $table->classifications);
+		}else{
+			$table->classifications = '';
 		}
 	}
 
