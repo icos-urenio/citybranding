@@ -100,6 +100,10 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
             <div class="span6">
                 <fieldset class="adminform">
 	                <div class="control-group">
+		                <div class="control-label"><?php echo $this->form->getLabel('panorama'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('panorama'); ?></div>
+	                </div>
+	                <div class="control-group">
 		                <div class="control-label"><?php echo $this->form->getLabel('photo'); ?></div>
 		                <div class="controls"><?php echo $this->form->getInput('photo'); ?></div>
 	                </div>
@@ -119,6 +123,15 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 		        </div>
         	</div>
         <?php echo JHtml::_('bootstrap.endTab'); ?>
+
+	    <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'relative', JText::_('COM_CITYBRANDING_TITLE_RELATED_POIS', true)); ?>
+	    <div class="span12">
+		    <div class="control-group">
+			    <div class="control-label"><?php echo $this->form->getLabel('related'); ?></div>
+			    <div class="controls"><?php echo $this->form->getInput('related'); ?></div>
+		    </div>
+	    </div>
+	    <?php echo JHtml::_('bootstrap.endTab'); ?>
 
         <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
             <div class="span6">

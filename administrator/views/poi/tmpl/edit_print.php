@@ -24,7 +24,7 @@ require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 	@media all {
 		table {width: 100%;}
 		.page-break	{ display: none; }
-		table, th, td, thead, tr {
+/*		table, th, td, thead, tr {
 		  border: 1px solid black;
 		}
 		table {
@@ -32,7 +32,7 @@ require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 		}
 		th {
 		  height: 50px;
-		}
+		}*/
 	}
 
 	@media print {
