@@ -113,7 +113,7 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_STEPID', 'a.stepid', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_TITLE_CLASSIFICATION', 'a.classifications', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_CATID', 'a.catid', $listDirn, $listOrder); ?>
@@ -212,8 +212,7 @@ if (!empty($this->extra_sidebar)) {
 				</td>
 				<td>
 
-					<?php //echo $item->stepid; ?>
-					<span style="font-size: 20px;color: <?php echo $item->stepid_color; ?>">&marker;</span><?php echo $item->stepid_title; ?>
+					<?php echo $item->classifications; ?>
 
 				</td>
 				<td>
