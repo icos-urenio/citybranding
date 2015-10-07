@@ -116,6 +116,9 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_TITLE_CLASSIFICATION', 'a.classifications', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+					<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_FORM_LBL_POI_TYPE', 'a.poitype', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_POIS_CATID', 'a.catid', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -211,9 +214,10 @@ if (!empty($this->extra_sidebar)) {
 				<?php endif; ?>
 				</td>
 				<td>
-
-					<?php echo $item->classifications; ?>
-
+					<?php echo $item->classifications_titles; ?>
+				</td>
+				<td>
+					<?php echo $item->poitype; ?>
 				</td>
 				<td>
 

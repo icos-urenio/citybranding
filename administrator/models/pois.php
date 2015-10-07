@@ -233,42 +233,24 @@ class CitybrandingModelPois extends JModelList {
 
     public function getItems() {
         $items = parent::getItems();
+        $classificationModel = JModelLegacy::getInstance( 'Classification', 'CitybrandingModel', array('ignore_request' => true) );
 
-        /* Causes pagination problem. Check: http://pois.joomla.org/tracker/joomla-cms/6645 */
-/*        if (JFactory::getApplication()->isAdmin())
-        {
-            $user = JFactory::getUser();
-            $canShowAllPois = $user->authorise('citybranding.showall.pois');
-            if (!$canShowAllPois) {
-                $usergroups = JAccess::getGroupsByUser($user->id);
-
-                for ($x = 0, $count = count($items); $x < $count; $x++)
-                {
-                    // Check the category usergroup level. Remove pois the user shouldn't see
-                    $category = JCategories::getInstance('Citybranding')->get($items[$x]->catid);
-                    $params = json_decode($category->params);
-                    if(isset($params->citybranding_category_usergroup))
-                        $citybranding_category_usergroup = $params->citybranding_category_usergroup;
-                    else
-                        $citybranding_category_usergroup = array();
-
-                    $group_found = false;
-                    foreach ($citybranding_category_usergroup as $group) {
-                        if (in_array($group, $usergroups))
+        foreach ($items as $oneItem) {
+            if (isset($oneItem->classifications)) {
+                $values = explode(',', $oneItem->classifications);
+                $textValue = array();
+                foreach ($values as $value){
+                    if(!empty($value)){
+                        $title = $classificationModel->getItem($value)->title;
+                        if( $title != '' )
                         {
-                            $group_found = true;
-                            break;
+                            $textValue[] = $title;
                         }
                     }
-                    if($group_found == false){
-                        unset($items[$x]);
-                    }
-
                 }
+                $oneItem->classifications_titles = !empty($textValue) ? implode(', ', $textValue) : $oneItem->classifications;
             }
-        }*/
-        
-
+        }
 
         if (JFactory::getApplication()->isSite())
         {
