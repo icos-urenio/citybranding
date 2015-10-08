@@ -18,62 +18,6 @@
             class="inputbox input-xxlarge input-large-text"
             filter="string" /> 
 
-        <field name="regnum" type="text"
-            label="COM_CITYBRANDING_FORM_LBL_POI_REGNUM"
-            description="COM_CITYBRANDING_FORM_DESC_POI_REGNUM" 
-            readonly="true" class="readonly"/>      
-
-        <field name="regdate" type="calendar"
-            label="COM_CITYBRANDING_FORM_LBL_POI_REGDATE"
-            description="COM_CITYBRANDING_FORM_DESC_POI_REGDATE" 
-            readonly="true" class="readonly"/> 
-
-        <field name="stepid" 
-            type="step" 
-            label="COM_CITYBRANDING_FORM_LBL_POI_STEPID" 
-            description="" 
-            required="false"
-            descriptionfield="step_modified_description"
-            flagfield="is_step_modified" 
-            /> 
-        <field name="step_modified_description"
-            type="text"
-            default=""
-            required="false"
-            label="Step modified reason" />
-        <field name="is_step_modified"
-            type="text"
-            default="false"
-            label="Step modified?" /> 
-
-        <field name="catid" 
-            type="cat"
-            label="COM_CITYBRANDING_FORM_LBL_POI_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_POI_CATID" 
-            required="true" 
-            published="1"
-            action="edit"
-            extension="com_citybranding" 
-            descriptionfield="category_modified_description"
-            flagfield="is_category_modified" 
-            
-            /> 
-
-        <field name="category_modified_description"
-            type="text"
-            default=""
-            required="false"
-            label="Category modified reason" />            
-        <field name="is_category_modified"
-            type="hidden"
-            default="false"
-            label="Category modified?" /> 
-
-     
-    	<field name="filter_catid" type="category"
-            label="COM_CITYBRANDING_FORM_LBL_POI_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_POI_CATID"  extension="com_citybranding" show_root="1" onchange="this.form.submit();" /> 
-
         <field name="description" type="textarea"
             label="COM_CITYBRANDING_FORM_LBL_POI_DESCRIPTION"
             description="COM_CITYBRANDING_FORM_DESC_POI_DESCRIPTION" 
@@ -104,7 +48,7 @@
             filter="string" /> 
 
         <field name="photo" 
-            type="multiphoto" 
+            type="multiphoto"
             label="COM_CITYBRANDING_FORM_LBL_POI_PHOTOS" 
             description="Upload and handle images" 
             imagedir="images/citybranding"
@@ -128,36 +72,6 @@
             description="COM_CONTENT_FIELD_LANGUAGE_DESC">
             <option value="*">JALL</option>
         </field>
-
-        <field name="hits" type="hidden" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_POI_HITS"
-            description="COM_CITYBRANDING_FORM_DESC_POI_HITS" 
-            default="0" 
-            filter="safehtml" /> 
-
-        <field name="votes" type="hidden" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_POI_VOTES"
-            description="COM_CITYBRANDING_FORM_DESC_POI_VOTES" 
-            filter="safehtml" /> 
-
-        <field name="modality" type="hidden" size="40" class="inputbox"
-            label="COM_CITYBRANDING_FORM_LBL_POI_MODALITY"
-            description="COM_CITYBRANDING_FORM_DESC_POI_MODALITY" 
-            filter="safehtml" /> 
-
-        <!--         
-        <field
-            name="state"
-            type="list"
-            label="JSTATUS"
-            description="JFIELD_PUBLISHED_DESC"
-            class="inputbox"
-            size="1"
-            default="1">
-            <option value="1">JPUBLISHED</option>
-            <option value="0">JUNPUBLISHED</option>
-        </field>  
-        -->
 
         <field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"
             description="JFIELD_ACCESS_DESC" size="1" />

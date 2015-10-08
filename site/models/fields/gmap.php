@@ -152,7 +152,7 @@ class JFormFieldGmap extends JFormField
 			JFactory::getDocument()->addScript('https://maps.googleapis.com/maps/api/js?language='.$language);
 
 
-
+		//JFactory::getDocument()->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/jquery.popupoverlay.min.js');
 		JFactory::getDocument()->addScript(JURI::root(true).'/components/com_citybranding/models/fields/gmap/js/gmap.js');
 
 
@@ -189,6 +189,12 @@ class JFormFieldGmap extends JFormField
 		$script[] = "google.maps.event.addDomListener(window, 'load', initialize);";
 		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
+		$init[] = 'jQuery(document).ready(function() {';
+		$init[] = '	jQuery("#citybranding_searchModal").popup();';
+		$init[] = '});';
+
+		JFactory::getDocument()->addScriptDeclaration( implode("\n", $init));
+
 		//style
 		$style = array();
 		$style[] = (isset($this->element['width']) ? 'width:'.$this->element['width'].';' : '');
@@ -213,7 +219,7 @@ class JFormFieldGmap extends JFormField
         if(!$disabled) {
         $html[] = '		<div class="span1">';
 		$html[] = '			<button id="locateposition" class="btn btn-mini" type="button"><i class="icon-home"></i></button><br /><br />';
-		$html[] = '			<button id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i></button>';
+		$html[] = '			<button id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i> search</button>';
 		$html[] = '		</div>';
 		}
         
@@ -229,20 +235,21 @@ class JFormFieldGmap extends JFormField
 		
 		$html[] = '	</div>';		
 		$html[] = '</div>';		
+		$html[] = '<div style="clear:both;padding-bottom:550px;"></div>';
 
 		$html[] = '<!-- Modal -->';
-		$html[] = '<div id="CITYBRANDING_searchModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">';
+		$html[] = '<div id="citybranding_searchModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">';
 		$html[] = '	<div class="modal-dialog modal-sm">';
 		$html[] = '		<div class="modal-content">';
 		$html[] = '			<div class="modal-header">';
-		$html[] = '				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
+		$html[] = '				<button type="button" class="citybranding_searchModal_close close" data-dismiss="modal" aria-hidden="true">×</button>';
 		$html[] = '				<h3 id="searchModalLabel">Search Results</h3>';
 		$html[] = '			</div>';
 		$html[] = '			<div class="modal-body">';
 		$html[] = '				<p id="searchBody">One fine body…</p>';
 		$html[] = '			</div>';
 		$html[] = '			<div class="modal-footer">';
-		$html[] = '				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>';
+		$html[] = '				<button class="btn citybranding_searchModal_close" data-dismiss="modal" aria-hidden="true">Close</button>';
 		$html[] = '			</div>';
 		$html[] = '		</div>';
 		$html[] = '	</div>';

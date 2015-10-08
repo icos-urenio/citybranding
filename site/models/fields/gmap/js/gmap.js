@@ -6,6 +6,10 @@ var	infowindow = new google.maps.InfoWindow({
 var geocoder = new google.maps.Geocoder();
 
 jQuery(document).ready(function() {
+	//prepare popup
+	jQuery('#citybranding_searchModal').popup();
+
+
 	jQuery( "#locateposition" ).click(function() {
 	  // Try HTML5 geolocation
 	  infowindow.setContent('Locating your position...<br /><span style="color: red">Please wait</span>');
@@ -82,7 +86,8 @@ function codeAddress() {
 			};
 			html += '</ul>';
 			jQuery('#searchBody').html(html);
-    		jQuery('#CITYBRANDING_searchModal').modal('show');
+    		jQuery('#citybranding_searchModal').popup('show');
+
 		}
 		else{
 			applySearchResult(results[0].geometry.location.lat(), 

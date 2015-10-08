@@ -26,7 +26,6 @@ class CitybrandingViewPoiform extends JViewLegacy {
      * Display the view
      */
     public function display($tpl = null) {
-
         $app = JFactory::getApplication();
         $user = JFactory::getUser();
 
@@ -84,6 +83,11 @@ class CitybrandingViewPoiform extends JViewLegacy {
         if ($this->params->get('robots')) {
             $this->document->setMetadata('robots', $this->params->get('robots'));
         }
+
+
+        //$this->document->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/jquery.popupoverlay.min.js');
+        //$this->document->addScript("https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.10/jquery.popupoverlay.js");
+
     }
 
 }
