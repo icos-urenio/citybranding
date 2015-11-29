@@ -14,9 +14,13 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 $user = JFactory::getUser();
 $userId = $user->get('id');
 
-// $canEdit = $user->authorise('core.edit', 'com_citybranding');
-// $canDelete = $user->authorise('core.delete', 'com_citybranding');
+$canEdit = $user->authorise('core.edit', 'com_citybranding');
+$canDelete = $user->authorise('core.delete', 'com_citybranding');
+//print_r($_REQUEST);
 ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+<script src="<?php echo  JURI::root(true) . '/components/com_citybranding/assets/js/imagesloaded.pkgd.min.js'; ?>"></script>
 
 <script type="text/javascript">
     js = jQuery.noConflict();
@@ -101,7 +105,7 @@ $userId = $user->get('id');
                             <?php endif; ?>
                         </p>
 
-                        <?php //echo CitybrandingFrontendHelper::cutString($item->description, 200); ?>
+                        <?php echo CitybrandingFrontendHelper::cutString($item->description, 200); ?>
 
                     </div>
                 </div>

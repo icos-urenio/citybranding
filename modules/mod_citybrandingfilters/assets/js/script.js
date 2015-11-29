@@ -72,34 +72,35 @@ function citybranding_toggle_checkboxes(elem) {
 
 
 
-function vote(poi_id, user_id, token){
-	jQuery.ajax({ 
-	    'async': true, 
-	    'global': false, 
-	    'url': "index.php?option=com_citybranding&task=votes.add&format=json&poi_id=" + poi_id + "&user_id=" + user_id + "&" + token + "=1", 
-	    'dataType': "json", 
-	    'success': function (data) {
-	    	var json = data;
-	        if(json.data.code == 1){
-	        	jQuery('#votes-counter').html(json.data.votes);
-	        }
+/*
+ function vote(poi_id, user_id, token){
+ jQuery.ajax({
+ 'async': true,
+ 'global': false,
+ 'url': "index.php?option=com_citybranding&task=votes.add&format=json&poi_id=" + poi_id + "&user_id=" + user_id + "&" + token + "=1",
+ 'dataType': "json",
+ 'success': function (data) {
+ var json = data;
+ if(json.data.code == 1){
+ jQuery('#votes-counter').html(json.data.votes);
+ }
 
-	        var notification = new NotificationFx({
-	        	wrapper : document.body,
-	        	message : '<span class="glyphicon glyphicon-info-sign icon" aria-hidden="true"></span><p>'+json.data.msg+'</p>',
-	        	//layout : 'bar',
-	        	//effect : 'slidetop',
-	        	layout : 'attached',
-	        	effect : 'bouncyflip',
-	        	type : 'error', // notice, warning or error
-	        	ttl : 3000,
-	        });
-	        notification.show();
+ var notification = new NotificationFx({
+ wrapper : document.body,
+ message : '<span class="glyphicon glyphicon-info-sign icon" aria-hidden="true"></span><p>'+json.data.msg+'</p>',
+ //layout : 'bar',
+ //effect : 'slidetop',
+ layout : 'attached',
+ effect : 'bouncyflip',
+ type : 'error', // notice, warning or error
+ ttl : 3000,
+ });
+ notification.show();
 
-	     },
-	     'error': function (error) {
-	        alert('Voting failure - See console for more information');
-	        console.log (error);
-	     }             
-	});
-}
+ },
+ 'error': function (error) {
+ alert('Voting failure - See console for more information');
+ console.log (error);
+ }
+ });
+ }*/

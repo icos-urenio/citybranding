@@ -169,6 +169,7 @@ class CitybrandingModelPois extends JModelList {
 
         // Filter by search in title
         $search = $this->getState('filter.search');
+
         if (!empty($search)) {
             if (stripos($search, 'id:') === 0) {
                 $query->where('a.id = ' . (int) substr($search, 3));

@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 // Check for component
 if (!JComponentHelper::getComponent('com_citybranding', true)->enabled)
 {
-	echo '<div class="alert alert-danger">Improve My City component is not enabled</div>';
+	echo '<div class="alert alert-danger">Citybranding component is not enabled</div>';
 	return;
 }
 
@@ -34,13 +34,16 @@ require_once __DIR__ . '/helper.php';
 
 $doc = JFactory::getDocument();
 $doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/style.css');
-$doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/ns-default.css');
+//$doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/ns-default.css');
 //$doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/ns-style-bar.css');
-$doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/ns-style-attached.css');
-$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/classie.js');
-$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/modernizr.custom.js');
-$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/notificationFx.js');
+//$doc->addStyleSheet(JURI::base() . '/modules/mod_citybrandingfilters/assets/css/ns-style-attached.css');
+//$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/classie.js');
+//$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/modernizr.custom.js');
+//$doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/notificationFx.js');
 $doc->addScript(JURI::base() . '/modules/mod_citybrandingfilters/assets/js/script.js');
+
+
+
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 require JModuleHelper::getLayoutPath('mod_citybrandingfilters', $params->get('layout', 'default'));

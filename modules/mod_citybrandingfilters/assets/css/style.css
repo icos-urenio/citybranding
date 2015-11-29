@@ -1,40 +1,35 @@
-.citybranding_filters_search {}
+/*.citybranding_filters_search {}*/
 .citybranding_filters_buttons {
-	margin: 0;
-	display: inline-block;
-	width: 100%;
-	min-height: 70px;
-	line-height: 70px;
-	padding: 0 10px;
-	clear:both;
+	min-height: 3em;
+	line-height: 5em;
 }
 .citybranding_btn_left {float: left;}
 .citybranding_btn_right {float: right;}
-.citybranding_ulist {list-style-type: none;}
-.citybranding_ulist_inline li {display: inline; padding-right:30px;}
+/*.citybranding_ulist {list-style-type: none;}*/
+/*.citybranding_ulist_inline li {display: inline; padding-right:30px;}*/
 
-#searchModal input[type="checkbox"] {
-	vertical-align: top;
-}
+/*#searchModal input[type="checkbox"] {*/
+	/*vertical-align: top;*/
+/*}*/
 
-#filter_search {
-    width: 300px;
-}
-#searchclear {
-    position: absolute;
-    right: 5px;
-    top: 0;
-    bottom: 0;
-    height: 14px;
-    margin: auto;
-    font-size: 14px;
-    cursor: pointer;
-    color: #ccc;
-}
+/*#filter_search {*/
+    /*width: 300px;*/
+/*}*/
+/*#searchclear {*/
+    /*position: absolute;*/
+    /*right: 5px;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*height: 14px;*/
+    /*margin: auto;*/
+    /*font-size: 14px;*/
+    /*cursor: pointer;*/
+    /*color: #ccc;*/
+/*}*/
 
-.modal.modal-wide .modal-dialog {
-  width: 90%;
-}
-.modal-wide .modal-body {
-  overflow-y: auto;
-}
+/*.modal.modal-wide .modal-dialog {*/
+  /*width: 90%;*/
+/*}*/
+/*.modal-wide .modal-body {*/
+  /*overflow-y: auto;*/
+/*}*/
