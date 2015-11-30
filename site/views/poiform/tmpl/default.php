@@ -21,10 +21,9 @@ $firstStep = CitybrandingFrontendHelper::getStepByStepId($this->item->stepid);
 
 <?php 
 JHtml::_('behavior.keepalive');
-//JHtml::_('behavior.tooltip');
+JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
-
 //include popup overlay
 JFactory::getDocument()->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/jquery.popupoverlay.min.js');
 
@@ -159,6 +158,17 @@ if(!$canState && $this->item->id > 0) {
 		<div class="control-label"><?php echo $this->form->getLabel('longitude'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('longitude'); ?></div>
 	</div>
+
+	    <div class="control-group">
+		    <div class="control-label"><?php echo $this->form->getLabel('related'); ?></div>
+		    <div class="controls"><?php echo $this->form->getInput('related'); ?></div>
+	    </div>
+
+<!--	    <div class="control-group">
+		    <div class="control-label"><?php /*echo $this->form->getLabel('classifications'); */?></div>
+		    <div class="controls"><?php /*echo $this->form->getInput('classifications'); */?></div>
+	    </div>
+-->
 	<div class="control-group">
 		<div class="control-label"><?php echo $this->form->getLabel('photo'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('photo'); ?></div>
