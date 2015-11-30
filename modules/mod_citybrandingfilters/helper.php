@@ -103,22 +103,31 @@ class ModCitybrandingfiltersHelper {
         $app = JFactory::getApplication();
         $filter_category = $app->getUserStateFromRequest('com_citybranding.pois.filter.category', 'cat', array());
     
-        self::$filters .= '<ul class="citybranding_ulist">';
+        //self::$filters .= '<ul class="citybranding_ulist">';
         foreach($cats as $JCatNode){
             //id is the category id
             if(empty($filter_category)){
-                if($JCatNode->parentid == 'root')       
-                    self::$filters .='<li><input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" checked="checked" id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" /><span class="root">'.' '.$JCatNode->title.'</span></li>' . "\n";
-                else
-                    self::$filters .='<li><input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" checked="checked" id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />'. ' ' .$JCatNode->title.'</li>' . "\n";
+                if($JCatNode->parentid == 'root')
+                {
+                    self::$filters .= '<input path="' . $JCatNode->path . '" parent="box' . $JCatNode->parentid . '" name="cat[]" value="' . $JCatNode->id . '" type="checkbox" checked="checked" id="cat-' . $JCatNode->id . '" onclick="citybranding_filterbox_click(this,' . $JCatNode->id . ')" />' . "\n";
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.$JCatNode->title.'</span></label>';
+                }
+                else {
+                    self::$filters .= '<input path="' . $JCatNode->path . '" parent="box' . $JCatNode->parentid . '" name="cat[]" value="' . $JCatNode->id . '" type="checkbox" checked="checked" id="cat-' . $JCatNode->id . '" onclick="citybranding_filterbox_click(this,' . $JCatNode->id . ')" />' . "\n";
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.$JCatNode->title.'</label>';
+                }
             }
             else{
-                if($JCatNode->parentid == 'root'){
-                    self::$filters .='<li><input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" /><span class="root">'.' '.$JCatNode->title.'</span></li>' . "\n";
+                if($JCatNode->parentid == 'root')
+                {
+                    self::$filters .='<input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />' . "\n";
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.$JCatNode->title.'</span></label>';
                 }
-                else{
-                    self::$filters .='<li><input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />'.' '.$JCatNode->title.'</li>' . "\n";
-                }   
+                else
+                {
+                    self::$filters .='<input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />'. "\n";
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.$JCatNode->title.'</label>';
+                }
             }
             
             if(!empty($JCatNode->children)){
@@ -126,7 +135,7 @@ class ModCitybrandingfiltersHelper {
             }
         
         }
-        self::$filters .= '</ul>';
+        //self::$filters .= '</ul>';
 
         return self::$filters;
     }

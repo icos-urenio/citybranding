@@ -11,12 +11,7 @@ jQuery(document).ready(function() {
 	   jQuery("#filter_search").val('');
 	});
 
-	jQuery(".modal-wide").on("show.bs.modal", function() {
-	  var height = jQuery(window).height() - 200;
-	  jQuery(this).find(".modal-body").css("max-height", height);
-	});	
-
-	jQuery('#selectAllCategories').click(function(event) {  
+	jQuery('#selectAllCategories').click(function(event) {
 		jQuery(':checkbox[name="cat[]"]').prop('checked', this.checked);
     });
 
