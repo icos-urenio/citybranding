@@ -159,10 +159,10 @@ if(!$canState && $this->item->id > 0) {
 		<div class="controls"><?php echo $this->form->getInput('longitude'); ?></div>
 	</div>
 
-	    <div class="control-group">
-		    <div class="control-label"><?php echo $this->form->getLabel('related'); ?></div>
-		    <div class="controls"><?php echo $this->form->getInput('related'); ?></div>
-	    </div>
+<!--	    <div class="control-group">
+		    <div class="control-label"><?php /*echo $this->form->getLabel('related'); */?></div>
+		    <div class="controls"><?php /*echo $this->form->getInput('related'); */?></div>
+	    </div>-->
 
 <!--	    <div class="control-group">
 		    <div class="control-label"><?php /*echo $this->form->getLabel('classifications'); */?></div>

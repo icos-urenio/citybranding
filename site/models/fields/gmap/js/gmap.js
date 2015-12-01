@@ -1,36 +1,32 @@
 var map;
 var marker;
 var	infowindow = new google.maps.InfoWindow({
-		content: ''
-	});
+	content: ''
+});
 var geocoder = new google.maps.Geocoder();
 
 jQuery(document).ready(function() {
-	//prepare popup
-	jQuery('#citybranding_searchModal').popup();
-
-
 	jQuery( "#locateposition" ).click(function() {
-	  // Try HTML5 geolocation
-	  infowindow.setContent('Locating your position...<br /><span style="color: red">Please wait</span>');
-	  if(navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      var pos = new google.maps.LatLng(position.coords.latitude,
-	                                       position.coords.longitude);
+		// Try HTML5 geolocation
+		infowindow.setContent('Locating your position...<br /><span style="color: red">Please wait</span>');
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = new google.maps.LatLng(position.coords.latitude,
+						position.coords.longitude);
 
-		  infowindow.setContent('Your approximate location');
-	      updateMarkerPosition(pos);
-	      reverseGeocodePosition(pos)
-	      map.setCenter(pos);
-	      marker.setPosition(pos);
+				infowindow.setContent('Your approximate location');
+				updateMarkerPosition(pos);
+				reverseGeocodePosition(pos)
+				map.setCenter(pos);
+				marker.setPosition(pos);
 
-	    }, function() {
-	      handleNoGeolocation(true);
-	    });
-	  } else {
-	    // Browser doesn't support Geolocation
-	    handleNoGeolocation(false);
-	  }
+			}, function() {
+				handleNoGeolocation(true);
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			handleNoGeolocation(false);
+		}
 
 	});
 
@@ -45,62 +41,61 @@ jQuery(document).ready(function() {
 			infowindow.setContent(info+'<br />'+info_unlock);
 		}
 		else {
-			jQuery(this).removeClass( "btn-danger" );	
-			google.maps.event.trigger(marker, 'dragend', null);	//trigger to display current address	
+			jQuery(this).removeClass( "btn-danger" );
+			google.maps.event.trigger(marker, 'dragend', null);	//trigger to display current address
 		}
 	});
 
 	//initially lock address for existing records
 	if(itemId > 0)
-		jQuery("#lockaddress").click();	
-});	
+		jQuery("#lockaddress").click();
+});
 
 
 function handleNoGeolocation(errorFlag) {
-  if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
-  } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
-  }
+	if (errorFlag) {
+		var content = 'Error: The Geolocation service failed.';
+	} else {
+		var content = 'Error: Your browser doesn\'t support geolocation.';
+	}
 
-  infowindow.setContent(content);
-  infowindow.open(map, marker);
+	infowindow.setContent(content);
+	infowindow.open(map, marker);
 }
 
 
 function codeAddress() {
 	var address = jQuery('#'+addrfield).val() + hiddenterm;
 	geocoder.geocode( { 'address': address, 'language': language}, function(results, status) {
-	  if (status == google.maps.GeocoderStatus.OK) {
+		if (status == google.maps.GeocoderStatus.OK) {
 
-		if(results.length > 1){
-			//make list with results
-			var html = '<ul>';
-			for (var i = 0; i < results.length; i++) {
-				html += '<li>';
-				var lat = results[i].geometry.location.lat();
-				var lng = results[i].geometry.location.lng();
-				var addr = results[i].formatted_address;
-				html += '<a style="cursor: pointer;" onclick="applySearchResult('+lat+','+lng+',\''+addr+'\');jQuery(\'#CITYBRANDING_searchModal\').modal(\'hide\');">'+addr+'</a>';
-				html += '</li>';
-			};
-			html += '</ul>';
-			jQuery('#searchBody').html(html);
-    		jQuery('#citybranding_searchModal').popup('show');
+			if(results.length > 1){
+				//make list with results
+				var html = '<ul>';
+				for (var i = 0; i < results.length; i++) {
+					html += '<li>';
+					var lat = results[i].geometry.location.lat();
+					var lng = results[i].geometry.location.lng();
+					var addr = results[i].formatted_address;
+					html += '<a style="cursor: pointer;" onclick="applySearchResult('+lat+','+lng+',\''+addr+'\');jQuery(\'#citybranding_searchModal\').modal(\'hide\');">'+addr+'</a>';
+					html += '</li>';
+				};
+				html += '</ul>';
+				jQuery('#searchBody').html(html);
+				jQuery('#citybranding_searchModal').modal('show');
+			}
+			else{
+				applySearchResult(results[0].geometry.location.lat(),
+						results[0].geometry.location.lng(),
+						results[0].formatted_address);
 
+			}
+
+		} else {
+			jQuery('#searchBody').html('<h2>'+notfound+'</h2>');
+			jQuery('#searchModal').modal('show');
 		}
-		else{
-			applySearchResult(results[0].geometry.location.lat(), 
-							  results[0].geometry.location.lng(), 	
-							  results[0].formatted_address);
-
-		}
-
-	  } else {
-		jQuery('#searchBody').html('<h2>'+notfound+'</h2>');
-		jQuery('#searchModal').modal('show');
-	  }
-	});		
+	});
 }
 
 function applySearchResult(lat, lng, addr){
@@ -111,17 +106,17 @@ function applySearchResult(lat, lng, addr){
 	jQuery('#'+lngfield).val(lng);
 	updateMarkerAddress(addr);
 }
-			
+
 function reverseGeocodePosition(pos) {
 	geocoder.geocode({
 		latLng: pos,
 		language: language
 	}, function(responses) {
 		if (responses && responses.length > 0) {
-		  updateMarkerAddress(responses[0].formatted_address);
-		} 
+			updateMarkerAddress(responses[0].formatted_address);
+		}
 		else {
-		  updateMarkerAddress(notfound);
+			updateMarkerAddress(notfound);
 		}
 	});
 }
@@ -143,7 +138,7 @@ function initialize() {
 		Lat = jQuery('#'+latfield).val();
 	if(jQuery('#'+lngfield).val())
 		Lng = jQuery('#'+lngfield).val();
-	
+
 	var center = new google.maps.LatLng(Lat, Lng);
 
 	var mapOptions = {
@@ -152,6 +147,20 @@ function initialize() {
 		zoom: zoom
 	}
 	map = new google.maps.Map(document.getElementById('citybranding-map-canvas'), mapOptions);
+
+	// Construct the polygon.
+	if(typeof boundaries != 'undefined') {
+
+		var bounds = new google.maps.Polygon({
+			paths: boundaries,
+			strokeColor: '#FF0000',
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: '#FF0000',
+			fillOpacity: 0.05
+		});
+		bounds.setMap(map);
+	}
 
 	if(disabled){
 		marker = new google.maps.Marker({
@@ -194,7 +203,7 @@ function initialize() {
 			infowindow.setContent(info+'<br />'+info_unlock); //if geolocation failed
 		}
 		else{
-			infowindow.setContent(info); //if geolocation failed	
+			infowindow.setContent(info); //if geolocation failed
 		}
 		infowindow.open(map, marker);
 		reverseGeocodePosition(marker.getPosition());

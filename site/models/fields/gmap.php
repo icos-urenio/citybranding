@@ -1,8 +1,8 @@
 <?php
 /**
- * @version     1.0.0
+ * @version     3.0.0
  * @package     com_citybranding
- * @copyright   Copyright (C) 2015. All rights reserved.
+ * @copyright   Copyright (C) 2014. All rights reserved.
  * @license     GNU AFFERO GENERAL PUBLIC LICENSE Version 3; see LICENSE
  * @author      Ioannis Tsampoulatidis <tsampoulatidis@gmail.com> - https://github.com/itsam
  */
@@ -33,9 +33,9 @@ class JFormFieldGmap extends JFormField
 	protected $lng;
 	protected $zoom;
 	protected $icon = '';
-	
+
 	protected $mapOnly = false;
-	
+
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
 	 *
@@ -55,9 +55,9 @@ class JFormFieldGmap extends JFormField
 			case 'height':
 			case 'lat':
 			case 'lng':
-			case 'zoom':			
-			case 'icon':			
-			case 'mapOnly':			
+			case 'zoom':
+			case 'icon':
+			case 'mapOnly':
 				return $this->$name;
 		}
 
@@ -65,7 +65,7 @@ class JFormFieldGmap extends JFormField
 	}
 
 
-/**
+	/**
 	 * Method to set certain otherwise inaccessible properties of the form field object.
 	 *
 	 * @param   string  $name   The property name for which to the the value.
@@ -95,7 +95,7 @@ class JFormFieldGmap extends JFormField
 		}
 	}
 
-	public function showField($lat, $lng, $zoom = 14) 
+	public function showField($lat, $lng, $zoom = 14)
 	{
 		$this->element['disabled'] = true;
 		$this->element['latitudefield'] = 'latitudefield';
@@ -119,7 +119,7 @@ class JFormFieldGmap extends JFormField
 			$disabled = $this->element['disabled'];
 		}
 		JFactory::getDocument()->addStyleSheet(JURI::root(true).'/components/com_citybranding/models/fields/gmap/css/gmap.css');
-		
+
 		//(isset($this->element['api_key']) ? $this->element['api_key'] : '');
 		if(!isset($this->element['latitudefield']))
 			return '<strong>GMap field argument `latitudefield` is not set</strong>';
@@ -128,10 +128,10 @@ class JFormFieldGmap extends JFormField
 
 		$params = JComponentHelper::getParams('com_citybranding');
 		$api_key = $params->get('api_key');
-		
+
 		if($api_key == '')
 			echo '<span style="color: red; font-weight:bold;">'.JText::_('COM_CITYBRANDING_JFIELD_GMAP_MISSING_KEY').'</span>';
-		
+
 
 		//get google maps default options if no value is set (e.g. new record)
 		$lat        = (isset($this->lat) ? $this->lat : $params->get('latitude') );
@@ -143,16 +143,30 @@ class JFormFieldGmap extends JFormField
 		if(!$lng)  $lng  = '22.948426';
 
 		$scrollwheel = ($params->get('scrollwheel') == 1 ? true : false);
+		$lockaddressbtn = ($params->get('lockaddressbtn') == 1 ? true : false);
 		$language   = $params->get('maplanguage');
 		$hiddenterm = $params->get('hiddenterm');
+		$boundaries = $params->get('boundaries', null);
+
 
 		if($api_key != '')
 			JFactory::getDocument()->addScript('https://maps.googleapis.com/maps/api/js?key='.$api_key.'&language='.$language);
 		else
 			JFactory::getDocument()->addScript('https://maps.googleapis.com/maps/api/js?language='.$language);
 
+		if(!is_null($boundaries))
+		{
+			$boundaries = str_replace("\r", "", $boundaries);
+			$bounds = array();
+			$arBoundaries = explode("\n", $boundaries);
+			foreach ($arBoundaries as $bnd)
+			{
+				$latLng = explode(',', $bnd);
+				array_push($bounds, array('lng'=>(double)$latLng[0], 'lat'=>(double)$latLng[1]));
+			}
+			$boundaries = json_encode($bounds);
+		}
 
-		//JFactory::getDocument()->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/jquery.popupoverlay.min.js');
 		JFactory::getDocument()->addScript(JURI::root(true).'/components/com_citybranding/models/fields/gmap/js/gmap.js');
 
 
@@ -178,6 +192,10 @@ class JFormFieldGmap extends JFormField
 		$script[] = "var icon='".$this->icon."';";
 		$script[] = "var language='".$language."';";
 		$script[] = "var hiddenterm='".$hiddenterm."';";
+		if(!is_null($boundaries))
+		{
+			$script[] = "var boundaries=JSON.parse('" . $boundaries . "');";
+		}
 		$script[] = "var info='".addslashes(JText::_('COM_CITYBRANDING_DRAG_MARKER'))."';";
 		$script[] = "var info_unlock='".JText::_('COM_CITYBRANDING_UNLOCK_ADDRESS')."';";
 		$script[] = "var notfound='".JText::_('COM_CITYBRANDING_ADDRESS_NOT_FOUND')."';";
@@ -189,67 +207,46 @@ class JFormFieldGmap extends JFormField
 		$script[] = "google.maps.event.addDomListener(window, 'load', initialize);";
 		JFactory::getDocument()->addScriptDeclaration(implode("\n", $script));
 
-		$init[] = 'jQuery(document).ready(function() {';
-		$init[] = '	jQuery("#citybranding_searchModal").popup();';
-		$init[] = '});';
-
-		JFactory::getDocument()->addScriptDeclaration( implode("\n", $init));
-
 		//style
 		$style = array();
 		$style[] = (isset($this->element['width']) ? 'width:'.$this->element['width'].';' : '');
 		$style[] = (isset($this->element['height']) ? 'height:'.$this->element['height'].';' : '');
 
-
-
 		//set html
 		$html = array();
-        $html[] = '<div style="'.implode("", $style).'">';
-        $html[] = '	<div id="citybranding-map-canvas"></div>';
 
-        if($this->mapOnly){
-        	$html[] = '</div>';
-        	return implode("\n", $html);
-        }
-
-
-        $html[] = '	<br />';
-        $html[] = '	<div class="row-fluid">';
-        
-        if(!$disabled) {
-        $html[] = '		<div class="span1">';
-		$html[] = '			<button id="locateposition" class="btn btn-mini" type="button"><i class="icon-home"></i></button><br /><br />';
-		$html[] = '			<button id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i> search</button>';
-		$html[] = '		</div>';
+		if($this->mapOnly){
+			$html[] = '<div style="'.implode("", $style).'display:block;clear:both;">';
+			$html[] = '	<div id="citybranding-map-canvas"></div>';
+			$html[] = '</div>';
+			return implode("\n", $html);
 		}
-        
-        $html[] = '		<div class="'. ($disabled ? "span12" : "span10").'">';
-		$html[] = '			<textarea '. ($disabled ? "disabled=\"\"" : "").' class="citybranding-gmap-textarea" rows="3" cols="75" id="' . $this->id . '" name="' . $this->name . '">'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'</textarea>';
-		$html[] = '		</div>';
-		
+
+		$html[] = '<div style="'.implode("", $style).'display:table-cell;clear:both;padding-bottom: 100px;">';
 		if(!$disabled) {
-        $html[] = '		<div class="span1 citybranding-text-right">';
-		$html[] = '			<button id="lockaddress" class="btn btn-mini" type="button"><i class="icon-lock"></i></button><br /><br /><br />';
-		$html[] = '		</div>';
+			$html[] = '		<button id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_ADDRESS') . '</button>';
+			if($lockaddressbtn) {
+				$html[] = '		<button id="lockaddress" class="btn btn-mini" type="button"><i class="icon-lock"></i> ' . JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCK_ADDRESS') . '</button>';
+			}
+			$html[] = '		<button id="locateposition" style="float:right;" class="btn btn-mini" type="button"><i class="icon-screenshot"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_POSITION') . '</button>';
 		}
-		
-		$html[] = '	</div>';		
-		$html[] = '</div>';		
-		$html[] = '<div style="clear:both;padding-bottom:550px;"></div>';
+		$html[] = ' <textarea placeholder="'.JText::_('COM_CITYBRANDING_FORM_LBL_ISSUE_ADDRESS').'" '. ($disabled ? "disabled=\"\"" : "").' class="citybranding-gmap-textarea" rows="3" cols="75" id="' . $this->id . '" name="' . $this->name . '">'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'</textarea>';
+		$html[] = '	<div id="citybranding-map-canvas"></div>';
+		$html[] = '</div>';
 
 		$html[] = '<!-- Modal -->';
 		$html[] = '<div id="citybranding_searchModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">';
 		$html[] = '	<div class="modal-dialog modal-sm">';
 		$html[] = '		<div class="modal-content">';
 		$html[] = '			<div class="modal-header">';
-		$html[] = '				<button type="button" class="citybranding_searchModal_close close" data-dismiss="modal" aria-hidden="true">×</button>';
+		$html[] = '				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
 		$html[] = '				<h3 id="searchModalLabel">Search Results</h3>';
 		$html[] = '			</div>';
 		$html[] = '			<div class="modal-body">';
 		$html[] = '				<p id="searchBody">One fine body…</p>';
 		$html[] = '			</div>';
 		$html[] = '			<div class="modal-footer">';
-		$html[] = '				<button class="btn citybranding_searchModal_close" data-dismiss="modal" aria-hidden="true">Close</button>';
+		$html[] = '				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>';
 		$html[] = '			</div>';
 		$html[] = '		</div>';
 		$html[] = '	</div>';
