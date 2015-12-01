@@ -99,10 +99,6 @@ $id = $jinput->get('id', null);
 		}
 		return false;
 	}
-
-
-
-
 </script>
 
 <div class="citybranding_filters_buttons">
@@ -138,6 +134,12 @@ $id = $jinput->get('id', null);
 			<?php endif; ?>
 			*/ ?>
 		</div>
+		<?php if(true) :?>
+		<div class="citybranding_btn_right">
+			<a id="addnew_btn" href="new-brand" role="button" class="button" ><i class="fa fa-plus-circle"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
+		</div>
+		<?php endif; ?>
+
 	<?php endif; ?>
 
 </div>
