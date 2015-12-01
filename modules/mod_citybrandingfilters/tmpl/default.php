@@ -134,7 +134,7 @@ $id = $jinput->get('id', null);
 			<?php endif; ?>
 			*/ ?>
 		</div>
-		<?php if(true) :?>
+		<?php if(true) : //only logged? ?>
 		<div class="citybranding_btn_right">
 			<a id="addnew_btn" href="new-brand" role="button" class="button" ><i class="fa fa-plus-circle"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_ADD_ITEM'); ?></a>
 		</div>
@@ -150,7 +150,16 @@ $id = $jinput->get('id', null);
 		<div class="cb-modal-content">
 			<h3 id="searchModalLabel"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_SEARCH'); ?></h3>
 			<div class="cb-modal-body">
-				<input id="filter_search" placeholder="<?php echo JText::_('MOD_CITYBRANDINGFILTERS_SEARCH_PLACEHOLDER');?>" name="filter_search" type="text" value="<?php echo $search; ?>" />
+
+				<div class="row uniform">
+					<div class="10u">
+						<input id="filter_search" placeholder="<?php echo JText::_('MOD_CITYBRANDINGFILTERS_SEARCH_PLACEHOLDER');?>" name="filter_search" type="text" value="<?php echo $search; ?>" />
+					</div>
+					<div class="2u$">
+						<a href="javascript:void(0);" id="searchclear" class="button"><i class="fa fa-times-circle"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_CLEAR');?></a>
+					</div>
+				</div>
+
 				<?php if (JFactory::getUser()->id > 0) : ?>
 					<br />
 					<input type="hidden" id="filter_owned_hidden" name="filter_owned" value="no" />
@@ -163,15 +172,15 @@ $id = $jinput->get('id', null);
 					<label for="selectAllCategories"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_CATEGORIES');?></label>
 				</h4>
 				<?php $category_filters = ModCitybrandingfiltersHelper::getCategoryFilters(); ?>
-				<div class="container-fluid">
-					<div class="row">
-						<?php foreach ($category_filters as $filter) : ?>
-							<div class="col-md-4">
-								<?php echo $filter; ?>
-							</div>
-						<?php endforeach; ?>
-					</div>
+
+				<div class="row">
+					<?php foreach ($category_filters as $filter) : ?>
+						<div class="4u">
+							<?php echo $filter; ?>
+						</div>
+					<?php endforeach; ?>
 				</div>
+
 
 
 				<?php /*

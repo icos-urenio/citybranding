@@ -102,7 +102,7 @@ class ModCitybrandingfiltersHelper {
     {
         $app = JFactory::getApplication();
         $filter_category = $app->getUserStateFromRequest('com_citybranding.pois.filter.category', 'cat', array());
-    
+
         //self::$filters .= '<ul class="citybranding_ulist">';
         foreach($cats as $JCatNode){
             //id is the category id

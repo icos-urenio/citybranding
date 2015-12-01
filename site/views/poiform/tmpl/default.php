@@ -21,9 +21,9 @@ $firstStep = CitybrandingFrontendHelper::getStepByStepId($this->item->stepid);
 
 <?php 
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.tooltip');
+//JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-JHtml::_('formbehavior.chosen', 'select');
+//JHtml::_('formbehavior.chosen', 'select');
 //include popup overlay
 JFactory::getDocument()->addScript(JURI::root(true) . '/components/com_citybranding/assets/js/jquery.popupoverlay.min.js');
 
