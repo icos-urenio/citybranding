@@ -88,7 +88,7 @@ function infoBox(map, marker, data) {
     
     // Attaching a click event to the current marker
     google.maps.event.addListener(marker, "click", function(e) {
-        infoWindow.setContent('<div class="infowindowcontent">'+data.title+'</div>');
+        infoWindow.setContent('<div class="infowindowcontent"><a href="guide/poi/'+data.id+'">'+data.title+'</a></div>');
         infoWindow.open(map, marker);
         panelFocus(data.id);
     });
@@ -104,7 +104,8 @@ function infoBox(map, marker, data) {
         if(data.state == 0){
           infoWindow.setContent('<div class="infowindowcontent citybranding-warning"><i class="icon-info-sign"></i> '+data.title+'</div>');
         } else {
-          infoWindow.setContent('<div class="infowindowcontent">'+data.title+'</div>');
+            //TODO: Get path correctly
+          infoWindow.setContent('<div class="infowindowcontent"><a href="guide/poi/'+data.id+'">'+data.title+'</a></div>');
         }
         infoWindow.open(map, marker);
       });
