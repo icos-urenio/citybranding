@@ -49,6 +49,13 @@ if($clusterer){
 $jinput = JFactory::getApplication()->input;
 $option = $jinput->get('option', null);
 $view = $jinput->get('view', null);
+
+if ($option == 'com_citybranding' && $view == 'poiform')
+{
+	return;
+}
+
+
 ?>
 
 <script type="text/javascript">
@@ -57,6 +64,7 @@ $view = $jinput->get('view', null);
 	var zoom = <?php echo $zoom;?> ;
 	var clusterer = "<?php echo $clusterer;?>" ;
 	var language = "<?php echo $language;?>" ;
+	var linkToPoi = "<?php echo JRoute::_('index.php?option=com_citybranding&view=poi'); ?>";
 </script>
 <?php if ($option == 'com_citybranding' && $view == 'pois') : ?>
 	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/script.js" type="text/javascript"></script>

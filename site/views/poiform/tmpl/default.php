@@ -14,12 +14,15 @@ require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 //TODO: Set this on settings
 $firstStep = CitybrandingFrontendHelper::getStepByStepId($this->item->stepid);
 ?>
-<?php if ($firstStep['ordering'] != 1 && isset($this->item->id) && $this->item->id > 0) :?>
-	<div class="alert alert-danger"><?php echo JText::_('COM_CITYBRANDING_POI_CANNOT_EDIT_ANYMORE'); ?></div>
-	<?php return; ?>	
-<?php endif; ?>
 
-<?php 
+<!--
+<?php /*if ($firstStep['ordering'] != 1 && isset($this->item->id) && $this->item->id > 0) :*/?>
+	<div class="alert alert-danger"><?php /*echo JText::_('COM_CITYBRANDING_POI_CANNOT_EDIT_ANYMORE'); */?></div>
+	<?php /*return; */?>
+<?php /*endif; */?>
+-->
+
+<?php
 JHtml::_('behavior.keepalive');
 //JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');

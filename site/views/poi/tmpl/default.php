@@ -24,9 +24,9 @@ if (!$canEdit && $user->authorise('core.edit.own', 'com_citybranding.poi.' . $th
 //Edit Own only if poi status is the initial one
 $firstStep = CitybrandingFrontendHelper::getStepByStepId($this->item->stepid);
 $canEditOnStatus = true;
-if ($firstStep['ordering'] != 1){
-    $canEditOnStatus = false;
-}
+//if ($firstStep['ordering'] != 1){
+//    $canEditOnStatus = false;
+//}
 
 $photos = json_decode($this->item->photo);
 $i=0;
@@ -75,11 +75,16 @@ foreach ($attachments->files as $attachment) {
 	</div>
 <?php return; endif; ?>
 
+<?php if($canEdit /*&& $this->item->checked_out == 0*/ && $canEditOnStatus && $this->item->poitype == 1): ?>
+	<a class="button special" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.$this->item->id); ?>"><i class="fa fa-pencil"></i> <?php echo JText::_("COM_CITYBRANDING_EDIT_ITEM"); ?> your brand</a>
+<?php endif; ?>
+
 <header class="citybranding-poi-title">
 	<h4><?php echo $this->item->title; ?></h4>
 	<p><span class="icon cb-location"></span> <?php echo $this->item->address;?><br />
 		<span class="icon cb-pushpin"></span> <?php echo $this->item->catid_title; ?>
 	</p>
+
 </header>
 
 <?php /*if(!empty($attachments->files)) : ?>
