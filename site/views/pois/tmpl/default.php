@@ -79,7 +79,6 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                     <?php if ($item->id == 4) : //testing ?>
                       <div class="ribbon-wrapper-corner"><div class="ribbon-corner">360<sup>o</sup></div></div>
                     <?php endif; ?>
-                    
                     <?php //show photo if any
                         $i = 0;
                         if(isset($attachments->files)){
@@ -89,30 +88,48 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                                     echo '<a href="'. JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id).'" class="image fit">';
                                     echo '<img src="'.$attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name) .'" alt="poi photo" />' . "\n";
                                     echo '</a>';
+                                    ?>
+                                    <div class="cb-category-icon">
+                                        <?php if($item->category_image != '') : ?>
+                                            <img src="<?php echo $item->category_image; ?>" alt="category image" />
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <?php
+
                                     echo '</div>'. "\n";
                                     break; //on first photo break
-                                }  
-                                $i++;  
+                                }
+                                $i++;
                             }
                         }
                     ?>
 
                     <div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
                         <p class="lead">
-                            <?php if($item->category_image != '') : ?>
-                            <img src="<?php echo $item->category_image; ?>" alt="category image" />
-                            <?php endif; ?>
+
+                            <?php $item->classifications = explode(',',$item->classifications);?>
+                            <?php foreach ($item->classifications as $classification) : ?>
+                                <span style="font-size: 2em;"><i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i></span>
+                            <?php endforeach; ?>
+
+
                             <?php if ($canEdit && $canEditOnStatus) : ?>
                               <a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $item->id); ?>">
                               <i class="icon-edit"></i> <?php echo $this->escape($item->title); ?></a>
                             <?php else : ?>
-                              <?php echo $this->escape($item->title); ?>
+                                <a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id); ?>">
+                                <?php echo $this->escape($item->title); ?>
+                                </a>
                             <?php endif; ?>
                         </p>
 
                         <?php echo CitybrandingFrontendHelper::cutString($item->description, 200); ?>
 
+
+
                     </div>
+
                 </div>
             </div>
         <?php endforeach; ?>

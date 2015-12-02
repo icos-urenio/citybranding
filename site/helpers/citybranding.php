@@ -458,5 +458,18 @@ class CitybrandingFrontendHelper
 	 
 	    return $string;
 
-	}	
+	}
+
+	public static function getClassificationById($id) {
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query
+				->select('a.icon')
+				->from('#__citybranding_classifications AS a')
+				->where('a.id = ' . intval($id));
+
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
 }

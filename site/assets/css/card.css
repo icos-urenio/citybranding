@@ -36,10 +36,18 @@
   color: #222222;
   font-size: 0.8em;
 }
-.citybranding-panel-body { padding: 5px; }
+
+.cb-category-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.citybranding-panel-body {padding: 5px; }
 .citybranding-panel-body .label { white-space: normal; }
 .citybranding-panel-thumbnail .image img { border-radius: 0px; }
 .citybranding-panel-thumbnail a.image.fit { margin: 0; }
+.citybranding-panel-thumbnail { position: relative; }
 
 #poi-wrapper .grid-sizer,
 #poi-wrapper .grid-item { width: 20%;}

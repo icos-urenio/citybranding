@@ -250,7 +250,7 @@ if(!$canState && $this->item->id > 0) {
 		<a class="button2" href="guide" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
 		<button type="submit" class="validate button special"><i class="fa fa-check-circle"></i> <?php echo JText::_('JSUBMIT'); ?></button>
 	</div>
-    
+
     <input type="hidden" name="option" value="com_citybranding" />
     <input type="hidden" name="task" value="poiform.save" />
     <?php echo JHtml::_('form.token'); ?>
