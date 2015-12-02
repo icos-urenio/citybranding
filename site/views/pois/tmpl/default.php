@@ -49,6 +49,11 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
         <div class="gutter-sizer"></div>
         <?php foreach ($this->items as $i => $item) : ?>
             <?php
+                if($item->poitype == 1)
+                {
+                    continue;
+                }
+
                 $canCreate = $user->authorise('core.create', 'com_citybranding.poi.'.$item->id);
                 $canEdit = $user->authorise('core.edit', 'com_citybranding.poi.'.$item->id);
                 $canCheckin = $user->authorise('core.manage', 'com_citybranding.poi.'.$item->id);

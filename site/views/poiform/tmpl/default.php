@@ -98,10 +98,9 @@ if(!$canState && $this->item->id > 0) {
     <hr class="citybranding-form-hr" />
 
     <div class="citybranding-dates">
-		<i class="icon-user"></i> <?php echo (strlen($this->form->getInput('created_by'))>1 ? $this->form->getInput('created_by') : 'Guest'); ?>
-		<i class="icon-calendar"></i> <?php echo $this->form->getInput('created'); ?>
-		<?php echo (strlen($this->form->getInput('updated')) > 4 ? '<i class="icon-pencil"></i> '.$this->form->getInput('updated') : ''); ?>
-	
+		<i class="fa fa-user"></i> <?php echo (strlen($this->form->getInput('created_by'))>1 ? $this->form->getInput('created_by') : 'Guest'); ?>
+		<i class="fa fa-calendar"></i> <?php echo $this->form->getInput('created'); ?>
+
 	</div>
 
 	<div class="control-group">
@@ -159,6 +158,15 @@ if(!$canState && $this->item->id > 0) {
 		<div class="controls"><?php echo $this->form->getInput('longitude'); ?></div>
 	</div>
 
+	<div class="control-group">
+		<div class="control-label"><?php echo $this->form->getLabel('poitype'); ?></div>
+		<div class="controls"><?php echo $this->form->getInput('poitype'); ?></div>
+	</div>
+
+
+
+
+
 <!--	    <div class="control-group">
 		    <div class="control-label"><?php /*echo $this->form->getLabel('related'); */?></div>
 		    <div class="controls"><?php /*echo $this->form->getInput('related'); */?></div>
@@ -169,7 +177,7 @@ if(!$canState && $this->item->id > 0) {
 		    <div class="controls"><?php /*echo $this->form->getInput('classifications'); */?></div>
 	    </div>
 -->
-	<div class="control-group">
+	<div class="cb-files control-group">
 		<div class="control-label"><?php echo $this->form->getLabel('photo'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('photo'); ?></div>
 	</div>
@@ -239,8 +247,8 @@ if(!$canState && $this->item->id > 0) {
 	<?php endif; ?>
 
 	<div style="float:right;">
-		<button type="submit" class="validate btn btn-primary"><i class="icon-ok"></i> <?php echo JText::_('JSUBMIT'); ?></button>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poiform.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
+		<a class="button2" href="guide" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
+		<button type="submit" class="validate button special"><i class="fa fa-check-circle"></i> <?php echo JText::_('JSUBMIT'); ?></button>
 	</div>
     
     <input type="hidden" name="option" value="com_citybranding" />

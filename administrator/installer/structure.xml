@@ -11,7 +11,7 @@
     <field field_name="responsible" field_type="TEXT" description=""/>
     <field field_name="description" field_type="TEXT" description=""/>
     <field action="add" field_name="classifications" field_type="TEXT" description=""/>
-    <field action="add" field_name="poitype" field_type="TEXT" description=""/>
+    <field action="add" field_name="poitype" field_type="TINYINT" field_length="1" description=""/>
     <field action="add" field_name="related" field_type="TEXT" description=""/>
     <field action="add" field_name="panorama" field_type="TEXT" description=""/>
     <field field_name="address" field_type="TEXT" description=""/>

@@ -15,8 +15,7 @@
             description="COM_CITYBRANDING_FORM_DESC_POI_TITLE" 
             required="true" 
             menu_published="0"
-            class="inputbox input-xxlarge input-large-text"
-            filter="string" /> 
+            filter="string" />
 
         <field name="description" type="textarea"
             label="COM_CITYBRANDING_FORM_LBL_POI_DESCRIPTION"
@@ -26,10 +25,6 @@
             class="full-width"
             filter="safehtml" />
 
-        <field name="related" type="sql" label="COM_CITYBRANDING_TITLE_RELATED_POIS" query="SELECT id, title AS value FROM #__citybranding_pois ORDER BY ordering" key_field="id" value_field="value" multiple="true" class="inputbox span12 small" required="false" />
-
-        <field name="classifications" type="sql" label="COM_CITYBRANDING_TITLE_CLASSIFICATION" query="SELECT id, title AS value FROM #__citybranding_classifications ORDER BY ordering" key_field="id" value_field="value" multiple="true" class="inputbox span12 small" required="false" />
-
         <field name="address" type="gmap" 
             label="COM_CITYBRANDING_FORM_LBL_POI_ADDRESS" 
             latitudefield="latitude" 
@@ -38,8 +33,12 @@
             required="true" 
             filter="safehtml"
             width="100%"
-            height="300px" /> 
-            
+            height="300px" />
+
+        <field name="poitype" type="hidden"
+               label="COM_CITYBRANDING_FORM_LBL_POI_TYPE"
+               description="COM_CITYBRANDING_FORM_DESC_POI_TYPE"
+               default="1" />
 
         <field name="latitude" type="hidden"
             label="COM_CITYBRANDING_FORM_LBL_POI_LATITUDE"

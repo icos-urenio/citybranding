@@ -222,20 +222,22 @@ class JFormFieldGmap extends JFormField
 			return implode("\n", $html);
 		}
 
-		$html[] = '<div style="'.implode("", $style).'display:table-cell;clear:both;padding-bottom: 100px;">';
+		//$html[] = '<div style="'.implode("", $style).'display:table-cell;clear:both;padding-bottom: 100px;">';
+		$html[] = '<div style="'.implode("", $style).' display:block; clear:both;margin-bottom: 250px;">';
 		if(!$disabled) {
-			$html[] = '		<button id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_ADDRESS') . '</button>';
-			if($lockaddressbtn) {
-				$html[] = '		<button id="lockaddress" class="btn btn-mini" type="button"><i class="icon-lock"></i> ' . JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCK_ADDRESS') . '</button>';
-			}
-			$html[] = '		<button id="locateposition" style="float:right;" class="btn btn-mini" type="button"><i class="icon-screenshot"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_POSITION') . '</button>';
+			$html[] = '		<button style="margin: 0.5em 0" id="searchaddress" class="btn btn-mini" type="button"><i class="icon-search icon-white"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_ADDRESS') . '</button>';
+			//if($lockaddressbtn) {
+				$html[] = '		<button style="margin: 0.5em 0" id="lockaddress" class="btn btn-mini" type="button"><i class="icon-lock"></i> ' . JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCK_ADDRESS') . '</button>';
+			//}
+			$html[] = '		<button style="margin: 0.5em 0" id="locateposition" style="float:right;" class="btn btn-mini" type="button"><i class="icon-screenshot"></i> '. JText::_('COM_CITYBRANDING_CUSTOM_FIELD_LOCATE_POSITION') . '</button>';
 		}
 		$html[] = ' <textarea placeholder="'.JText::_('COM_CITYBRANDING_FORM_LBL_ISSUE_ADDRESS').'" '. ($disabled ? "disabled=\"\"" : "").' class="citybranding-gmap-textarea" rows="3" cols="75" id="' . $this->id . '" name="' . $this->name . '">'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'</textarea>';
 		$html[] = '	<div id="citybranding-map-canvas"></div>';
 		$html[] = '</div>';
 
+
 		$html[] = '<!-- Modal -->';
-		$html[] = '<div id="citybranding_searchModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">';
+		$html[] = '<div style="display:none;" id="citybranding_searchModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">';
 		$html[] = '	<div class="modal-dialog modal-sm">';
 		$html[] = '		<div class="modal-content">';
 		$html[] = '			<div class="modal-header">';

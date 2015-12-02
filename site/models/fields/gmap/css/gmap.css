@@ -1,4 +1,7 @@
-#citybranding-map-canvas { width: 100%; height: 100%; }
+#citybranding-map-canvas {
+    width: 100%; height: 100%;
+    margin: 0.5em 0;
+}
 .citybranding-gmap-textarea {width:100%; resize:none; }
 .citybranding-text-right {text-align: right;}
 .citybranding-text-left {text-align: left;}

@@ -5,3 +5,9 @@
 }
 
 .drop-photos span.dptitle {font-size: 20px; color: #ccc;}
+
+
+.cb-files {
+  display: block;
+  margin: 1em 0;
+}

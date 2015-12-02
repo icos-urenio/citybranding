@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_pois` (
 `responsible` TEXT  NOT NULL ,
 `description` TEXT NOT NULL ,
 `classifications` TEXT NOT NULL ,
-`poitype` TEXT NOT NULL ,
+`poitype` TINYINT(1) NOT NULL ,
 `related` TEXT NOT NULL ,
 `panorama` TEXT NOT NULL ,
 `address` TEXT NOT NULL ,
