@@ -160,4 +160,27 @@ $src = $dom.$pan.$arg.$preview;
 <p></p>
 <p><?php echo $this->item->description; ?></p>
 
+<?php if( $this->item->poitype == 0) : ?>
+	<h4>Brands relative or close to the <?php echo $this->item->title;?></h4>
+	<?php
+		$relativePois = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, 500.0 * 0.000621371192);
+	?>
 
+	<?php if(!empty($relativePois)) : ?>
+		<?php foreach ($relativePois as $rPoi) : ?>
+			<h5>
+				<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
+					<?php echo $rPoi['title'];?>
+					(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
+				</a>
+			</h5>
+		<?php endforeach; ?>
+
+	<?php else : ?>
+		<div class="alert alert-info"><h5 style="text-align: center;">None yet. Help populate the catalog by adding your brand!!</h5></div>
+	<?php endif; ?>
+
+
+<?php endif ?>
+
+<div style="height: 10em;"></div>

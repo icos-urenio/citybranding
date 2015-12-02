@@ -472,4 +472,28 @@ class CitybrandingFrontendHelper
 		$db->setQuery($query);
 		return $db->loadResult();
 	}
+
+	public static function getRelativePois($lat, $lng, $radius = 2.0)
+	{
+		$db = JFactory::getDbo();
+		$origLat = $lat;
+		$origLon = $lng;
+		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
+		$query = "
+			SELECT *, 3956 * 2 *
+          ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
+          +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
+          *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))
+          as distance FROM #__citybranding_pois WHERE
+          longitude between ($origLon-$dist/abs(cos(radians($origLat))*69))
+          and ($origLon+$dist/abs(cos(radians($origLat))*69))
+          and latitude between ($origLat-($dist/69))
+          and ($origLat+($dist/69))
+          and poitype = 1
+			and state = 1
+          having distance < $dist ORDER BY distance;";
+
+		$db->setQuery($query);
+		return $db->loadAssocList();
+	}
 }
