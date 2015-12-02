@@ -9,6 +9,9 @@
 // no direct access
 defined('_JEXEC') or die;
 
+$app = JFactory::getApplication();
+$params	= $app->getParams();
+
 //Load admin language file
 $lang = JFactory::getLanguage();
 $lang->load('com_citybranding', JPATH_ADMINISTRATOR);
@@ -161,9 +164,9 @@ $src = $dom.$pan.$arg.$preview;
 <p><?php echo $this->item->description; ?></p>
 
 <?php if( $this->item->poitype == 0) : ?>
-	<h4>Brands relative or close to the <?php echo $this->item->title;?></h4>
+	<h4>Brands relative or close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
 	<?php
-		$relativePois = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, 500.0 * 0.000621371192);
+		$relativePois = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, $params->get('radiusMeters') * 0.000621371192);
 	?>
 
 	<?php if(!empty($relativePois)) : ?>
