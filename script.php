@@ -656,7 +656,10 @@ class com_citybrandingInstallerScript {
             ->where("`name`='ImproveMyCity'");
         $db->setQuery($query);
         $db->execute();
-        
+
+        //add root to areas to support nested areas
+        $this->addRoot();
+
         return true;        
     }
 
@@ -690,6 +693,33 @@ class com_citybrandingInstallerScript {
                 $db->quote( $paramsString ) .
                 ' WHERE name = "com_citybranding"' );
                 $db->query();
+        }
+    }
+
+    private function addRoot()
+    {
+        $db = JFactory::getDbo();
+
+        $sql = 'SELECT COUNT(*) FROM `#__citybranding_areas` WHERE alias = "root"';
+        $db->setQuery($sql);
+        $cnt = $db->loadResult();
+        if( $cnt == 0) {
+            $sql = 'INSERT INTO `#__citybranding_areas` '
+                . ' SET parent_id = 0'
+                . ', lft = 0'
+                . ', rgt = 1'
+                . ', level = 0'
+                . ', title = '.$db->quote( 'Root' )
+                . ', description = '.$db->quote( 'Root' )
+                . ', alias = '.$db->quote( 'root' )
+                . ', access = 1'
+                . ', path = '.$db->quote( '' )
+            ;
+            $db->setQuery( $sql );
+            $db->execute();
+
+            echo '<p style="color: green;">' . 'Citybranding Nested Areas prepared' . '</p>';
+            //return $db->insertid();
         }
     }
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_citybranding/models/fields">
+
+        <field name="id" type="hidden" default="0" label="COM_CITYBRANDING_FORM_LBL_AREA_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+            
+        <field
+            name="parent_id"
+            type="areaedit"
+            label="Parent"
+        />
+
+        <field
+            name="lft"
+            type="hidden"
+            filter="unset"
+        />
+
+        <field
+            name="rgt"
+            type="hidden"
+            filter="unset"
+        />
+
+        <field
+            name="level"
+            type="hidden"
+            filter="unset"
+        />
+
+        <field
+            name="path"
+            type="text"
+            class="readonly"
+            label="CATEGORIES_PATH_LABEL"
+            description="CATEGORIES_PATH_DESC"
+            size="40"
+            readonly="true"
+        />
+        <field
+            name="access"
+            type="accesslevel"
+            label="JFIELD_ACCESS_LABEL"
+            description="JFIELD_ACCESS_DESC"
+        />
+        <field
+            name="alias"
+            type="text"
+            label="JFIELD_ALIAS_LABEL"
+            description="JFIELD_ALIAS_DESC"
+            size="40"
+        />        
+        <field
+            name="photo"
+            type="media"
+            label="photo"
+            description=""
+        />        
+
+        <field name="title" type="text"
+            label="COM_CITYBRANDING_FORM_LBL_AREA_TITLE"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_TITLE"
+            required="true" 
+            filter="string" /> 
+
+        <field name="description" type="editor"
+            label="COM_CITYBRANDING_FORM_LBL_AREA_DESCRIPTION"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_DESCRIPTION"
+            filter="JComponentHelper::filterText" buttons="true"
+        /> 
+            
+
+        <field name="areacolor" type="color" default="#eee"
+            label="COM_CITYBRANDING_FORM_LBL_AREA_AREACOLOR"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_AREACOLOR" />
+
+        <field name="created" type="timecreated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_AREA_CREATED"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_CREATED"  />
+
+        <field name="updated" type="timeupdated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_AREA_UPDATED"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_UPDATED"  />
+
+        <field name="created_by" type="createdby" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_AREA_CREATED_BY"
+            description="COM_CITYBRANDING_FORM_DESC_AREA_CREATED_BY"  />
+
+        <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+            description="COM_CONTENT_FIELD_LANGUAGE_DESC">
+            <option value="*">JALL</option>
+        </field>
+
+        <field name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="chzn-color-state"
+            size="1"
+            default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field> 
+
+        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out_time" type="hidden" filter="unset" /> 
+
+  </fieldset> 
+
+  <fieldset name="accesscontrol">
+    
+        <field name="asset_id" type="hidden" filter="unset" />
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_alphatour"
+            section="area" />
+
+	</fieldset>
+
+</form>

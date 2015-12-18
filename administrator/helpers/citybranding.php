@@ -33,6 +33,11 @@ class CitybrandingHelper {
 		if ($vName=='categories') {
 			JToolBarHelper::title('City Branding: Categories (POIs)');
 		}
+	    JHtmlSidebar::addEntry(
+		    JText::_('COM_CITYBRANDING_TITLE_AREAS'),
+		    'index.php?option=com_citybranding&view=areas',
+		    $vName == 'areas'
+	    );
         JHtmlSidebar::addEntry(
             JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'),
             'index.php?option=com_citybranding&view=classifications',

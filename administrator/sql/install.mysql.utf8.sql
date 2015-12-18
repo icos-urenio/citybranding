@@ -155,3 +155,30 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_classifications` (
 `language` VARCHAR(255)  NOT NULL ,
 PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `#__citybranding_areas` (
+`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+`parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+`lft` int(11) NOT NULL DEFAULT '0',
+`rgt` int(11) NOT NULL DEFAULT '0',
+`level` int(10) UNSIGNED NOT NULL DEFAULT '0',
+`alias` varchar(255) NOT NULL DEFAULT '',
+`access` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+`path` varchar(255) NOT NULL DEFAULT '',
+`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+`title` VARCHAR(255)  NOT NULL ,
+`alias` VARCHAR(255)  NOT NULL ,
+`photo` TEXT  NOT NULL ,
+`description` TEXT NOT NULL ,
+`areacolor` VARCHAR(10) NOT NULL ,
+`ordering` INT(11)  NOT NULL ,
+`state` TINYINT(1)  NOT NULL ,
+`created` DATETIME NOT NULL ,
+`updated` DATETIME NOT NULL ,
+`checked_out` INT(11)  NOT NULL ,
+`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+`created_by` INT(11)  NOT NULL ,
+`language` VARCHAR(255)  NOT NULL ,
+PRIMARY KEY (`id`),
+KEY `idx_left_right` (`lft`,`rgt`)
+) DEFAULT COLLATE=utf8_general_ci;
