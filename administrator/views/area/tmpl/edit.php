@@ -61,10 +61,11 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 						<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 					</div>
-					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('alias'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('alias'); ?></div>
-					</div>
+
+	                <div class="control-group">
+		                <div class="control-label"><?php echo $this->form->getLabel('global'); ?></div>
+		                <div class="controls"><?php echo $this->form->getInput('global'); ?></div>
+	                </div>
 					<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('parent_id'); ?></div>
 						<div class="controls"><?php echo $this->form->getInput('parent_id'); ?></div>
