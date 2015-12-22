@@ -168,7 +168,6 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_areas` (
 `path` varchar(255) NOT NULL DEFAULT '',
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
 `title` VARCHAR(255)  NOT NULL ,
-`alias` VARCHAR(255)  NOT NULL ,
 `photo` TEXT  NOT NULL ,
 `description` TEXT NOT NULL ,
 `areacolor` VARCHAR(10) NOT NULL ,
@@ -179,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_areas` (
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 `created_by` INT(11)  NOT NULL ,
+`updated_by` INT(11)  NOT NULL ,
 `language` VARCHAR(255)  NOT NULL ,
 PRIMARY KEY (`id`),
 KEY `idx_left_right` (`lft`,`rgt`)
