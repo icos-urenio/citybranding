@@ -151,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_classifications` (
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 `created_by` INT(11)  NOT NULL ,
+`updated_by` INT(11)  NOT NULL ,
 `access` INT(11)  NOT NULL ,
 `language` VARCHAR(255)  NOT NULL ,
 PRIMARY KEY (`id`)
