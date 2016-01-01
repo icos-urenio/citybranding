@@ -76,9 +76,9 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                 
             <div class="grid-item">
                 <div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
-                    <?php if ($item->id == 4) : //testing ?>
-                      <div class="ribbon-wrapper-corner"><div class="ribbon-corner">360<sup>o</sup></div></div>
-                    <?php endif; ?>
+                    <?php /* if (JFactory::getUser()->id == $item->created_by) : ?>
+                      <div class="ribbon-wrapper-corner"><div class="ribbon-corner"><?php echo JText::_('COM_CITYBRANDING_POIS_MY_POI');?></div></div>
+                    <?php endif; */ ?>
                     <?php //show photo if any
                         $i = 0;
                         if(isset($attachments->files)){
@@ -126,7 +126,16 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
 
                         <?php echo CitybrandingFrontendHelper::cutString($item->description, 200); ?>
 
-
+                        <?php /*
+                        <p><a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id); ?>"><?php echo JText::_('COM_CITYBRANDING_POIS_MORE');?></a></p>
+                        <?php if($item->moderation == 1) : ?>
+                            <hr />
+                            <p class="imc-warning"><i class="icon-info-sign"></i> <?php echo JText::_('COM_CITYBRANDING_POIS_NOT_YET_PUBLISHED');?></p>
+                        <?php endif; ?>
+                        <?php if (!$canEditOnStatus && JFactory::getUser()->id == $item->created_by) : ?>
+                            <p class="imc-info"><i class="icon-info-sign"></i> <?php echo JText::_('COM_CITYBRANDING_POI_CANNOT_EDIT_ANYMORE'); ?></p>
+                        <?php endif; ?>
+                        */ ?>
 
                     </div>
 
