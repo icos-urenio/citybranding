@@ -43,6 +43,7 @@
         <submenu>
 			<menu link="option=com_citybranding&amp;view=pois" view="pois" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Pois">COM_CITYBRANDING_TITLE_POIS</menu>
 			<menu link="option=com_categories&amp;extension=com_citybranding" view="categories" img="components/com_citybranding/assets/images/s_pois.png" alt="Citybranding/Categories">COM_CITYBRANDING_POIS_CATID</menu>
+            <menu link="option=com_citybranding&amp;view=areas" view="areas" img="components/com_citybranding/assets/images/s_areas.png" alt="Citybranding/Areas">COM_CITYBRANDING_TITLE_AREAS</menu>
             <menu link="option=com_citybranding&amp;view=classifications" view="classifications" img="components/com_citybranding/assets/images/s_classifications.png" alt="Citybranding/Classifications">COM_CITYBRANDING_TITLE_CLASSIFICATIONS</menu>
             <menu link="option=com_citybranding&amp;view=keys" view="keys" img="components/com_citybranding/assets/images/s_keys.png" alt="Citybranding/Keys">COM_CITYBRANDING_TITLE_KEYS</menu>
         </submenu>

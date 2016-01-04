@@ -167,5 +167,35 @@
     <field field_name="updated_by" field_type="INT" field_length="11" index="index" description=""/>
     <field field_name="language" field_type="VARCHAR" field_length="255" description=""/>
   </table>
-
+  <table table_name="#__citybranding_brands" storage_engine="" collation="utf8_general_ci">
+    <field field_name="id" field_type="INT" field_length="11" is_autoincrement="1" index="primary" description=""/>
+    <field field_name="asset_id" field_type="INT" field_length="10" description=""/>
+    <field field_name="title" field_type="VARCHAR" field_length="255" description=""/>
+    <field field_name="areaid" field_type="INT" field_length="11" description=""/>
+    <field field_name="description" field_type="TEXT" description=""/>
+    <field field_name="tags" field_type="TEXT" description=""/>
+    <field field_name="related" field_type="TEXT" description=""/>
+    <field field_name="panorama" field_type="TEXT" description=""/>
+    <field field_name="address" field_type="TEXT" description=""/>
+    <field field_name="latitude" field_type="DECIMAL" field_length="18,15" description=""/>
+    <field field_name="longitude" field_type="DECIMAL" field_length="18,15" description=""/>
+    <field field_name="photo" field_type="TEXT" description=""/>
+    <field field_name="ordering" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="state" field_type="TINYINT" field_length="1" index="index" description=""/>
+    <field field_name="moderation" field_type="TINYINT" field_length="1" description=""/>
+    <field field_name="checked_out" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="checked_out_time" field_type="DATETIME" description=""/>
+    <field field_name="access" field_type="INT" field_length="11" description=""/>
+    <field field_name="created" field_type="DATETIME" description=""/>
+    <field field_name="updated" field_type="DATETIME" description=""/>
+    <field field_name="created_by" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="updated_by" field_type="INT" field_length="11" index="index" description=""/>
+    <field field_name="language" field_type="VARCHAR" field_length="255" description=""/>
+    <field field_name="hits" field_type="MEDIUMINT" field_length="8" description=""/>
+    <field field_name="note" field_type="VARCHAR" field_length="512" description=""/>
+    <field field_name="extra" field_type="TEXT" description=""/>
+    <field field_name="votes" field_type="MEDIUMINT" field_length="8" description=""/>
+    <field field_name="modality" field_type="SMALLINT" field_length="6" description=""/>
+    <field field_name="subgroup" field_type="VARCHAR" field_length="255" description=""/>
+  </table>
 </component>

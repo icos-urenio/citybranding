@@ -52,7 +52,7 @@ class CitybrandingViewArea extends JViewLegacy {
         }
         $canDo = CitybrandingHelper::getActions();
 
-        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_AREA'), 'area.png');
+        JToolBarHelper::title(JText::_('COM_CITYBRANDING_TITLE_AREA'), 'folder');
 
         // If not checked out, can save the item.
         if (!$checkedOut && ($canDo->get('core.edit') || ($canDo->get('core.create')))) {
