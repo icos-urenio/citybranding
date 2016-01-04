@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_citybranding/models/fields">
+
+        <field name="id" type="text" default="0" label="COM_CITYBRANDING_FORM_LBL_BRAND_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+
+        <field name="title" type="text"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_TITLE"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_TITLE"
+            required="true" 
+            menu_published="0"
+            class="inputbox input-xxlarge input-large-text"
+            filter="string" /> 
+        
+        <field name="moderation" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_BRAND_MODERATION" description="COM_CITYBRANDING_FORM_DESC_BRAND_MODERATION">
+              <option value="0">JNO</option>
+              <option value="1">JYES</option>
+            </field>
+
+        <field name="tags" type="text" label="COM_CITYBRANDING_TITLE_TAG" class="inputbox span12 small" required="false" />
+
+        <field name="panorama" type="repeatable" icon="list"
+               label="Panorama" description=""
+               default=""
+               maximum="99">
+            <fieldset hidden="true" repeat="true">
+                <field name="pano_title" type="text"
+                       label="Title" description="Appears on bottom layer" />
+
+                <field name="pano_video" type="list" default="0"
+                       label="Is video?" description="" >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="pano_settings" type="textarea"
+                       label="Settings" description="Define autoload, autorotate, etc" width="100" />
+
+                <field name="pano_preview" type="media" directory=""
+                       label="Preview image" description="Image to show before loading"/>
+
+                <field name="pano_media" type="media" directory=""
+                       label="Media" description="The panorama media"/>
+
+            </fieldset>
+        </field>
+
+        <field name="photo"
+            type="multiphoto" 
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_PHOTOS"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_PHOTOS"
+            imagedir="images/citybranding"
+            side="backend" />
+
+        <field name="areaid"
+            type="text"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_CATID"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_CATID"
+            required="false"
+            extension="com_citybranding" 
+
+            /> 
+
+        <field name="description" 
+            type="editor"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_DESCRIPTION"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_DESCRIPTION"
+            filter="safehtml" />
+
+        <field name="address" type="gmap" 
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_ADDRESS"
+            latitudefield="latitude" 
+            longitudefield="longitude" 
+            filter="safehtml" 
+            width="100%"
+            height="300px" /> 
+
+        <field name="latitude" type="hidden"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_LATITUDE"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_LATITUDE"
+            filter="string" /> 
+
+        <field name="longitude" type="hidden"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_LONGITUDE"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_LONGITUDE"
+            filter="string" /> 
+
+        <field name="created" type="timecreated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_CREATED"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_CREATED"  />
+
+        <field name="updated" type="timeupdated" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_UPDATED"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_UPDATED"  />
+
+        <field name="created_by" type="createdby" default="" 
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_CREATED_BY"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_CREATED_BY"  />
+
+        <field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
+            description="COM_CONTENT_FIELD_LANGUAGE_DESC">
+            <option value="*">JALL</option>
+        </field>
+
+        <field name="hits" type="text" size="40" class="inputbox"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_HITS"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_HITS"
+            default="0" 
+            readonly="true"
+            filter="safehtml" /> 
+
+        <field name="modality" type="hidden" size="40" class="inputbox"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_MODALITY"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_MODALITY"
+            filter="safehtml" /> 
+        
+        <field name="note" 
+            type="text" size="40" class="inputbox"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_NOTE"
+            description="COM_CITYBRANDING_FORM_DESC_NOTE_HITS" 
+            default="" 
+            filter="safehtml" /> 
+
+        <field name="extra" 
+            type="textarea"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_EXTRA"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_EXTRA"
+            cols="100"
+            rows="8"
+            class="input-xxlarge"
+            filter="safehtml" /> 
+
+        <field name="state" type="list" label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+            filter="intval" size="1" default="1"
+        >
+            <option value="1">
+                JPUBLISHED</option>
+            <option value="0">
+                JUNPUBLISHED</option>
+        </field>
+
+        <field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL"
+            description="JFIELD_ACCESS_DESC" size="1" />
+
+        <field name="checked_out" type="hidden" filter="unset" />
+        
+        <field name="checked_out_time" type="hidden" filter="unset" /> 
+
+    </fieldset> 
+
+    <fieldset name="accesscontrol">
+        <field name="asset_id" type="hidden" filter="unset" />
+
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_citybranding"
+            section="brand"
+        />
+
+	</fieldset>
+
+</form>

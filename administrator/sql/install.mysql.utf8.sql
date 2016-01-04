@@ -183,3 +183,33 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_areas` (
 PRIMARY KEY (`id`),
 KEY `idx_left_right` (`lft`,`rgt`)
 ) DEFAULT COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `#__citybranding_brands` (
+`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+`title` VARCHAR(255)  NOT NULL ,
+`areaid` INT(11)  NOT NULL ,
+`description` TEXT NOT NULL ,
+`tags` TEXT NOT NULL ,
+`panorama` TEXT NOT NULL ,
+`address` TEXT NOT NULL ,
+`latitude` VARCHAR(255)  NOT NULL ,
+`longitude` VARCHAR(255)  NOT NULL ,
+`photo` TEXT  NOT NULL ,
+`ordering` INT(11)  NOT NULL ,
+`state` TINYINT(1)  NOT NULL ,
+`moderation` TINYINT(1)  NOT NULL ,
+`checked_out` INT(11)  NOT NULL ,
+`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+`access` INT(11)  NOT NULL ,
+`created` DATETIME NOT NULL ,
+`updated` DATETIME NOT NULL ,
+`created_by` INT(11)  NOT NULL ,
+`updated_by` INT(11)  NOT NULL ,
+`language` VARCHAR(255)  NOT NULL ,
+`hits` MEDIUMINT(8)  NOT NULL ,
+`note` VARCHAR(512)  NOT NULL ,
+`extra` TEXT  NOT NULL ,
+`modality` SMALLINT(6)  NOT NULL ,
+PRIMARY KEY (`id`)
+) DEFAULT COLLATE=utf8_general_ci;
