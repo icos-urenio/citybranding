@@ -118,7 +118,7 @@ $src = $dom.$pan.$arg.$preview;
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 
-		<?php if($this->item->id == 4) : //testing ?>
+		<?php if($this->item->id == 4 && false) : //testing ?>
 		<div class="grid-item grid-item--width100">
 			<iframe title="pannellum panorama viewer 1"
 					width="100%"

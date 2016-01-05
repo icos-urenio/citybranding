@@ -51,7 +51,7 @@
             type="multiphoto" 
             label="COM_CITYBRANDING_FORM_LBL_BRAND_PHOTOS"
             description="COM_CITYBRANDING_FORM_DESC_BRAND_PHOTOS"
-            imagedir="images/citybranding"
+            imagedir="images/citybranding/brands"
             side="backend" />
 
         <field name="areaid"
