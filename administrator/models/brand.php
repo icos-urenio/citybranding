@@ -160,33 +160,6 @@ class CitybrandingModelBrand extends JModelAdmin
 	public function getItem($pk = null)
 	{
 		if ($item = parent::getItem($pk)) {
-			//Do any procesing on fields here if needed
-	        $category = JCategories::getInstance('Citybranding')->get($item->areaid);
-	        $params = json_decode($category->params);
-	        if(isset($params->citybranding_category_emails)){
-	        	//$item->notification_emails = explode("\n", $params->citybranding_category_emails);
-	        	$category_emails = explode("\n", $params->citybranding_category_emails);
-	        	$notification_emails = array();
-	        	foreach ($category_emails as $email) {
-	        		$line = explode(':', $email);
-	        		if($line[0] != '')
-	        			array_push($notification_emails, $line[0]);
-	        	}
-	        	$item->notification_emails = $notification_emails;
-	        }
-	        else{
-	        	$item->notification_emails = array();
-	        }
-
-	        if(isset($params->citybranding_category_usergroup))
-	        	$item->citybranding_category_usergroup = $params->citybranding_category_usergroup;
-	        else
-	        	$item->citybranding_category_usergroup = array();
-
-	        if(isset($params->image))
-	        	$item->category_image = $params->image;
-	        else
-	        	$item->category_image = '';
 
 	        $user = JFactory::getUser($item->created_by);
 	        $item->creatorDetails = array(

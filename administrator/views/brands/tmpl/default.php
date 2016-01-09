@@ -211,14 +211,11 @@ if (!empty($this->extra_sidebar)) {
 				<?php endif; ?>
 				</td>
 				<td>
-					<?php echo $item->classifications_titles; ?>
-				</td>
-				<td>
-					<?php echo $item->brandtype; ?>
+					<?php echo $item->tags; ?>
 				</td>
 				<td>
 
-					<?php echo $item->catid_title; ?>
+					<?php echo $item->areaid_title; ?>
 				</td>
 				<td>
 					<?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC2')); ?>

@@ -127,9 +127,9 @@ class CitybrandingModelBrands extends JModelList {
 		// Join over the users for the checked out user
 		$query->select("uc.name AS editor");
 		$query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
-//		// Join over the category 'catid'
-//		$query->select('catid.title AS catid_title');
-//		$query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
+//		// Join over the area category 'areaid'
+		$query->select('areaid.title AS areaid_title');
+		$query->join('LEFT', '#__citybranding_areas AS areaid ON areaid.id = a.areaid');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');

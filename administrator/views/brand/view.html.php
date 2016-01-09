@@ -75,7 +75,7 @@ class CitybrandingViewBrand extends JViewLegacy {
         //    JToolBarHelper::custom('brand.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
         //}
 
-        if(!empty($this->item->id)) {
+/*        if(!empty($this->item->id)) {
 
             $bar = JToolBar::getInstance('toolbar');
             $layout = new JLayoutFile('joomla.toolbar.popup');
@@ -87,8 +87,8 @@ class CitybrandingViewBrand extends JViewLegacy {
                     'name' => 'citybranding-print'
             ));
             $bar->appendButton('Custom', $dhtml);
-            
-        }
+
+        }*/
 
         if (empty($this->item->id)) {
             JToolBarHelper::cancel('brand.cancel', 'JTOOLBAR_CANCEL');
