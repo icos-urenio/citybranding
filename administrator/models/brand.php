@@ -166,8 +166,11 @@ class CitybrandingModelBrand extends JModelAdmin
 	        	'name'=>$user->name,
 	        	'username'=>$user->username,
 	        	'email'=>$user->email,
-	        ); 
-
+	        );
+			if (!empty($item->id)) {
+				$item->tags = new JHelperTags;
+				$item->tags->getTagIds($item->id, 'com_citybranding.brand');
+			}
 		}
 
 		return $item;

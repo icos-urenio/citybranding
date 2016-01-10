@@ -653,14 +653,41 @@ class com_citybrandingInstallerScript {
         $query
             ->update('#__update_sites')
             ->set("`enabled`='1'")
-            ->where("`name`='ImproveMyCity'");
+            ->where("`name`='CityBranding'");
         $db->setQuery($query);
         $db->execute();
 
         //add root to areas to support nested areas
         $this->addRoot();
 
+        // Add citybranding content type to support tagging
+        $this->insert_content_type_brand();
         return true;        
+    }
+
+    private function insert_content_type_brand()
+    {
+        $db = JFactory::getDbo();
+        // If entries do not exist in #__content_types add them
+        $query  = "SELECT COUNT(*) FROM `#__content_types` ";
+        $query .= " WHERE type_title IN ('Citybranding Brand') ";
+        $db->setQuery($query);
+        $cnt = $db->loadResult();
+
+        if ( $cnt == 0  ) {
+            $query  = 'INSERT INTO `#__content_types` ';
+            $query .= '(`type_title`, `type_alias`, `table`, `rules`, `field_mappings`,`router`) VALUES ';
+            $query .= "('Citybranding Brand','com_citybranding.brand',";
+            $query .= '\'{"special":{"dbtable":"#__citybranding_brands","key":"id","type":"brand","prefix":"CitybrandingTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}\',';
+            $query .= "'',";
+            $query .= '\'{"common":{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"null","core_created_by_alias":"null","core_created_time":"created","core_modified_time":"updated","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"null", "core_featured":"null", "core_metadata":"null", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"null", "core_ordering":"ordering", "core_metakey":"null", "core_metadesc":"null", "core_catid":"catid", "core_xreference":"null", "asset_id":"asset_id"}, "special":{}}\',';
+            $query .= "'');";
+
+            $db->setQuery($query);
+            $db->execute();
+
+            echo '<p style="color: green;">' . 'Citybranding Brand Content type inserted' . '</p>';
+        }
     }
 
     /*

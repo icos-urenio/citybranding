@@ -22,8 +22,17 @@ class CitybrandingTablebrand extends JTable {
      */
     public function __construct(&$db) {
         parent::__construct('#__citybranding_brands', 'id', $db);
-    }
 
+        JTableObserverTags::createObserver($this, array('typeAlias' => 'com_citybranding.brand'));
+
+        //after 3.2.1
+        //JObserverMapper::addObserverClassToClass('JTableObserverTags', 'AlphatourTableroad', array('typeAlias' => 'com_alphatour.road'));
+
+        //before 3.1.4
+        //$this->_observers = new JObserverUpdater($this);
+        //JObserverMapper::attachAllObservers($this);
+
+    }
     /**
      * Overloaded bind function to pre-process the params.
      *
