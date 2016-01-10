@@ -65,6 +65,7 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 	var clusterer = "<?php echo $clusterer;?>" ;
 	var language = "<?php echo $language;?>" ;
 	var linkToPoi = "<?php echo JRoute::_('index.php?option=com_citybranding&view=poi'); ?>";
+	var linkToBrand = "<?php echo JRoute::_('index.php?option=com_citybranding&view=brand'); ?>";
 </script>
 <?php if ($option == 'com_citybranding' && $view == 'pois') : ?>
 	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/script.js" type="text/javascript"></script>

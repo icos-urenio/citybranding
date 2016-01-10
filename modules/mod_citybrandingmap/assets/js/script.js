@@ -85,10 +85,13 @@ function setMarkers(center, map) {
 
 
 function infoBox(map, marker, data) {
-    
+    var link = linkToPoi;
+    if (data.poitype == 'brand'){
+        link = linkToBrand;
+    }
     // Attaching a click event to the current marker
     google.maps.event.addListener(marker, "click", function(e) {
-        infoWindow.setContent('<div class="infowindowcontent"><a href="'+linkToPoi+'/'+data.id+'">'+data.title+'</a></div>');
+        infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
         infoWindow.open(map, marker);
 
         if(data.poitype == 'poi'){
@@ -107,8 +110,9 @@ function infoBox(map, marker, data) {
         if(data.state == 0){
           infoWindow.setContent('<div class="infowindowcontent citybranding-warning"><i class="icon-info-sign"></i> '+data.title+'</div>');
         } else {
-          infoWindow.setContent('<div class="infowindowcontent"><a href="'+linkToPoi+'/'+data.id+'">'+data.title+'</a></div>');
+          infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
         }
+
         infoWindow.open(map, marker);
       });
     })(marker, data);
