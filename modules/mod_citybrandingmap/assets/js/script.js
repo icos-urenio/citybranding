@@ -90,7 +90,10 @@ function infoBox(map, marker, data) {
     google.maps.event.addListener(marker, "click", function(e) {
         infoWindow.setContent('<div class="infowindowcontent"><a href="'+linkToPoi+'/'+data.id+'">'+data.title+'</a></div>');
         infoWindow.open(map, marker);
-        panelFocus(data.id);
+
+        if(data.poitype == 'poi'){
+            panelFocus(data.id);
+        }
     });
     google.maps.event.addListener(infoWindow,'closeclick',function(){
         panelFocusReset();

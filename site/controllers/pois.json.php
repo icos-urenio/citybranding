@@ -44,9 +44,27 @@ class CitybrandingControllerPois extends CitybrandingController
 				$marker->category_image = ($item->category_image == '' ? '' : JURI::base() . $item->category_image);
 				$marker->stepid_title = $item->stepid_title;
 				$marker->stepid_color = $item->stepid_color;
+				$marker->poitype = 'poi';
 
 				$markers[] = $marker;
 			}
+
+			//get brands
+			JModelLegacy::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/models');
+			$brandsModel = JModelLegacy::getInstance( 'Brands', 'CitybrandingModel', array('ignore_request' => true) );
+			$items = $brandsModel->getItems();
+			foreach ($items as $item) {
+				$marker = new StdClass();
+				$marker->id = $item->id;
+				$marker->state = $item->state;
+				$marker->moderation = $item->moderation;
+				$marker->title = $item->title;
+				$marker->latitude = $item->latitude;
+				$marker->longitude = $item->longitude;
+				$marker->poitype = 'brand';
+				$markers[] = $marker;
+			}
+
 			echo new JResponseJson($markers);
 		}
 		catch(Exception $e)	{
