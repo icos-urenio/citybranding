@@ -216,24 +216,13 @@ class CitybrandingModelBrands extends JModelList {
 
     public function getItems() {
         $items = parent::getItems();
-//        $classificationModel = JModelLegacy::getInstance( 'Classification', 'CitybrandingModel', array('ignore_request' => true) );
-//
-//        foreach ($items as $oneItem) {
-//            if (isset($oneItem->classifications)) {
-//                $values = explode(',', $oneItem->classifications);
-//                $textValue = array();
-//                foreach ($values as $value){
-//                    if(!empty($value)){
-//                        $title = $classificationModel->getItem($value)->title;
-//                        if( $title != '' )
-//                        {
-//                            $textValue[] = $title;
-//                        }
-//                    }
-//                }
-//                $oneItem->classifications_titles = !empty($textValue) ? implode(', ', $textValue) : $oneItem->classifications;
-//            }
-//        }
+
+        foreach ($items as $oneItem) {
+            $tags = new JHelperTags;
+            $tagIds = $tags->getTagIds($oneItem->id, 'com_citybranding.brand');
+            $tagNames = $tags->getTagNames(explode(',',$tagIds));
+            $oneItem->tags = implode(', ',$tagNames);
+        }
 
         if (JFactory::getApplication()->isSite())
         {
