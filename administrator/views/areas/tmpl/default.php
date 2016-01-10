@@ -111,14 +111,8 @@ if (!empty($this->extra_sidebar)) {
 					</th>
                 <?php endif; ?>
                     
-				<th width="10%" class='left'>
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_AREAS_TITLE', 'a.title', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_AREAS_DESCRIPTION', 'a.description', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_AREAS_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_AREAS_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
@@ -227,14 +221,7 @@ if (!empty($this->extra_sidebar)) {
 					<?php echo $this->escape($item->title); ?>
 				<?php endif; ?>
 				</td>
-				<td>
 
-					<?php echo $item->description; ?>
-				</td>
-				<td>
-
-					<?php echo $item->created_by; ?>
-				</td>
 				<td>
 
 					<?php echo $item->language; ?>

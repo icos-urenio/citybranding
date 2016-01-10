@@ -64,10 +64,6 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
             <div class="span6">
                 <fieldset class="adminform">
 	                <div class="control-group">
-		                <div class="control-label"><?php echo $this->form->getLabel('poitype'); ?></div>
-		                <div class="controls"><?php echo $this->form->getInput('poitype'); ?></div>
-	                </div>
-	                <div class="control-group">
 		                <div id="class1" style="color: green;"></div>
 		                <div class="control-label"><?php echo $this->form->getLabel('classifications'); ?></div>
 		                <div class="controls"><?php echo $this->form->getInput('classifications'); ?></div>

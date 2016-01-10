@@ -75,7 +75,7 @@ class CitybrandingViewPoi extends JViewLegacy {
         //    JToolBarHelper::custom('poi.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
         //}
 
-        if(!empty($this->item->id)) {
+/*        if(!empty($this->item->id)) {
             //on existing allow printing
             //JToolBarHelper::custom('poi.printPoi', 'print.png', 'print.png', 'COM_CITYBRANDING_PRINT', false);
 
@@ -89,10 +89,10 @@ class CitybrandingViewPoi extends JViewLegacy {
                     'name' => 'citybranding-print'
             ));
             $bar->appendButton('Custom', $dhtml);
-            
+
             //$url = 'index.php?option=com_citybranding&amp;view=poi&amp;task=poi.printPoi&amp;id='.$this->item->id.'&amp;tmpl=component';
             //$bar->appendButton('Popup', 'print', 'JTOOLBAR_EXPORT', $url);
-        }
+        }*/
 
         if (empty($this->item->id)) {
             JToolBarHelper::cancel('poi.cancel', 'JTOOLBAR_CANCEL');
