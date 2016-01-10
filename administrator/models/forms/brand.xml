@@ -55,10 +55,11 @@
             side="backend" />
 
         <field name="areaid"
-            type="text"
-            label="COM_CITYBRANDING_FORM_LBL_BRAND_CATID"
-            description="COM_CITYBRANDING_FORM_DESC_BRAND_CATID"
+            type="areaedit"
+            label="COM_CITYBRANDING_FORM_LBL_BRAND_AREAID"
+            description="COM_CITYBRANDING_FORM_DESC_BRAND_AREAID"
             required="false"
+            show_all="true"
             extension="com_citybranding" 
 
             /> 

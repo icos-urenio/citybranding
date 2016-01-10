@@ -117,9 +117,6 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_CLASSIFICATIONS_ICON', 'a.icon', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_CLASSIFICATIONS_DESCRIPTION', 'a.description', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_CITYBRANDING_CLASSIFICATIONS_CREATED', 'a.created', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -206,10 +203,7 @@ if (!empty($this->extra_sidebar)) {
 
 					<?php echo $item->icon; ?>
 				</td>
-				<td>
 
-					<?php echo $item->description; ?>
-				</td>
 				<td>
 
 					<?php echo $item->created; ?>

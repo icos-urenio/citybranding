@@ -83,8 +83,8 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 						endforeach;
 					*/?>
 					<div class="control-group">
-						<div class="control-label"><?php echo $this->form->getLabel('catid'); ?></div>
-						<div class="controls"><?php echo $this->form->getInput('catid'); ?></div>
+						<div class="control-label"><?php echo $this->form->getLabel('areaid'); ?></div>
+						<div class="controls"><?php echo $this->form->getInput('areaid'); ?></div>
 					</div>
 					<div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('description'); ?></div>
