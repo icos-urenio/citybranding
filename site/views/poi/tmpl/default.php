@@ -166,15 +166,15 @@ $src = $dom.$pan.$arg.$preview;
 <?php if( $this->item->poitype == 0) : ?>
 	<h4>Brands relative or close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
 	<?php
-		$relativePois = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, $params->get('radiusMeters') * 0.000621371192);
+		$relativeBrands = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, $params->get('radiusMeters') * 0.000621371192);
 	?>
 
-	<?php if(!empty($relativePois)) : ?>
-		<?php foreach ($relativePois as $rPoi) : ?>
+	<?php if(!empty($relativeBrands)) : ?>
+		<?php foreach ($relativeBrands as $rBrand) : ?>
 			<h5>
-				<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
-					<?php echo $rPoi['title'];?>
-					(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
+				<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rBrand['id']);?>">
+					<?php echo $rBrand['title'];?>
+					(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
 				</a>
 			</h5>
 		<?php endforeach; ?>

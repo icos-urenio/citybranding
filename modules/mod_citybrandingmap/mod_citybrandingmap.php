@@ -80,6 +80,11 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 	$poiIcon = ($data->category_image == '' ? '' : JURI::base() . $data->category_image);
 	$poiAddress = $data->address;
 	$poiTitle = $data->title;
+
+	//get related brands
+	$params	= $app->getParams();
+	$relativeBrands = CitybrandingFrontendHelper::getRelativePois($data->latitude, $data->longitude, $params->get('radiusMeters') * 0.000621371192);
+
 	?>
 	<script type="text/javascript">
 		var poiLat = "<?php echo $poiLat;?>" ;
@@ -87,6 +92,9 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 		var poiIcon = "<?php echo $poiIcon;?>" ;
 		var poiAddress = "<?php echo $poiAddress;?>" ;
 		var poiTitle = "<?php echo $poiTitle;?>" ;
+		var relativeBrands = <?php echo json_encode($relativeBrands);?>
+
+
 	</script>
 	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single.js" type="text/javascript"></script>
 <?php elseif ($option == 'com_citybranding' && $view == 'brand') : ?>
