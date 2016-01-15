@@ -69,7 +69,7 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 </script>
 <?php if ($option == 'com_citybranding' && $view == 'pois') : ?>
 	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/script.js" type="text/javascript"></script>
-<?php else : ?>
+<?php elseif ($option == 'com_citybranding' && $view == 'poi') : ?>
 	<?php
 	$id = $jinput->get('id', -1);
 	$poiModel = JModelLegacy::getInstance( 'Poi', 'CitybrandingModel', array('ignore_request' => true) );
@@ -78,6 +78,26 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 	$poiLat = $data->latitude;
 	$poiLng = $data->longitude;
 	$poiIcon = ($data->category_image == '' ? '' : JURI::base() . $data->category_image);
+	$poiAddress = $data->address;
+	$poiTitle = $data->title;
+	?>
+	<script type="text/javascript">
+		var poiLat = "<?php echo $poiLat;?>" ;
+		var poiLng = "<?php echo $poiLng;?>" ;
+		var poiIcon = "<?php echo $poiIcon;?>" ;
+		var poiAddress = "<?php echo $poiAddress;?>" ;
+		var poiTitle = "<?php echo $poiTitle;?>" ;
+	</script>
+	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single.js" type="text/javascript"></script>
+<?php elseif ($option == 'com_citybranding' && $view == 'brand') : ?>
+	<?php
+	$id = $jinput->get('id', -1);
+	$brandModel = JModelLegacy::getInstance( 'Brand', 'CitybrandingModel', array('ignore_request' => true) );
+	$data = $brandModel->getData($id);
+
+	$poiLat = $data->latitude;
+	$poiLng = $data->longitude;
+	$poiIcon = ''; //($data->category_image == '' ? '' : JURI::base() . $data->category_image);
 	$poiAddress = $data->address;
 	$poiTitle = $data->title;
 	?>
