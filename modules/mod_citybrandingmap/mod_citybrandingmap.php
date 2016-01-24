@@ -93,10 +93,8 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 		var poiAddress = "<?php echo $poiAddress;?>" ;
 		var poiTitle = "<?php echo $poiTitle;?>" ;
 		var relativeBrands = <?php echo json_encode($relativeBrands);?>
-
-
 	</script>
-	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single.js" type="text/javascript"></script>
+	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single_and_brands.js" type="text/javascript"></script>
 <?php elseif ($option == 'com_citybranding' && $view == 'brand') : ?>
 	<?php
 	$id = $jinput->get('id', -1);

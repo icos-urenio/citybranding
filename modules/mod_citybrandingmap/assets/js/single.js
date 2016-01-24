@@ -1,4 +1,3 @@
-console.log((relativeBrands));
 function citybranding_mod_map_initialize() {
 
     var poiCenter = new google.maps.LatLng(poiLat, poiLng);
