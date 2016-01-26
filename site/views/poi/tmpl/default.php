@@ -172,7 +172,7 @@ $src = $dom.$pan.$arg.$preview;
 	<?php if(!empty($relativeBrands)) : ?>
 		<?php foreach ($relativeBrands as $rBrand) : ?>
 			<h5>
-				<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rBrand['id']);?>">
+				<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
 					<?php echo $rBrand['title'];?>
 					(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
 				</a>
