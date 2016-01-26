@@ -30,5 +30,4 @@ function citybranding_mod_map_initialize() {
     }
 
     citybranding_mod_map.setZoom(18);
-    //infowindow.open(citybranding_mod_map, marker);
 }

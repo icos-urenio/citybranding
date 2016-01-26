@@ -1,4 +1,7 @@
 var citybranding_markers = [];
+var infoWindow = new google.maps.InfoWindow({
+    maxWidth: 350
+});
 function citybranding_mod_map_initialize() {
 
     var poiCenter = new google.maps.LatLng(poiLat, poiLng);
@@ -57,8 +60,12 @@ function citybranding_mod_map_initialize() {
         });
         citybranding_markers.push(brand);
 
-        //infoBox(map, marker, data);
-        //
+        //brand.addListener('click', function() {
+        //    brand_infowindow.open(citybranding_mod_map, brand);
+        //});
+
+        infoBox(citybranding_mod_map, brand, data);
+
         if(data.moderation == 1){
             brand.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
         }
@@ -66,8 +73,6 @@ function citybranding_mod_map_initialize() {
 
     resetBounds(citybranding_mod_map, citybranding_markers);
 
-
-    //infowindow.open(citybranding_mod_map, marker);
 }
 
 function resetBounds(map, gmarkers) {
@@ -87,4 +92,38 @@ function resetBounds(map, gmarkers) {
             google.maps.event.removeListener(listener);
         });
     }
+}
+
+
+function infoBox(map, marker, data) {
+
+    var link = linkToBrand;
+
+    // Attaching a click event to the current marker
+    google.maps.event.addListener(marker, "click", function(e) {
+        infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
+        infoWindow.open(map, marker);
+
+        if(data.poitype == 'poi'){
+            panelFocus(data.id);
+        }
+    });
+    google.maps.event.addListener(infoWindow,'closeclick',function(){
+        panelFocusReset();
+    });
+
+    // Creating a closure to retain the correct data
+    // Pass the current data in the loop into the closure (marker, data)
+    (function(marker, data) {
+        // Attaching a click event to the current marker
+        google.maps.event.addListener(marker, "click", function(e) {
+            if(data.state == 0){
+                infoWindow.setContent('<div class="infowindowcontent citybranding-warning"><i class="icon-info-sign"></i> '+data.title+'</div>');
+            } else {
+                infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
+            }
+
+            infoWindow.open(map, marker);
+        });
+    })(marker, data);
 }
