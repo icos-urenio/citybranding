@@ -120,15 +120,6 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
         	</div>
         <?php echo JHtml::_('bootstrap.endTab'); ?>
 
-	    <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'relative', JText::_('COM_CITYBRANDING_TITLE_RELATED_BRANDS', true)); ?>
-	    <div class="span12">
-		    <div class="control-group">
-			    <div class="control-label"><?php echo $this->form->getLabel('related'); ?></div>
-			    <div class="controls"><?php echo $this->form->getInput('related'); ?></div>
-		    </div>
-	    </div>
-	    <?php echo JHtml::_('bootstrap.endTab'); ?>
-
         <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('JGLOBAL_FIELDSET_PUBLISHING', true)); ?>
             <div class="span6">
                 <fieldset class="adminform">
