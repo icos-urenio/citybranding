@@ -42,7 +42,16 @@ function setMarkers(center, map) {
             'url': "index.php?option=com_citybranding&task=pois.markers&format=json",
             'dataType': "json", 
             'success': function (data) {
-                json = data; 
+                json = data;
+
+                var circle ={
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: 'red',
+                    fillOpacity: 0.8,
+                    scale: 6.5,
+                    strokeColor: 'white',
+                    strokeWeight: 1
+                };
 
                 //loop between each of the json elements
                 for (var i = 0, length = json.data.length; i < length; i++) {
@@ -66,6 +75,10 @@ function setMarkers(center, map) {
 
                     if(data.moderation == 1){
                       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+                    }
+
+                    if (data.poitype == 'brand'){
+                        marker.setIcon(circle);
                     }
                 }
                 resetBounds(map, citybranding_markers);

@@ -29,5 +29,6 @@ function citybranding_mod_map_initialize() {
         marker.setIcon(poiIcon);
     }
 
+    citybranding_mod_map.setZoom(18);
     //infowindow.open(citybranding_mod_map, marker);
 }

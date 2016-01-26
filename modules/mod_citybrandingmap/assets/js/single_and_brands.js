@@ -1,4 +1,4 @@
-console.log((relativeBrands));
+var citybranding_markers = [];
 function citybranding_mod_map_initialize() {
 
     var poiCenter = new google.maps.LatLng(poiLat, poiLng);
@@ -30,7 +30,17 @@ function citybranding_mod_map_initialize() {
     if (poiIcon != '') {
         marker.setIcon(poiIcon);
     }
+    citybranding_markers.push(marker);
 
+
+    var circle ={
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: 'red',
+        fillOpacity: 0.8,
+        scale: 6.5,
+        strokeColor: 'white',
+        strokeWeight: 1
+    };
 
     //create relative brand markers
     for (var i = 0, length = relativeBrands.length; i < length; i++) {
@@ -39,23 +49,42 @@ function citybranding_mod_map_initialize() {
         // Create marker and putting it on the map
         var brand = new google.maps.Marker({
             position: latLng,
-            //icon: data.category_image,
+            //icon: 'https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0',
+            icon: circle,
             map: citybranding_mod_map,
             title: data.title,
             id: data.id
         });
+        citybranding_markers.push(brand);
 
-        //citybranding_markers.push(marker);
-        ////bounds.extends(marker.position);
-        //
         //infoBox(map, marker, data);
         //
-        //if(data.moderation == 1){
-        //    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-        //}
+        if(data.moderation == 1){
+            brand.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+        }
     }
 
+    resetBounds(citybranding_mod_map, citybranding_markers);
 
 
     //infowindow.open(citybranding_mod_map, marker);
+}
+
+function resetBounds(map, gmarkers) {
+    var a = 0;
+    bounds = null;
+    bounds = new google.maps.LatLngBounds();
+    for (var i=0; i<gmarkers.length; i++) {
+        if(gmarkers[i].getVisible()){
+            a++;
+            bounds.extend(gmarkers[i].position);
+        }
+    }
+    if(a > 0){
+        map.fitBounds(bounds);
+        var listener = google.maps.event.addListener(map, 'idle', function() {
+            if (map.getZoom() > 18) map.setZoom(18);
+            google.maps.event.removeListener(listener);
+        });
+    }
 }
