@@ -103,9 +103,14 @@ $id = $jinput->get('id', null);
 
 <div class="citybranding_filters_buttons">
 	<?php if ($option == 'com_citybranding' && $view != 'pois') : ?>
-		<span class="citybranding_btn_left">
-			<a href="<?php echo JRoute::_('index.php?option=com_citybranding', false, 2); ?>" class="button"><i class="fa fa-arrow-circle-left"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_RETURN_TO_POIS'); ?></a>
+<!--		<span class="citybranding_btn_left">
+			<a href="<?php /*echo JRoute::_('index.php?option=com_citybranding', false, 2); */?>" class="button"><i class="fa fa-arrow-circle-left"></i> <?php /*echo JText::_('MOD_CITYBRANDINGFILTERS_RETURN_TO_POIS'); */?></a>
 		</span>
+-->
+		<span class="citybranding_btn_left">
+			<a href="javascript:window.history.back();" class="button"><i class="fa fa-arrow-circle-left"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_BACK'); ?></a>
+		</span>
+
 	<?php else : ?>
 		<div class="citybranding_btn_left">
 			<a id="search_btn" href="#cb-modal" role="button" class="button special cb-modal_open" ><i class="fa fa-search"></i> <?php echo JText::_('MOD_CITYBRANDINGFILTERS_SEARCH'); ?></a>
