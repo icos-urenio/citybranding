@@ -163,6 +163,19 @@ $src = $dom.$pan.$arg.$preview;
 <p></p>
 <p><?php echo $this->item->description; ?></p>
 
-
+<?php
+	$relativePois = $this->relativePois;
+?>
+<?php if(!empty($relativePois)) : ?>
+	<h4>POIs close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
+	<?php foreach ($relativePois as $rPoi) : ?>
+		<h5>
+			<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
+				<?php echo $rPoi['title'];?>
+				(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
+			</a>
+		</h5>
+	<?php endforeach; ?>
+<?php endif; ?>
 
 <div style="height: 10em;"></div>

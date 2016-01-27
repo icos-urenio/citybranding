@@ -21,6 +21,7 @@ class CitybrandingViewPoi extends JViewLegacy {
     protected $item;
     ///protected $form;
     protected $params;
+    protected $relativeBrands;
 
     /**
      * Display the view
@@ -33,6 +34,7 @@ class CitybrandingViewPoi extends JViewLegacy {
         $this->state = $this->get('State');
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_citybranding');
+        $this->relativeBrands = CitybrandingFrontendHelper::getRelativeBrands($this->item->latitude, $this->item->longitude, $this->params->get('radiusMeters') * 0.000621371192);
 
         if (!empty($this->item)) {
             ///$this->form = $this->get('Form');
@@ -45,13 +47,10 @@ class CitybrandingViewPoi extends JViewLegacy {
 
         }
 
-
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
             throw new Exception(implode("\n", $errors));
         }
-
-        
 
         if ($this->_layout == 'edit') {
 

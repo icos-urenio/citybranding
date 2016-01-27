@@ -21,6 +21,7 @@ class CitybrandingViewBrand extends JViewLegacy {
     protected $item;
     ///protected $form;
     protected $params;
+    protected $relativePois;
 
     /**
      * Display the view
@@ -33,6 +34,7 @@ class CitybrandingViewBrand extends JViewLegacy {
         $this->state = $this->get('State');
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_citybranding');
+        $this->relativePois = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, $this->params->get('radiusMeters') * 0.000621371192);
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
