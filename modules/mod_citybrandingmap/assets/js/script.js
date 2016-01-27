@@ -102,33 +102,51 @@ function infoBox(map, marker, data) {
     if (data.poitype == 'brand'){
         link = linkToBrand;
     }
+
     // Attaching a click event to the current marker
-    google.maps.event.addListener(marker, "click", function(e) {
-        infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
+    // (ONLY FOR POIs) //TODO: Set this on settings maybe?
+
+    google.maps.event.addListener(marker, "click", function (e) {
+
+        if (data.poitype == 'poi') {
+            infoWindow.setContent('<div class="infowindowcontent"><a href="' + link + '/' + data.id + '">' + data.title + '</a></div>');
+        }
+        else {
+            infoWindow.setContent('<div class="infowindowcontent">' + data.title + '</div>');
+        }
+
         infoWindow.open(map, marker);
 
-        if(data.poitype == 'poi'){
+        if (data.poitype == 'poi') {
             panelFocus(data.id);
         }
     });
-    google.maps.event.addListener(infoWindow,'closeclick',function(){
+    google.maps.event.addListener(infoWindow, 'closeclick', function () {
         panelFocusReset();
     });
 
-    // Creating a closure to retain the correct data 
+    // Creating a closure to retain the correct data
     // Pass the current data in the loop into the closure (marker, data)
-    (function(marker, data) {
-      // Attaching a click event to the current marker
-      google.maps.event.addListener(marker, "click", function(e) {
-        if(data.state == 0){
-          infoWindow.setContent('<div class="infowindowcontent citybranding-warning"><i class="icon-info-sign"></i> '+data.title+'</div>');
-        } else {
-          infoWindow.setContent('<div class="infowindowcontent"><a href="'+link+'/'+data.id+'">'+data.title+'</a></div>');
-        }
+    (function (marker, data) {
+        // Attaching a click event to the current marker
+        google.maps.event.addListener(marker, "click", function (e) {
+            if (data.state == 0) {
+                infoWindow.setContent('<div class="infowindowcontent citybranding-warning"><i class="icon-info-sign"></i> ' + data.title + '</div>');
+            } else {
 
-        infoWindow.open(map, marker);
-      });
+                if (data.poitype == 'poi') {
+                    infoWindow.setContent('<div class="infowindowcontent"><a href="' + link + '/' + data.id + '">' + data.title + '</a></div>');
+                }
+                else {
+                    infoWindow.setContent('<div class="infowindowcontent">' + data.title + '</div>');
+                }
+
+            }
+
+            infoWindow.open(map, marker);
+        });
     })(marker, data);
+
 }
 
 // Add a marker to the map and push to the array.
