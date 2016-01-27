@@ -46,6 +46,8 @@ foreach ($attachments->files as $attachment) {
 	$i++;
 }
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+<script src="<?php echo  JURI::root(true) . '/components/com_citybranding/assets/js/imagesloaded.pkgd.min.js'; ?>"></script>
 
 <script type="text/javascript">
     js = jQuery.noConflict();
@@ -68,6 +70,19 @@ foreach ($attachments->files as $attachment) {
 		//grid.masonry('layout');
 		grid.imagesLoaded().progress( function() {
 			grid.masonry('layout');
+		});
+
+		var grid2 = js('.grid2').masonry({
+			// set itemSelector so .grid-sizer is not used in layout
+			itemSelector: '.grid-item',
+			// use element for option
+			columnWidth: '.grid-sizer',
+			gutter: '.gutter-sizer',
+			percentPosition: true
+		});
+		//grid2.masonry('layout');
+		grid2.imagesLoaded().progress( function() {
+			grid2.masonry('layout');
 		});
     });
 </script>
@@ -167,15 +182,51 @@ $src = $dom.$pan.$arg.$preview;
 	$relativePois = $this->relativePois;
 ?>
 <?php if(!empty($relativePois)) : ?>
-	<h4>POIs close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
-	<?php foreach ($relativePois as $rPoi) : ?>
-		<h5>
-			<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
-				<?php echo $rPoi['title'];?>
-				(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
-			</a>
-		</h5>
-	<?php endforeach; ?>
+<h4>POIs close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
 <?php endif; ?>
+<div class="grid2">
+	<!-- width of .grid-sizer used for columnWidth -->
+	<div class="grid-sizer"></div>
+	<div class="gutter-sizer"></div>
+
+	<?php if(!empty($relativePois)) : ?>
+
+		<?php foreach ($relativePois as $rPoi) : ?>
+			<div class="grid-item">
+				<div id="citybranding-panel-<?php echo $rPoi['id'];?>" class="citybranding-panel">
+					<div class="<?php echo ($rPoi['moderation'] == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
+						<p class="lead">
+
+						<?php /*
+						<?php $rPoi['classifications'] = explode(',',$rPoi['classifications']);?>
+						<?php foreach ($rPoi['classifications'] as $classification) : ?>
+							<span style="font-size: 2em;"><i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i></span>
+						<?php endforeach;?>
+						*/?>
+
+						<?php if ($canEdit && $canEditOnStatus) : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rPoi['id']); ?>">
+								<i class="icon-edit"></i> <?php echo $this->escape($rPoi['title']); ?></a>
+						<?php else : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']); ?>">
+								<?php echo $this->escape($rPoi['title']); ?>
+							</a>
+						<?php endif; ?>
+						<h5>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
+								<?php echo $rPoi['title'];?>
+								(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
+							</a>
+						</h5>
+						</p>
+
+					</div>
+
+				</div>
+			</div>
+		<?php endforeach; ?>
+
+	<?php endif; ?>
+</div> <!-- grid2 -->
 
 <div style="height: 10em;"></div>

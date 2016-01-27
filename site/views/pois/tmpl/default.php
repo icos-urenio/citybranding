@@ -16,7 +16,6 @@ $userId = $user->get('id');
 
 $canEdit = $user->authorise('core.edit', 'com_citybranding');
 $canDelete = $user->authorise('core.delete', 'com_citybranding');
-//print_r($_REQUEST);
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>

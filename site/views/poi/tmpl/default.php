@@ -47,6 +47,9 @@ foreach ($attachments->files as $attachment) {
 }
 ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+<script src="<?php echo  JURI::root(true) . '/components/com_citybranding/assets/js/imagesloaded.pkgd.min.js'; ?>"></script>
+
 <script type="text/javascript">
     js = jQuery.noConflict();
     js(document).ready(function() {
@@ -68,6 +71,19 @@ foreach ($attachments->files as $attachment) {
 		//grid.masonry('layout');
 		grid.imagesLoaded().progress( function() {
 			grid.masonry('layout');
+		});
+
+		var grid2 = js('.grid2').masonry({
+			// set itemSelector so .grid-sizer is not used in layout
+			itemSelector: '.grid-item',
+			// use element for option
+			columnWidth: '.grid-sizer',
+			gutter: '.gutter-sizer',
+			percentPosition: true
+		});
+		//grid2.masonry('layout');
+		grid2.imagesLoaded().progress( function() {
+			grid2.masonry('layout');
 		});
     });
 </script>
@@ -170,14 +186,48 @@ $src = $dom.$pan.$arg.$preview;
 ?>
 
 <?php if(!empty($relativeBrands)) : ?>
-	<?php foreach ($relativeBrands as $rBrand) : ?>
-		<h5>
-			<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
-				<?php echo $rBrand['title'];?>
-				(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
-			</a>
-		</h5>
-	<?php endforeach; ?>
+
+	<div class="grid2">
+		<!-- width of .grid-sizer used for columnWidth -->
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
+
+		<?php foreach ($relativeBrands as $rBrand) : ?>
+		<div class="grid-item">
+			<div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
+				<div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
+					<p class="lead">
+<!--
+						<?php /*$item->classifications = explode(',',$item->classifications);*/?>
+						<?php /*foreach ($item->classifications as $classification) : */?>
+							<span style="font-size: 2em;"><i class="icon <?php /*echo CitybrandingFrontendHelper::getClassificationById($classification); */?>"></i></span>
+						<?php /*endforeach; */?>
+
+-->
+						<?php if ($canEdit && $canEditOnStatus) : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rBrand['id']); ?>">
+								<i class="icon-edit"></i> <?php echo $this->escape($rBrand['title']); ?></a>
+						<?php else : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']); ?>">
+								<?php echo $this->escape($rBrand['title']); ?>
+							</a>
+						<?php endif; ?>
+						<h5>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
+								<?php echo $rBrand['title'];?>
+								(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
+							</a>
+						</h5>
+					</p>
+
+				</div>
+
+
+			</div>
+		</div>
+		<?php endforeach; ?>
+
+	</div> <!-- grid2 -->
 
 <?php else : ?>
 	<div class="alert alert-info"><h5 style="text-align: center;">None yet. Help populate the catalog by adding your brand!!</h5></div>
