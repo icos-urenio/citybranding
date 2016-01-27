@@ -34,6 +34,11 @@ class CitybrandingHelper {
 			JToolBarHelper::title('City Branding: Categories (POIs)');
 		}
 	    JHtmlSidebar::addEntry(
+		    JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'),
+		    'index.php?option=com_citybranding&view=classifications',
+		    $vName == 'classifications'
+	    );
+	    JHtmlSidebar::addEntry(
 		    JText::_('COM_CITYBRANDING_TITLE_BRANDS'),
 		    'index.php?option=com_citybranding&view=brands',
 		    $vName == 'brands'
@@ -43,11 +48,6 @@ class CitybrandingHelper {
 		    'index.php?option=com_citybranding&view=areas',
 		    $vName == 'areas'
 	    );
-        JHtmlSidebar::addEntry(
-            JText::_('COM_CITYBRANDING_TITLE_CLASSIFICATIONS'),
-            'index.php?option=com_citybranding&view=classifications',
-            $vName == 'classifications'
-        );
 
     }
 
