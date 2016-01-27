@@ -166,7 +166,7 @@ $src = $dom.$pan.$arg.$preview;
 <?php if( $this->item->poitype == 0) : ?>
 	<h4>Brands relative or close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
 	<?php
-		$relativeBrands = CitybrandingFrontendHelper::getRelativePois($this->item->latitude, $this->item->longitude, $params->get('radiusMeters') * 0.000621371192);
+		$relativeBrands = CitybrandingFrontendHelper::getRelativeBrands($this->item->latitude, $this->item->longitude, $params->get('radiusMeters') * 0.000621371192);
 	?>
 
 	<?php if(!empty($relativeBrands)) : ?>

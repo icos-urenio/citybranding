@@ -54,7 +54,10 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 {
 	return;
 }
-
+if ($option == 'com_citybranding' && $view == 'brandform')
+{
+	return;
+}
 
 ?>
 
@@ -83,7 +86,7 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 
 	//get related brands
 	$params	= $app->getParams();
-	$relativeBrands = CitybrandingFrontendHelper::getRelativePois($data->latitude, $data->longitude, $params->get('radiusMeters') * 0.000621371192);
+	$relativeBrands = CitybrandingFrontendHelper::getRelativeBrands($data->latitude, $data->longitude, $params->get('radiusMeters') * 0.000621371192);
 
 	?>
 	<script type="text/javascript">
@@ -103,9 +106,13 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 
 	$poiLat = $data->latitude;
 	$poiLng = $data->longitude;
-	$poiIcon = ''; //($data->category_image == '' ? '' : JURI::base() . $data->category_image);
+	$poiIcon = '';//($data->category_image == '' ? '' : JURI::base() . $data->category_image);
 	$poiAddress = $data->address;
 	$poiTitle = $data->title;
+
+	//get related pois
+	$params	= $app->getParams();
+	$relativePois = CitybrandingFrontendHelper::getRelativePois($data->latitude, $data->longitude, $params->get('radiusMeters') * 0.000621371192);
 	?>
 	<script type="text/javascript">
 		var poiLat = "<?php echo $poiLat;?>" ;
@@ -113,8 +120,9 @@ if ($option == 'com_citybranding' && $view == 'poiform')
 		var poiIcon = "<?php echo $poiIcon;?>" ;
 		var poiAddress = "<?php echo $poiAddress;?>" ;
 		var poiTitle = "<?php echo $poiTitle;?>" ;
+		var relativePois = <?php echo json_encode($relativePois);?>
 	</script>
-	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single.js" type="text/javascript"></script>
+	<script src="<?php echo JURI::base();?>modules/mod_citybrandingmap/assets/js/single_and_pois.js" type="text/javascript"></script>
 <?php endif; ?>
 
 <?php

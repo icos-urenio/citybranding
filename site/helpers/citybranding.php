@@ -473,14 +473,14 @@ class CitybrandingFrontendHelper
 		return $db->loadResult();
 	}
 
-	public static function getRelativePois($lat, $lng, $radius = 2.0)
+	public static function getRelativeBrands($lat, $lng, $radius = 2.0)
 	{
 		$db = JFactory::getDbo();
 		$origLat = $lat;
 		$origLon = $lng;
 		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
 		$query = "
-			SELECT *, 3956 * 2 *
+			SELECT id,address,latitude,longitude,moderation,title, 3956 * 2 *
           ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
           +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
           *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))
@@ -494,5 +494,48 @@ class CitybrandingFrontendHelper
 
 		$db->setQuery($query);
 		return $db->loadAssocList();
+	}
+
+	public static function getRelativePois($lat, $lng, $radius = 2.0)
+	{
+		$db = JFactory::getDbo();
+		$origLat = $lat;
+		$origLon = $lng;
+		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
+		$query = "
+			SELECT id,catid,address,latitude,longitude,moderation,title, 3956 * 2 *
+          ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
+          +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
+          *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))
+          as distance FROM #__citybranding_pois WHERE
+          longitude between ($origLon-$dist/abs(cos(radians($origLat))*69))
+          and ($origLon+$dist/abs(cos(radians($origLat))*69))
+          and latitude between ($origLat-($dist/69))
+          and ($origLat+($dist/69))
+          and state = 1
+          having distance < $dist ORDER BY distance;";
+
+		$db->setQuery($query);
+		$pois = $db->loadAssocList();
+		foreach ($pois as &$poi)
+		{
+			$poi['category_image'] = self::getCategoryImage($poi['catid']);
+			$poi['category_image'] = ($poi['category_image'] == '' ? '' : JURI::base() . $poi['category_image']);
+
+		}
+		return $pois;
+	}
+
+	public function getCategoryImage($catid)
+	{
+		$category_image = '';
+		$category = JCategories::getInstance('Citybranding')->get($catid);
+		$params = json_decode($category->params);
+		if(isset($params->image))
+		{
+			$category_image = $params->image;
+		}
+
+		return $category_image;
 	}
 }

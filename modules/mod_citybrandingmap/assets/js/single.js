@@ -7,7 +7,6 @@ function citybranding_mod_map_initialize() {
         center: poiCenter,
         zoom: parseInt(zoom)
     }
-
     var citybranding_mod_map = new google.maps.Map(document.getElementById('citybranding-mod-map-canvas'),
         mapOptions);
 
