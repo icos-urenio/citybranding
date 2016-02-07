@@ -151,7 +151,7 @@ $id = $jinput->get('id', null);
 
 <!-- Modal -->
 <div id="cb-modal" style="width:70%;" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-	<form action="<?php echo JRoute::_('index.php?option=com_citybranding&view=pois'); ?>" method="post" name="citybranding_filter_form" id="adminForm">
+	<form action="<?php echo JRoute::_('index.php?option=com_citybranding&view=pois'); ?>" method="get" name="citybranding_filter_form" id="adminForm">
 		<div class="cb-modal-content">
 			<h3 id="searchModalLabel"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_SEARCH'); ?></h3>
 			<div class="cb-modal-body">
