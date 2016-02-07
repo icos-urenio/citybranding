@@ -220,15 +220,16 @@ $src = $dom.$pan.$arg.$preview;
 					</div>
 				<?php endif; ?>
 
+				<div class="cb-category-icon">
+					<?php $rBrand['areaid'] = explode(',',$rBrand['areaid']);?>
+					<?php foreach ($rBrand['areaid'] as $areaid) : ?>
+						<span class="cb-cat"><?php echo CitybrandingFrontendHelper::getAreaById($areaid); ?></span>
+					<?php endforeach; ?>
+				</div>
+
 				<div class="<?php echo ($rBrand['moderation'] == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
 					<span class="lead">
-<!--
-						<?php /*$item->classifications = explode(',',$item->classifications);*/?>
-						<?php /*foreach ($item->classifications as $classification) : */?>
-							<span style="font-size: 2em;"><i class="icon <?php /*echo CitybrandingFrontendHelper::getClassificationById($classification); */?>"></i></span>
-						<?php /*endforeach; */?>
 
--->
 						<?php if ($canEdit && $canEditOnStatus) : ?>
 							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rBrand['id']); ?>">
 								<i class="icon-edit"></i> <?php echo $this->escape($rBrand['title']); ?></a>

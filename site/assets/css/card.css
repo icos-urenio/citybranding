@@ -49,14 +49,20 @@
   top: 0;
 }
 
-.cb-tag {
+.cb-tag,
+.cb-cat{
   background-color: #545484;
   color: #ffffff;
   padding: 2px 4px;
   display: inline;
   margin: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
   border-color: #484860;
+  font-size: 0.75em;
+}
+.cb-cat {
+  background-color: slategray;
+
 }
 
 .citybranding-panel-body {padding: 5px;}
