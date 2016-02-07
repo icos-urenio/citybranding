@@ -480,7 +480,7 @@ class CitybrandingFrontendHelper
 		$origLon = $lng;
 		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
 		$query = "
-			SELECT id,address,latitude,longitude,moderation,title, 3956 * 2 *
+			SELECT id,address,latitude,longitude,moderation,photo,title, 3956 * 2 *
           ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
           +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
           *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))
@@ -493,7 +493,16 @@ class CitybrandingFrontendHelper
           having distance < $dist ORDER BY distance;";
 
 		$db->setQuery($query);
-		return $db->loadAssocList();
+		$items = $db->loadAssocList();
+
+		foreach ($items as &$oneItem) {
+			$tags = new JHelperTags;
+			$tagIds = $tags->getTagIds($oneItem['id'], 'com_citybranding.brand');
+			$tagNames = $tags->getTagNames(explode(',',$tagIds));
+			//$oneItem['tags'] = implode(', ',$tagNames);
+			$oneItem['tags'] = $tagNames;
+		}
+		return $items;
 	}
 
 	public static function getRelativePois($lat, $lng, $radius = 2.0)
@@ -503,7 +512,7 @@ class CitybrandingFrontendHelper
 		$origLon = $lng;
 		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
 		$query = "
-			SELECT id,catid,address,latitude,longitude,moderation,title, 3956 * 2 *
+			SELECT id,catid,address,latitude,longitude,moderation,photo,classifications,title, 3956 * 2 *
           ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
           +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
           *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))

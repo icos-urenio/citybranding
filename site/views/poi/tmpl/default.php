@@ -193,10 +193,35 @@ $src = $dom.$pan.$arg.$preview;
 		<div class="gutter-sizer"></div>
 
 		<?php foreach ($relativeBrands as $rBrand) : ?>
+		<?php $attachments = json_decode($rBrand['photo']); ?>
 		<div class="grid-item">
-			<div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
-				<div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
-					<p class="lead">
+			<div id="citybranding-panel-brand-<?php echo $rBrand['id'];?>" class="citybranding-panel">
+
+
+				<?php //get photo if any
+				$img = null;
+				$i = 0;
+				if(isset($attachments->files)){
+					foreach ($attachments->files as $file) {
+						if (isset($file->thumbnailUrl)){
+							$img['src']  = $attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name);
+							$img['link'] = JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);
+							break; //on first photo break
+						}
+						$i++;
+					}
+				}
+				?>
+				<?php if (!is_null($img)) : ?>
+					<div class="crop-height">
+						<a href="<?php echo $img['link'];?>">
+							<img class="scale" src="<?php echo $img['src'];?>" alt="POI photo" />
+						</a>
+					</div>
+				<?php endif; ?>
+
+				<div class="<?php echo ($rBrand['moderation'] == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
+					<span class="lead">
 <!--
 						<?php /*$item->classifications = explode(',',$item->classifications);*/?>
 						<?php /*foreach ($item->classifications as $classification) : */?>
@@ -208,17 +233,18 @@ $src = $dom.$pan.$arg.$preview;
 							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rBrand['id']); ?>">
 								<i class="icon-edit"></i> <?php echo $this->escape($rBrand['title']); ?></a>
 						<?php else : ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']); ?>">
+							<h5><a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']); ?>">
 								<?php echo $this->escape($rBrand['title']); ?>
-							</a>
+							</a></h5>
 						<?php endif; ?>
-						<h5>
-							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
-								<?php echo $rBrand['title'];?>
-								(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
-							</a>
-						</h5>
-					</p>
+						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
+							(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
+						</a>
+
+					</span>
+					<?php foreach ($rBrand['tags'] as $tag) : ?>
+						<span class="cb-tag"><?php echo $tag;?></span>
+					<?php endforeach; ?>
 
 				</div>
 

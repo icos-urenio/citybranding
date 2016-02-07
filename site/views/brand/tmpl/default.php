@@ -181,6 +181,8 @@ $src = $dom.$pan.$arg.$preview;
 <?php
 	$relativePois = $this->relativePois;
 ?>
+
+
 <?php if(!empty($relativePois)) : ?>
 <h4>POIs close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
 <?php endif; ?>
@@ -191,40 +193,86 @@ $src = $dom.$pan.$arg.$preview;
 
 	<?php if(!empty($relativePois)) : ?>
 
-		<?php foreach ($relativePois as $rPoi) : ?>
-			<div class="grid-item">
-				<div id="citybranding-panel-<?php echo $rPoi['id'];?>" class="citybranding-panel">
-					<div class="<?php echo ($rPoi['moderation'] == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
-						<p class="lead">
 
-						<?php /*
+
+		<?php foreach ($relativePois as $rPoi) : ?>
+			<?php $attachments = json_decode($rPoi['photo']); ?>
+			<div class="grid-item">
+				<div id="citybranding-panel-poi-<?php echo $rPoi['id'];?>" class="citybranding-panel">
+
+
+					<?php //get photo if any
+					$img = null;
+					$i = 0;
+					if(isset($attachments->files)){
+						foreach ($attachments->files as $file) {
+							if (isset($file->thumbnailUrl)){
+								$img['src']  = $attachments->imagedir .'/'. $attachments->id . '/medium/' . ($attachments->files[$i]->name);
+								$img['link'] = JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);
+								break; //on first photo break
+							}
+							$i++;
+						}
+					}
+					?>
+					<?php if (!is_null($img)) : ?>
+						<div class="crop-height">
+							<a href="<?php echo $img['link'];?>">
+								<img class="scale" src="<?php echo $img['src'];?>" alt="POI photo" />
+							</a>
+						</div>
+					<?php endif; ?>
+
+					<div class="cb-category-icon">
+						<?php if($rPoi['category_image'] != '') : ?>
+							<img src="<?php echo $rPoi['category_image']; ?>" alt="category symbol" />
+						<?php endif; ?>
+					</div>
+					<div class="cb-classification-icon">
 						<?php $rPoi['classifications'] = explode(',',$rPoi['classifications']);?>
 						<?php foreach ($rPoi['classifications'] as $classification) : ?>
-							<span style="font-size: 2em;"><i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i></span>
-						<?php endforeach;?>
-						*/?>
+							<i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i>
+						<?php endforeach; ?>
+					</div>
+
+
+					<div class="<?php echo ($rPoi['moderation'] == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
+					<span class="lead">
 
 						<?php if ($canEdit && $canEditOnStatus) : ?>
 							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rPoi['id']); ?>">
 								<i class="icon-edit"></i> <?php echo $this->escape($rPoi['title']); ?></a>
 						<?php else : ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']); ?>">
-								<?php echo $this->escape($rPoi['title']); ?>
-							</a>
+							<h5><a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']); ?>">
+									<?php echo $this->escape($rPoi['title']); ?>
+								</a></h5>
 						<?php endif; ?>
-						<h5>
-							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
-								<?php echo $rPoi['title'];?>
-								(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
-							</a>
-						</h5>
-						</p>
+						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
+							(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
+						</a>
 
+					</span>
 					</div>
+
 
 				</div>
 			</div>
 		<?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<?php endif; ?>
 </div> <!-- grid2 -->

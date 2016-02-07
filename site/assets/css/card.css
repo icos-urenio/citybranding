@@ -42,12 +42,72 @@
   left: 0;
   top: 0;
 }
+.cb-tag-icon,
+.cb-classification-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
-.citybranding-panel-body {padding: 5px; }
+.cb-tag {
+  background-color: #545484;
+  color: #ffffff;
+  padding: 2px 4px;
+  display: inline;
+  margin: 2px;
+  border-radius: 2px;
+  border-color: #484860;
+}
+
+.citybranding-panel-body {padding: 5px;}
 .citybranding-panel-body .label { white-space: normal; }
-.citybranding-panel-thumbnail .image img { border-radius: 0px; }
-.citybranding-panel-thumbnail a.image.fit { margin: 0; }
-.citybranding-panel-thumbnail { position: relative; }
+span.lead a {text-decoration: none; border-bottom: none;}
+/* scale and crop image to same height */
+.crop-height {
+  /* max-width: 1200px; /* native or declared width of img src (if known) */
+  height: 220px;
+  /*max-height: 200px;*/
+  overflow: hidden;
+  background-color: #fff;
+}
+@media screen and (max-width: 480px) { .crop-height {height: 100px;} }
+@media screen and (max-width: 736px) { .crop-height {height: 150px;} }
+img.scale {
+  /* corrects small inline gap at bottom of containing div */
+  display: block;
+  width: 100%; /* corrects obscure Firefox bug */
+  max-width: 100%;
+  /* just in case, to force correct aspect ratio */
+  height: auto !important;
+  display: block; /* corrects small inline gap at bottom of containing div */
+  width: 100% /* corrects obscure Firefox bug */
+  max-width: 100%;
+  /* just in case, to force correct aspect ratio */
+  height: auto !important;
+  /*width: auto\9;
+  /* ie8+9 - use modernizr instead of this \9 hack */
+  /* lt ie8 */
+  -ms-interpolation-mode: bicubic;
+  /* optionally force a minimum size if img src size is known: */
+  /* min-height: 320px; /* max-height of .crop-height */
+  /* min-width: 480px; /* proportional to above */
+}
+
+.flip {
+  -webkit-transform: rotate(180deg);
+  -moz-transform:    rotate(180deg);
+  -ms-transform:     rotate(180deg);
+  -o-transform:      rotate(180deg);
+  transform:         rotate(180deg);
+  /* needed? not sure */
+  zoom: 1;
+}
+
+img.flip {
+  /* actually, aligns left within .cropheight */
+  float: right;
+  /* clearfix after? */
+}
 
 #poi-wrapper .grid-sizer,
 #poi-wrapper .grid-item { width: 20%;}
