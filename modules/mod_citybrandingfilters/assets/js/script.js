@@ -15,8 +15,8 @@ jQuery(document).ready(function() {
 		jQuery(':checkbox[name="cat[]"]').prop('checked', this.checked);
     });
 
-	jQuery('#selectAllSteps').click(function(event) {  
-		jQuery(':checkbox[name="steps[]"]').prop('checked', this.checked);
+	jQuery('#selectAllClassifications').click(function(event) {
+		jQuery(':checkbox[name="classifications[]"]').prop('checked', this.checked);
     });
 });
 

@@ -23,7 +23,7 @@ $search = $app->getUserStateFromRequest('com_citybranding.pois.filter.search', '
 
 $owned = $app->getUserStateFromRequest('com_citybranding.pois.filter.owned', 'filter_owned');
 $cat = $app->getUserStateFromRequest('com_citybranding.pois.filter.category', 'cat', array());
-$steps = $app->getUserStateFromRequest('com_citybranding.pois.filter.steps', 'steps', array());
+$classifications = $app->getUserStateFromRequest('com_citybranding.pois.filter.classifications', 'classifications', array());
 
 $jinput = $app->input;
 $option = $jinput->get('option', null);
@@ -54,8 +54,8 @@ $id = $jinput->get('id', null);
 			js(':checkbox[name="cat[]"]').prop('checked', this.checked);
 		});
 
-		js('#selectAllSteps').click(function(event) {
-			js(':checkbox[name="steps[]"]').prop('checked', this.checked);
+		js('#selectAllClassifications').click(function(event) {
+			js(':checkbox[name="classifications[]"]').prop('checked', this.checked);
 		});
 	});
 
@@ -165,12 +165,12 @@ $id = $jinput->get('id', null);
 					</div>
 				</div>
 
-				<?php if (JFactory::getUser()->id > 0) : ?>
+<!--				<?php /*if (JFactory::getUser()->id > 0) : */?>
 					<br />
 					<input type="hidden" id="filter_owned_hidden" name="filter_owned" value="no" />
-					<input type="checkbox" id="filter_owned" name="filter_owned" value="yes" <?php echo ($owned == 'yes' ? 'checked="checked"' : ''); ?> />
-					<label for="filter_owned"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_SHOW_MINE');?></label>
-				<?php endif; ?>
+					<input type="checkbox" id="filter_owned" name="filter_owned" value="yes" <?php /*echo ($owned == 'yes' ? 'checked="checked"' : ''); */?> />
+					<label for="filter_owned"><?php /*echo JText::_('MOD_CITYBRANDINGFILTERS_SHOW_MINE');*/?></label>
+				--><?php /*endif; */?>
 				<hr />
 				<h4>
 					<input type="checkbox" checked="checked" id="selectAllCategories">
@@ -185,26 +185,21 @@ $id = $jinput->get('id', null);
 						</div>
 					<?php endforeach; ?>
 				</div>
-
-
-
-				<?php /*
 				<hr />
+<!--
 				<h4>
-					<input type="checkbox" checked="checked" id="selectAllSteps">
-					<label for="selectAllSteps"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_POI_STATUSES');?></label>
+					<input type="checkbox" checked="checked" id="selectAllClassifications">
+					<label for="selectAllClassifications"><?php /*echo JText::_('MOD_CITYBRANDINGFILTERS_CLASSIFICATIONS');*/?></label>
 				</h4>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<?php
-							$statuses = ModCitybrandingfiltersHelper::createStatuses();
-							echo $statuses;
-							?>
+				<?php /*$classification_filters = ModCitybrandingfiltersHelper::getClassificationFilters(); */?>
+
+				<div class="row">
+					<?php /*foreach ($classification_filters as $filter) : */?>
+						<div class="4u">
+							<?php /*echo $filter; */?>
 						</div>
-					</div>
-				</div>
-				*/ ?>
+					<?php /*endforeach; */?>
+				</div>-->
 
 			</div>
 			<div class="modal-footer">

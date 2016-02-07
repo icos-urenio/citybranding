@@ -181,5 +181,11 @@ class ModCitybrandingfiltersHelper {
         return array_filter($filters);
     }
 
-   
+    public static function getClassificationFilters() {
+        $classifications = ModCitybrandingfiltersHelper::getCategories();
+        $filters = ModCitybrandingfiltersHelper::createFiltersAsArray($classifications);
+        return array_filter($filters);
+    }
+
+
 }
