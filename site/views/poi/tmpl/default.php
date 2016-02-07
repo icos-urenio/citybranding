@@ -238,9 +238,14 @@ $src = $dom.$pan.$arg.$preview;
 								<?php echo $this->escape($rBrand['title']); ?>
 							</a></h5>
 						<?php endif; ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
-							(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
-						</a>
+
+						<?php if ($rBrand['is_global']) :?>
+							<span class="cb-cat">Global Brand</span>
+						<?php else : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=brand&id='.(int) $rBrand['id']);?>">
+								(<i class="fa fa-tachometer"></i> <?php echo round($rBrand['distance']*1609.344) ;?> meters)
+							</a>
+						<?php endif; ?>
 
 					</span>
 					<?php foreach ($rBrand['tags'] as $tag) : ?>

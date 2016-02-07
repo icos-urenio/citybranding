@@ -46,12 +46,6 @@
             description="JFIELD_ACCESS_DESC"
         />
 
-    <field name="global" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_AREA_GLOBAL" description="COM_CITYBRANDING_FORM_LBL_AREA_GLOBAL_DESC">
-            <option value="0">JNO</option>
-            <option value="1">JYES</option>
-    </field>
-
-
         <field
             name="alias"
             type="text"

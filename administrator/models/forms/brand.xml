@@ -21,6 +21,11 @@
 
         <field name="tags" type="tag" custom="allow" label="COM_CITYBRANDING_TITLE_TAG" mode="ajax" class="inputbox span12 small" multiple="true" />
 
+        <field name="is_global" type="radio" default="0" class="btn-group btn-group-yesno" label="COM_CITYBRANDING_FORM_LBL_AREA_GLOBAL" description="COM_CITYBRANDING_FORM_LBL_AREA_GLOBAL_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
         <field name="panorama" type="repeatable" icon="list"
                label="Panorama" description=""
                default=""

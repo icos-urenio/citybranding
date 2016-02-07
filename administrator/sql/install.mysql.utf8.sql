@@ -199,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `#__citybranding_brands` (
 `ordering` INT(11)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL ,
 `moderation` TINYINT(1)  NOT NULL ,
+`is_global` TINYINT(1)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 `access` INT(11)  NOT NULL ,

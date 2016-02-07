@@ -54,15 +54,19 @@ class CitybrandingControllerPois extends CitybrandingController
 			$brandsModel = JModelLegacy::getInstance( 'Brands', 'CitybrandingModel', array('ignore_request' => true) );
 			$items = $brandsModel->getItems();
 			foreach ($items as $item) {
-				$marker = new StdClass();
-				$marker->id = $item->id;
-				$marker->state = $item->state;
-				$marker->moderation = $item->moderation;
-				$marker->title = $item->title;
-				$marker->latitude = $item->latitude;
-				$marker->longitude = $item->longitude;
-				$marker->poitype = 'brand';
-				$markers[] = $marker;
+				//global brands should not be displayed on map
+				if($item->is_global == 0)
+				{
+                    $marker = new StdClass();
+                    $marker->id = $item->id;
+                    $marker->state = $item->state;
+                    $marker->moderation = $item->moderation;
+                    $marker->title = $item->title;
+                    $marker->latitude = $item->latitude;
+                    $marker->longitude = $item->longitude;
+                    $marker->poitype = 'brand';
+                    $markers[] = $marker;
+				}
 			}
 
 			echo new JResponseJson($markers);

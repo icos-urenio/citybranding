@@ -493,7 +493,7 @@ class CitybrandingFrontendHelper
 		$origLon = $lng;
 		$dist = $radius; // This is the maximum distance (in miles) away from $origLat, $origLon in which to search
 		$query = "
-			SELECT id,address,latitude,longitude,moderation,photo,title,areaid, 3956 * 2 *
+			SELECT id,address,latitude,longitude,moderation,photo,title,areaid,is_global, 3956 * 2 *
           ASIN(SQRT( POWER(SIN(($origLat - abs(latitude))*pi()/180/2),2)
           +COS($origLat*pi()/180 )*COS(abs(latitude)*pi()/180)
           *POWER(SIN(($origLon-longitude)*pi()/180/2),2)))
@@ -503,11 +503,32 @@ class CitybrandingFrontendHelper
           and latitude between ($origLat-($dist/69))
           and ($origLat+($dist/69))
           and state = 1
-          having distance < $dist ORDER BY distance;";
+          AND is_global = 0
+          HAVING distance < $dist ORDER BY distance;";
 
 		$db->setQuery($query);
 		$items = $db->loadAssocList();
 
+		foreach ($items as &$oneItem) {
+			$tags = new JHelperTags;
+			$tagIds = $tags->getTagIds($oneItem['id'], 'com_citybranding.brand');
+			$tagNames = $tags->getTagNames(explode(',',$tagIds));
+			//$oneItem['tags'] = implode(', ',$tagNames);
+			$oneItem['tags'] = $tagNames;
+		}
+		return $items;
+	}
+
+	public static function getGlobalBrands()
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query
+			->select('id,address,latitude,longitude,moderation,photo,title,areaid,is_global')
+			->from('#__citybranding_brands')
+			->where('is_global = 1');
+		$db->setQuery($query);
+		$items = $db->loadAssocList();
 		foreach ($items as &$oneItem) {
 			$tags = new JHelperTags;
 			$tagIds = $tags->getTagIds($oneItem['id'], 'com_citybranding.brand');

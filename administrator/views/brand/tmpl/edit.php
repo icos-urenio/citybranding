@@ -68,7 +68,10 @@ $document->addStyleSheet('components/com_citybranding/assets/css/citybranding.cs
 		                <div class="control-label"><?php echo $this->form->getLabel('tags'); ?></div>
 		                <div class="controls"><?php echo $this->form->getInput('tags'); ?></div>
 	                </div>
-
+					<div class="control-group">
+						<div class="control-label"><?php echo $this->form->getLabel('is_global'); ?></div>
+						<div class="controls"><?php echo $this->form->getInput('is_global'); ?></div>
+					</div>
 	                <?php /*
 	                <div class="control-group">
 						<div class="control-label"><?php echo $this->form->getLabel('stepid'); ?></div>
