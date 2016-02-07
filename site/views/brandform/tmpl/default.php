@@ -10,19 +10,6 @@
 defined('_JEXEC') or die;
 require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 
-
-//TODO: Set this on settings
-$firstStep = CitybrandingFrontendHelper::getStepByStepId($this->item->stepid);
-?>
-
-<!--
-<?php /*if ($firstStep['ordering'] != 1 && isset($this->item->id) && $this->item->id > 0) :*/?>
-	<div class="alert alert-danger"><?php /*echo JText::_('COM_CITYBRANDING_BRAND_CANNOT_EDIT_ANYMORE'); */?></div>
-	<?php /*return; */?>
-<?php /*endif; */?>
--->
-
-<?php
 JHtml::_('behavior.keepalive');
 //JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
@@ -57,11 +44,7 @@ $default_stepId = $options[0]->value;
 
 //TODO: Add business logic here
 if(!$canState) {
-	$this->form->setFieldAttribute( 'stepid', 'readonly', 'true' );
 	$this->form->setFieldAttribute( 'access', 'disabled', 'disabled' );
-}
-if(!$canState && $this->item->id > 0) {
-	$this->form->setFieldAttribute( 'catid', 'readonly', 'true' );
 }
 ?>
 
@@ -75,17 +58,7 @@ if(!$canState && $this->item->id > 0) {
                 jQuery('input[name="task"]').val('brandform.save');
             });
 
-			jQuery('input:hidden.stepid').each(function(){
-				var name = jQuery(this).attr('name');
-				if(name.indexOf('stepidhidden')){
-					jQuery('#jform_stepid option[value="' + jQuery(this).val() + '"]').attr('selected', 'selected');
-				}
-			});
-
-			jQuery("#jform_stepid").trigger("liszt:updated");
         });
-    
-    
 </script>
 
 <div class="container">
@@ -110,40 +83,26 @@ if(!$canState && $this->item->id > 0) {
 		<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 	</div>
-	
+
+	<div class="control-group">
+		<div class="control-label"><?php echo $this->form->getLabel('areaid'); ?></div>
+		<div class="controls"><?php echo $this->form->getInput('areaid'); ?></div>
+	</div>
+
+	<div class="control-group">
+		<div class="control-label"><?php echo $this->form->getLabel('tags'); ?></div>
+		<div class="controls"><?php echo $this->form->getInput('tags'); ?></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><?php echo $this->form->getLabel('is_global'); ?></div>
+		<div class="controls"><?php echo $this->form->getInput('is_global'); ?></div>
+	</div>
+
 	<div class="control-group citybrandingid">
 		<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 	</div>	
 
-	<?php if (!empty($this->item->id)): /*existing*/?> 
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('regnum'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('regnum'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('regdate'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('regdate'); ?></div>
-	</div>	
-	
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('stepid'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('stepid'); ?></div>
-		<?php foreach((array)$this->item->stepid as $value): ?>
-			<?php if(!is_array($value)): ?>
-				<input type="hidden" class="stepid" name="jform[stepidhidden][<?php echo $value; ?>]" value="<?php echo $value; ?>" />
-			<?php endif; ?>
-		<?php endforeach; ?>
-	</div>
-	<?php else : /*new*/?>
-		<input type="hidden" name="jform[stepid]" value="<?php echo $default_stepId; ?>" />
-		<input type="hidden" class="stepid" name="jform[stepidhidden][<?php echo $default_stepId; ?>]" value="<?php echo $default_stepId; ?>" />
-	<?php endif; ?>
-
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('catid'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('catid'); ?></div>
-	</div>
 	<div class="control-group">
 		<div class="control-label"><?php echo $this->form->getLabel('description'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('description'); ?></div>
@@ -190,36 +149,6 @@ if(!$canState && $this->item->id > 0) {
 		<div class="control-label"><?php echo $this->form->getLabel('language'); ?></div>
 		<div class="controls"><?php echo $this->form->getInput('language'); ?></div>
 	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('hits'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('hits'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('note'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('note'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('votes'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('votes'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('modality'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('modality'); ?></div>
-	</div>				
-
-	<?php /* TODO: check this on settings */ ?>
-	<?php /*
-	<div class="control-group">
-		<?php if(!$canState): ?>
-			<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-			<div class="controls"><?php echo $state_string; ?></div>
-			<input type="hidden" name="jform[state]" value="<?php echo $state_value; ?>" />
-		<?php else: ?>
-			<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
-			<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
-		<?php endif; ?>
-	</div>
-	*/ ?>
 
 
 	<div class="fltlft" <?php if (!JFactory::getUser()->authorise('core.admin','citybranding')): ?> style="display:none;" <?php endif; ?> >

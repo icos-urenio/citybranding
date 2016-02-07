@@ -106,16 +106,16 @@ class CitybrandingModelBrandForm extends JModelForm
 
 
                 //get category properties
-		        $category = JCategories::getInstance('Citybranding')->get($this->_item->catid);
-		        $params = json_decode($category->params);
-		        // if(isset($params->citybranding_category_emails))
-		        // 	$this->_item->notification_emails = explode("\n", $params->citybranding_category_emails);
-		        // else
-		        // 	$this->_item->notification_emails = array();
-		        if(isset($params->image))
-		        	$this->_item->category_image = $params->image;
-		        else
-		        	$this->_item->category_image = ''; 
+//		        $category = JCategories::getInstance('Citybranding')->get($this->_item->catid);
+//		        $params = json_decode($category->params);
+//		        // if(isset($params->citybranding_category_emails))
+//		        // 	$this->_item->notification_emails = explode("\n", $params->citybranding_category_emails);
+//		        // else
+//		        // 	$this->_item->notification_emails = array();
+//		        if(isset($params->image))
+//		        	$this->_item->category_image = $params->image;
+//		        else
+//		        	$this->_item->category_image = '';
 
 
 			} elseif ($error = $table->getError()) {

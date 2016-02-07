@@ -83,7 +83,7 @@ class CitybrandingControllerBrand extends CitybrandingController {
             $app->setUserState('com_citybranding.edit.brand.data', null);
 
             // Redirect to the list screen.
-            $this->setMessage(JText::_('COM_CITYBRANDING_ITEM_SAVED_SUCCESSFULLY'));
+            $this->setMessage(JText::_('COM_CITYBRANDING_BRAND_SAVED_SUCCESSFULLY'));
             $menu = & JSite::getMenu();
             $item = $menu->getActive();
             if(isset($item->link))

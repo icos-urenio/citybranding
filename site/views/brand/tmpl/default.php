@@ -93,7 +93,7 @@ foreach ($attachments->files as $attachment) {
 	</div>
 <?php return; endif; ?>
 
-<?php if($canEdit /*&& $this->item->checked_out == 0*/ && $canEditOnStatus && $this->item->poitype == 1): ?>
+<?php if($canEdit /*&& $this->item->checked_out == 0*/ && $canEditOnStatus): ?>
 	<a class="button special" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=brand.edit&id='.$this->item->id); ?>"><i class="fa fa-pencil"></i> <?php echo JText::_("COM_CITYBRANDING_EDIT_ITEM"); ?> your brand</a>
 <?php endif; ?>
 
@@ -247,6 +247,7 @@ $src = $dom.$pan.$arg.$preview;
 									<?php echo $this->escape($rPoi['title']); ?>
 								</a></h5>
 						<?php endif; ?>
+						<br />
 						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
 							(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
 						</a>
@@ -258,21 +259,6 @@ $src = $dom.$pan.$arg.$preview;
 				</div>
 			</div>
 		<?php endforeach; ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	<?php endif; ?>
 </div> <!-- grid2 -->
