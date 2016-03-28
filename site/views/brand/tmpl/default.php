@@ -59,18 +59,9 @@ foreach ($attachments->files as $attachment) {
 			//console.log('callback for loaded content:', this);
 		};
 
-		var grid = js('.grid').masonry({
-			// set itemSelector so .grid-sizer is not used in layout
-			itemSelector: '.grid-item',
-			// use element for option
-			columnWidth: '.grid-sizer',
-			/*gutter: '.gutter-sizer',*/
-			percentPosition: true
-		});
-		//grid.masonry('layout');
-		grid.imagesLoaded().progress( function() {
-			grid.masonry('layout');
-		});
+	    js(window).imagesLoaded(function () {
+		    collage();
+	    });
 
 		var grid2 = js('.grid2').masonry({
 			// set itemSelector so .grid-sizer is not used in layout
@@ -84,6 +75,28 @@ foreach ($attachments->files as $attachment) {
 		grid2.imagesLoaded().progress( function() {
 			grid2.masonry('layout');
 		});
+    });
+
+    function collage() {
+	    js('#gallery').removeWhitespace().collagePlus(
+		    {
+			    'fadeSpeed' : 2000,
+			    'targetHeight': 200,
+			    'direction': 'horizontal',
+			    'allowPartialLastRow': false,
+			    'effect': 'effect-1'
+		    }
+	    );
+    };
+
+    var resizeTimer = null;
+    js(window).bind('resize', function() {
+	    // hide all the images until we resize them
+	    // set the element you are scaling i.e. the first child nodes of ```.Collage``` to opacity 0
+	    js('#gallery .Image_Wrapper').css("opacity", 0);
+	    // set a timer to re-apply the plugin
+	    if (resizeTimer) clearTimeout(resizeTimer);
+	    resizeTimer = setTimeout(collage, 200);
     });
 </script>
 
@@ -127,25 +140,6 @@ $src = $dom.$pan.$arg.$preview;
 ?>
 
 <div id="poi-wrapper">
-	<div class="grid">
-
-		<!-- width of .grid-sizer used for columnWidth -->
-		<div class="grid-sizer"></div>
-		<div class="gutter-sizer"></div>
-
-		<?php if($this->item->id == 4 && false) : //testing ?>
-		<div class="grid-item grid-item--width100">
-			<iframe title="pannellum panorama viewer 1"
-					width="100%"
-					height="300px"
-					webkitAllowFullScreen
-					mozallowfullscreen
-					allowFullScreen
-					style="border-style:none;margin:0;"
-					src="<?php echo $src;?>">
-			</iframe>
-		</div>
-		<?php endif; ?>
 
 		<?php if(!empty($photos->files) && file_exists($photos->imagedir .'/'. $photos->id . '/thumbnail/' . (@$photos->files[0]->name))) : ?>
 
@@ -156,23 +150,18 @@ $src = $dom.$pan.$arg.$preview;
 			?>
 
 			<?php foreach ($photos->files as $photo) : ?>
-
-			<div class="grid-item<?php echo $index == 1 ? ' grid-item--width2': ''; ?><?php echo $count == 1 ? ' grid-item--width100': ''; ?>">
+				<div class="Image_Wrapper">
 				<a href="<?php echo $photos->imagedir .'/'. $photos->id . '/' . ($photo->name) ;?>" class="image fit">
-					<?php if($index == 1) : ?>
-						<img src="<?php echo $photos->imagedir .'/'. $photos->id . ($index == 1 ? '/' : '/medium/') . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
-					<?php else :?>
-						<img src="<?php echo $photos->imagedir .'/'. $photos->id . '/medium/' . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
-					<?php endif; ?>
+					<img src="<?php echo $photos->imagedir .'/'. $photos->id . '/medium/' . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
 				</a>
 				<?php $index++;?>
-			</div>
+
+				</div>
 
 			<?php endforeach; ?>
 		</div>
 		<?php endif; ?>
 
-	</div>
 </div>
 
 <p></p>

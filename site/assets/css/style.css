@@ -19,6 +19,15 @@
   text-align: center;
 }
 
+#gallery a {border-bottom: none;}
+#gallery {padding: 10px;}
+#gallery img {
+  vertical-align: bottom;
+  opacity: 1;
+}
+#gallery .Image_Wrapper {
+  opacity: 0;
+}
 /*
 Vertical Timeline!
 !
