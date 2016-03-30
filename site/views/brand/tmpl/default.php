@@ -49,6 +49,9 @@ foreach ($attachments->files as $attachment) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
 <script src="<?php echo  JURI::root(true) . '/components/com_citybranding/assets/js/imagesloaded.pkgd.min.js'; ?>"></script>
 
+<script src="<?php echo JURI::root(true).'/components/com_citybranding/assets/js/jquery.collagePlus.min.js'; ?>"></script>
+<script src="<?php echo JURI::root(true).'/components/com_citybranding/assets/js/jquery.removeWhitespace.min.js'; ?>"></script>
+
 <script type="text/javascript">
     js = jQuery.noConflict();
     js(document).ready(function() {
@@ -59,7 +62,7 @@ foreach ($attachments->files as $attachment) {
 			//console.log('callback for loaded content:', this);
 		};
 
-	    js(window).imagesLoaded(function () {
+	    js(window).load(function () {
 		    collage();
 	    });
 

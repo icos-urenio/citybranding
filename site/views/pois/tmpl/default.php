@@ -77,6 +77,7 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                     ?>
 
                     <?php //get photo if any
+
                         $img = null;
                         $i = 0;
                         if(isset($attachments->files)){
@@ -88,6 +89,12 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                                 }
                                 $i++;
                             }
+                        }
+
+                        if (empty($attachments->files))
+                        {
+                            $img['src']  = JURI::root(true) . '/components/com_citybranding/assets/images/image-placeholder-1.png';
+                            $img['link'] = JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id);
                         }
                     ?>
                     <?php if (!is_null($img)) : ?>

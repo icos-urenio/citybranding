@@ -76,7 +76,7 @@ class CitybrandingModelPois extends JModelList {
 
         // List state information
         $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-        $this->setState('list.limit', $limit);
+        //$this->setState('list.limit', $limit);
 
         $limitstart = JFactory::getApplication()->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
@@ -92,12 +92,12 @@ class CitybrandingModelPois extends JModelList {
         $access = $app->getUserStateFromRequest($this->context . '.filter.access', 'filter_access');
         $this->setState('filter.access', $access);
 
-        $category = $app->getUserStateFromRequest($this->context . '.filter.category', 'cat', array()); 
+        $category = $app->getUserStateFromRequest($this->context . '.filter.category', 'cat', array());
         $this->setState('filter.category', $category);
         //Filtering catid
         //$this->setState('filter.catid', $app->getUserStateFromRequest($this->context.'.filter.catid', 'filter_catid', '', 'string'));
 
-        $steps = $app->getUserStateFromRequest($this->context . '.filter.steps', 'steps', array()); 
+        $steps = $app->getUserStateFromRequest($this->context . '.filter.steps', 'steps', array());
         $this->setState('filter.steps', $steps);
         //Filtering stepid
         //$this->setState('filter.stepid', $app->getUserStateFromRequest($this->context.'.filter.stepid', 'filter_stepid', '', 'string'));
@@ -107,8 +107,9 @@ class CitybrandingModelPois extends JModelList {
 
         $this->setState('filter.language', JLanguageMultilang::isEnabled());
 
-	    // List state information.
-	    parent::populateState($ordering, $direction);
+        // List state information.
+        parent::populateState($ordering, $direction);
+        $this->setState('list.limit', 0); //show all
     }
 
     /**
