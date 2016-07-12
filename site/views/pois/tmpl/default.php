@@ -107,19 +107,24 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
 
                     <div class="cb-category-icon">
                         <?php if($item->category_image != '') : ?>
-                            <img src="<?php echo $item->category_image; ?>" alt="category symbol" />
+                            <img
+                                title="<?php echo JText::_(CitybrandingFrontendHelper::getCategoryNameByCategoryId($item->catid));?>"
+                                src="<?php echo $item->category_image; ?>" alt="category symbol"
+                            />
                         <?php endif; ?>
                     </div>
-                    <div class="cb-classification-icon">
-                        <?php $item->classifications = explode(',',$item->classifications);?>
-                        <?php foreach ($item->classifications as $classification) : ?>
-                            <i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i>
-                        <?php endforeach; ?>
-                    </div>
-
 
                     <div class="<?php echo ($item->moderation == 1 ? 'poi-unmoderated ' : ''); ?>citybranding-panel-body">
                         <span class="lead">
+                            <div class="cb-classification-icon2">
+                                <?php $item->classifications = explode(',',$item->classifications);?>
+                                <?php foreach ($item->classifications as $classification) : ?>
+                                    <i
+                                        title="<?php echo JText::_(CitybrandingFrontendHelper::getClassificationTitleById($classification)); ?>"
+                                        class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"
+                                    ></i>
+                                <?php endforeach; ?>
+                            </div>
                             <?php if ($canEdit && $canEditOnStatus) : ?>
                               <a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $item->id); ?>">
                               <i class="icon-edit"></i> <?php echo $this->escape($item->title); ?></a>

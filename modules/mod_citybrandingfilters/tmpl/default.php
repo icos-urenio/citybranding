@@ -179,9 +179,10 @@ $id = $jinput->get('id', null);
 				<?php $category_filters = ModCitybrandingfiltersHelper::getCategoryFilters(); ?>
 
 				<div class="row">
+
 					<?php foreach ($category_filters as $filter) : ?>
 						<div class="4u">
-							<?php echo $filter; ?>
+							<?php echo JText::_($filter); ?>
 						</div>
 					<?php endforeach; ?>
 				</div>

@@ -110,23 +110,23 @@ class ModCitybrandingfiltersHelper {
                 if($JCatNode->parentid == 'root')
                 {
                     self::$filters .= '<input path="' . $JCatNode->path . '" parent="box' . $JCatNode->parentid . '" name="cat[]" value="' . $JCatNode->id . '" type="checkbox" checked="checked" id="cat-' . $JCatNode->id . '" onclick="citybranding_filterbox_click(this,' . $JCatNode->id . ')" />' . "\n";
-                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.$JCatNode->title.'</span></label>';
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.JText::_($JCatNode->title).'</span></label>';
                 }
                 else {
                     self::$filters .= '<input path="' . $JCatNode->path . '" parent="box' . $JCatNode->parentid . '" name="cat[]" value="' . $JCatNode->id . '" type="checkbox" checked="checked" id="cat-' . $JCatNode->id . '" onclick="citybranding_filterbox_click(this,' . $JCatNode->id . ')" />' . "\n";
-                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.$JCatNode->title.'</label>';
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.JText::_($JCatNode->title).'</label>';
                 }
             }
             else{
                 if($JCatNode->parentid == 'root')
                 {
                     self::$filters .='<input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />' . "\n";
-                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.$JCatNode->title.'</span></label>';
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'"><span class="root">'.' '.JText::_($JCatNode->title).'</span></label>';
                 }
                 else
                 {
                     self::$filters .='<input path="'.$JCatNode->path.'" parent="box'.$JCatNode->parentid.'" name="cat[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_category)) self::$filters .= 'checked="checked"'; self::$filters .= ' id="cat-'.$JCatNode->id.'" onclick="citybranding_filterbox_click(this,'.$JCatNode->id.')" />'. "\n";
-                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.$JCatNode->title.'</label>';
+                    self::$filters .= '<label for="cat-' . $JCatNode->id .'">'.JText::_($JCatNode->title).'</label>';
                 }
             }
             

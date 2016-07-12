@@ -88,8 +88,8 @@ foreach ($attachments->files as $attachment) {
 			    'fadeSpeed' : 2000,
 			    'targetHeight': 200,
 			    'direction': 'horizontal',
-			    'allowPartialLastRow': false,
-			    'effect': 'effect-1'
+			    'allowPartialLastRow': <?php echo count($photos->files) == 1 ? 'true' : 'false';?>
+			    //'effect': 'effect-1'
 		    }
 	    );
     };
@@ -117,9 +117,22 @@ foreach ($attachments->files as $attachment) {
 <?php endif; ?>
 
 <header class="citybranding-poi-title">
-	<h4><?php echo $this->item->title; ?></h4>
-	<p><span class="icon cb-location"></span> <?php echo $this->item->address;?><br />
-		<span class="icon cb-pushpin"></span> <?php echo $this->item->catid_title; ?>
+	<h4>
+	<?php if($this->item->category_image != '') : ?>
+		<img
+			title="<?php echo JText::_(CitybrandingFrontendHelper::getCategoryNameByCategoryId($this->item->catid));?>"
+			src="<?php echo $this->item->category_image; ?>" alt="category symbol"
+		/>
+	<?php endif; ?>
+
+	<?php echo $this->item->title; ?></h4>
+	<p>
+		<span class="icon cb-location"></span> <?php echo $this->item->address;?><br />
+		<?php $this->item->classifications = explode(',',$this->item->classifications);?>
+		<?php foreach ($this->item->classifications as $classification) : ?>
+			<i class="icon <?php echo CitybrandingFrontendHelper::getClassificationById($classification); ?>"></i>
+			<?php echo JText::_(CitybrandingFrontendHelper::getClassificationTitleById($classification)) . ' '; ?>
+		<?php endforeach; ?>
 	</p>
 
 </header>
@@ -149,23 +162,34 @@ $src = $dom.$pan.$arg.$preview;
 
 		<?php if(!empty($photos->files) && file_exists($photos->imagedir .'/'. $photos->id . '/thumbnail/' . (@$photos->files[0]->name))) : ?>
 
-		<div id='gallery' class="effect-parent">
-
 			<?php
-			$index = 1;
-			$count = count($photos->files);
+				$index = 1;
+				$count = count($photos->files);
 			?>
 
-			<?php foreach ($photos->files as $photo) : ?>
-				<div class="Image_Wrapper">
-				<a href="<?php echo $photos->imagedir .'/'. $photos->id . '/' . ($photo->name) ;?>">
-					<img src="<?php echo $photos->imagedir .'/'. $photos->id . '/medium/' . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
-				</a>
-				<?php $index++;?>
+			<?php if($count == 1) : ?>
+				<div id='gallery'>
+				<div style="float: left;padding-right: 15px;">
+					<a href="<?php echo $photos->imagedir .'/'. $photos->id . '/' . ($photo->name) ;?>">
+						<img src="<?php echo $photos->imagedir .'/'. $photos->id . '/medium/' . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
+					</a>
 				</div>
-			<?php endforeach; ?>
+				</div>
+			<?php else : ?>
 
-		</div>
+			<div id='gallery' class="effect-parent">
+
+				<?php foreach ($photos->files as $photo) : ?>
+					<div class="Image_Wrapper">
+					<a href="<?php echo $photos->imagedir .'/'. $photos->id . '/' . ($photo->name) ;?>">
+						<img src="<?php echo $photos->imagedir .'/'. $photos->id . '/medium/' . ($photo->name) ;?>" alt="<?php echo JText::_('COM_CITYBRANDING_POIS_PHOTO') . ' '. $index;?>" />
+					</a>
+					<?php $index++;?>
+					</div>
+				<?php endforeach; ?>
+
+			</div>
+			<?php endif; ?>
 		<?php endif; ?>
 
 	</div>
@@ -175,7 +199,7 @@ $src = $dom.$pan.$arg.$preview;
 <p><?php echo $this->item->description; ?></p>
 
 
-<h4>Brands close to the <?php echo $this->item->title;?> (up to <?php echo $params->get('radiusMeters'); ?> meters)</h4>
+<h4><?php echo JText::_('COM_CITYBRANDING_BRANDS_CLOSE') . ' ' . $this->item->title;?></h4>
 <?php
 	$relativeBrands = $this->relativeBrands;
 ?>

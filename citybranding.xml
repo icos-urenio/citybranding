@@ -78,7 +78,4 @@
         <module module="mod_citybrandingmap" />
 		<module module="mod_citybrandingfilters" />
 	</modules>
-    <updateservers>
-        <server type="extension" priority="1" name="ImproveMyCity">http://www.improve-my-city.com/autoupdates-repo/citybranding3-update.xml</server>
-    </updateservers>    
 </extension>
