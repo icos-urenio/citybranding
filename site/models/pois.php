@@ -97,6 +97,9 @@ class CitybrandingModelPois extends JModelList {
         //Filtering catid
         //$this->setState('filter.catid', $app->getUserStateFromRequest($this->context.'.filter.catid', 'filter_catid', '', 'string'));
 
+        $classification = $app->getUserStateFromRequest($this->context . '.filter.classification', 'cla', array());
+        $this->setState('filter.classification', $classification);
+
         $steps = $app->getUserStateFromRequest($this->context . '.filter.steps', 'steps', array());
         $this->setState('filter.steps', $steps);
         //Filtering stepid
@@ -215,7 +218,16 @@ class CitybrandingModelPois extends JModelList {
                 $filter_category = implode(',', $filter_category);
                 $query->where('a.catid IN ('.$filter_category.')');
             }
-        } 
+        }
+
+        // Filter by classification
+        $filter_classification = $this->state->get('filter.classification');
+        if(!empty($filter_classification)){
+            if(!in_array(0, $filter_classification)){
+                $filter_classification = implode(',', $filter_classification);
+                $query->where('a.classifications IN ('.$filter_classification.')');
+            }
+        }
 
         //Filtering owned
 	    $filter_owned = $this->state->get("filter.owned");

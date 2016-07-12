@@ -55,7 +55,7 @@ $id = $jinput->get('id', null);
 		});
 
 		js('#selectAllClassifications').click(function(event) {
-			js(':checkbox[name="classifications[]"]').prop('checked', this.checked);
+			js(':checkbox[name="cla[]"]').prop('checked', this.checked);
 		});
 	});
 
@@ -187,20 +187,21 @@ $id = $jinput->get('id', null);
 					<?php endforeach; ?>
 				</div>
 				<hr />
-<!--
+
 				<h4>
 					<input type="checkbox" checked="checked" id="selectAllClassifications">
-					<label for="selectAllClassifications"><?php /*echo JText::_('MOD_CITYBRANDINGFILTERS_CLASSIFICATIONS');*/?></label>
+					<label for="selectAllClassifications"><?php echo JText::_('MOD_CITYBRANDINGFILTERS_CLASSIFICATIONS');?></label>
 				</h4>
-				<?php /*$classification_filters = ModCitybrandingfiltersHelper::getClassificationFilters(); */?>
+				<?php $classification_filters = ModCitybrandingfiltersHelper::getClassificationFilters(); ?>
 
 				<div class="row">
-					<?php /*foreach ($classification_filters as $filter) : */?>
+					<?php foreach ($classification_filters as $filter) : ?>
 						<div class="4u">
-							<?php /*echo $filter; */?>
+							<?php echo $filter; ?>
 						</div>
-					<?php /*endforeach; */?>
-				</div>-->
+					<?php endforeach; ?>
+				</div>
+				<hr />
 
 			</div>
 			<div class="modal-footer">

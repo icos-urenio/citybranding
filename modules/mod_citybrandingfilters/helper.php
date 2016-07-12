@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 class ModCitybrandingfiltersHelper {
     
     private static $filters;
+    private static $classificationFilters;
 
     public function getVotes($id) 
     {
@@ -53,6 +54,13 @@ class ModCitybrandingfiltersHelper {
         return $str;        
     }
 
+    public static function getClassifications()
+    {
+        require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/classifications.php';
+        $claModel = new CitybrandingModelClassifications();
+        return $claModel->getItems();
+    }
+    
     //TODO: getCategories + loadCats to be replaced with getOptions like subgrouplist.php does
     public static function getCategories($recursive = false)
     {
@@ -96,6 +104,28 @@ class ModCitybrandingfiltersHelper {
             return $return;
         }
         return false;
+    }
+
+    private static function createClassificationFilters($cls = array())
+    {
+        $app = JFactory::getApplication();
+        $filter_class = $app->getUserStateFromRequest('com_citybranding.pois.filter.classification', 'cla', array());
+
+
+        foreach($cls as $JCatNode){
+            if(empty($filter_class)){
+                self::$classificationFilters .= '<input name="cla[]" value="' . $JCatNode->id . '" type="checkbox" checked="checked" id="cla-' . $JCatNode->id . '" />' . "\n";
+                self::$classificationFilters .= '<label for="cla-' . $JCatNode->id .'">'.JText::_($JCatNode->title).'</label>';
+            }
+            else{
+                self::$classificationFilters .='<input name="cla[]" value="'.$JCatNode->id.'" type="checkbox" '; if(in_array($JCatNode->id, $filter_class)) self::$classificationFilters .= 'checked="checked"'; self::$classificationFilters .= ' id="cla-'.$JCatNode->id.'" />'. "\n";
+                self::$classificationFilters .= '<label for="cla-' . $JCatNode->id .'">'.JText::_($JCatNode->title).'</label>';
+            }
+
+        }
+
+
+        return self::$classificationFilters;
     }
 
     private static function createFilters($cats = array())
@@ -151,6 +181,18 @@ class ModCitybrandingfiltersHelper {
         return $ar;
     }
 
+
+    private static function createClassificationFiltersAsArray($cats)
+    {
+        $ar[] = null;
+        foreach($cats as $cat){
+            self::$classificationFilters = '';
+            $ar[] = ModCitybrandingfiltersHelper::createClassificationFilters(array($cat));
+        }
+        self::$classificationFilters = '';
+        return $ar;
+    }
+
     public function createLimitBox($lim)
     {
         // Initialise variables.
@@ -182,8 +224,8 @@ class ModCitybrandingfiltersHelper {
     }
 
     public static function getClassificationFilters() {
-        $classifications = ModCitybrandingfiltersHelper::getCategories();
-        $filters = ModCitybrandingfiltersHelper::createFiltersAsArray($classifications);
+        $classifications = ModCitybrandingfiltersHelper::getClassifications();
+        $filters = ModCitybrandingfiltersHelper::createClassificationFiltersAsArray($classifications);
         return array_filter($filters);
     }
 
