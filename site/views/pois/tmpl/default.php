@@ -56,7 +56,7 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                 $canDelete = $user->authorise('core.delete', 'com_citybranding.poi.'.$item->id);
                 //$canEditOwn = $user->authorise('core.edit.own', 'com_citybranding.poi.' . $item->id);
                 $attachments = json_decode($item->photo);
-                
+
                 //Edit Own only if poi status is the initial one
                 $firstStep = CitybrandingFrontendHelper::getStepByStepId($item->stepid);
                 $canEditOnStatus = true;
@@ -68,7 +68,7 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
             <?php if (!$canEdit && $user->authorise('core.edit.own', 'com_citybranding.poi.'.$item->id)): ?>
                 <?php $canEdit = JFactory::getUser()->id == $item->created_by; ?>
             <?php endif; ?>
-                
+
             <div class="grid-item">
                 <div id="citybranding-panel-<?php echo $item->id;?>" class="citybranding-panel">
                     <?php /* if (JFactory::getUser()->id == $item->created_by) : ?>
@@ -98,9 +98,9 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                         }
                     ?>
                     <?php if (!is_null($img)) : ?>
-                    <div class="crop-height">
+                    <div class="panel-thumbnail">
                         <a href="<?php echo $img['link'];?>">
-                            <img class="scale" src="<?php echo $img['src'];?>" alt="POI photo" />
+                            <img class="citybranding-card-img" src="<?php echo $img['src'];?>" alt="POI photo" />
                         </a>
                     </div>
                     <?php endif; ?>
@@ -126,10 +126,10 @@ $canDelete = $user->authorise('core.delete', 'com_citybranding');
                                 <?php endforeach; ?>
                             </div>
                             <?php if ($canEdit && $canEditOnStatus) : ?>
-                              <a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $item->id); ?>">
+                              <a class="citybranding-grid-title" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $item->id); ?>">
                               <i class="icon-edit"></i> <?php echo $this->escape($item->title); ?></a>
                             <?php else : ?>
-                                <a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id); ?>">
+                                <a class="citybranding-grid-title" href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $item->id); ?>">
                                 <?php echo $this->escape($item->title); ?>
                                 </a>
                             <?php endif; ?>

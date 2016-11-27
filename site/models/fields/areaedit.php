@@ -143,7 +143,8 @@ class JFormFieldAreaEdit extends JFormFieldList
 			{
 				if ($options[$i]->level == 0)
 				{
-					$options[$i]->text = JText::_('JGLOBAL_ROOT_PARENT');
+					//$options[$i]->text = JText::_('JGLOBAL_ROOT_PARENT');
+					$options[$i]->text = '-';
 				}
 			}
 			if ($options[$i]->state == 1)

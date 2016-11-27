@@ -223,7 +223,22 @@ function resetBounds(map, gmarkers) {
 }
 
 function panelFocus(id) {
-  jQuery('#citybranding-panel-' + id)[0].scrollIntoView( true );
+  //jQuery('#citybranding-panel-' + id)[0].scrollIntoView( true );
+
+    var el = jQuery('#citybranding-panel-' + id);
+    var elOffset = el.offset().top;
+    var elHeight = el.height();
+    var windowHeight = jQuery(window).height();
+    var offset;
+
+    if (elHeight < windowHeight) {
+        offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+    }
+    else {
+        offset = elOffset;
+    }
+    var speed = 700;
+    jQuery('html, body').animate({scrollTop:offset}, speed);
 
   //all
   jQuery("[id^=citybranding-panel-]").removeClass('citybranding-focus');

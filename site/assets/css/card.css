@@ -48,7 +48,9 @@
   right: 0;
   top: 0;
 }
-
+.cb-classification-icon2 {
+  height: 20px;
+}
 .cb-tag,
 .cb-cat{
   background-color: #545484;
@@ -65,56 +67,6 @@
 
 }
 
-.citybranding-panel-body {padding: 5px;}
-.citybranding-panel-body .label { white-space: normal; }
-span.lead a {text-decoration: none; border-bottom: none;}
-/* scale and crop image to same height */
-.crop-height {
-  /* max-width: 1200px; /* native or declared width of img src (if known) */
-  height: 220px;
-  /*max-height: 200px;*/
-  overflow: hidden;
-  background-color: #fff;
-}
-@media screen and (max-width: 480px) { .crop-height {height: 100px;} }
-@media screen and (max-width: 736px) { .crop-height {height: 150px;} }
-img.scale {
-  /* corrects small inline gap at bottom of containing div */
-  display: block;
-  width: 100%; /* corrects obscure Firefox bug */
-  max-width: 100%;
-  /* just in case, to force correct aspect ratio */
-  height: auto !important;
-  display: block; /* corrects small inline gap at bottom of containing div */
-  width: 100% /* corrects obscure Firefox bug */
-  max-width: 100%;
-  /* just in case, to force correct aspect ratio */
-  height: auto !important;
-  /*width: auto\9;
-  /* ie8+9 - use modernizr instead of this \9 hack */
-  /* lt ie8 */
-  -ms-interpolation-mode: bicubic;
-  /* optionally force a minimum size if img src size is known: */
-  /* min-height: 320px; /* max-height of .crop-height */
-  /* min-width: 480px; /* proportional to above */
-}
-
-.flip {
-  -webkit-transform: rotate(180deg);
-  -moz-transform:    rotate(180deg);
-  -ms-transform:     rotate(180deg);
-  -o-transform:      rotate(180deg);
-  transform:         rotate(180deg);
-  /* needed? not sure */
-  zoom: 1;
-}
-
-img.flip {
-  /* actually, aligns left within .cropheight */
-  float: right;
-  /* clearfix after? */
-}
-
 #poi-wrapper .grid-sizer,
 #poi-wrapper .grid-item { width: 20%;}
 #poi-wrapper .grid-item--width2 { width: 40%; }
@@ -128,11 +80,320 @@ img.flip {
 .citybranding-warning {color: #e21d1d; font-size: small;}
 .citybranding-info {color: #999999; font-size: small;}
 .masonry .citybranding-panel { position: relative;z-index:90;}
-/*.masonry .panel-body {position: relative;}*/
-.poi-unmoderated { /*background-color: #efefef;*/ }
+.masonry .panel-body a { border-bottom: none;}
+.masonry .panel-body a:hover { border-bottom: dotted 1px;}
+
+
+body {
+  /* Helvetica/Arial-based sans serif stack */
+  font-family:
+          Frutiger, "Frutiger Linotype",
+          Univers,
+          Calibri,
+          "Gill Sans", "Gill Sans MT",
+          "Myriad Pro", Myriad,
+          "DejaVu Sans Condensed",
+          "Liberation Sans",
+          "Nimbus Sans L",
+          Tahoma,
+          Geneva,
+          "Helvetica Neue", Helvetica,
+          Arial,
+          sans-serif;
+}
+
+/* grid */
+.grid-sizer,
+.grid-item {
+  width: 32%;
+}
+.gutter-sizer { width: 2%; }
+.grid-item { margin-bottom: 10px; }
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid { font-size: 1em; }
+
+@media screen and (max-width: 1120px) {
+  .grid-sizer,
+  .grid-item { width: 49%;}
+}
+
+@media screen and (max-width: 736px) {
+  .grid-sizer,
+  .grid-item { width: 99%;}
+}
+
+.citybranding-card-header {
+  margin: 0 auto;
+  display: flex;
+}
+
+/* hover effect */
+
+.panel {
+  background-color: rgb(255,255,255);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.12);
+  margin-bottom: 10px;
+}
+
+.citybranding-focus {
+  border-color: #0077BB;
+  opacity: 1;
+}
+.citybranding-not-focus {
+  border-color: #dddddd;
+  opacity: 0.25;
+}
+
+.citybranding-panel-body {padding: 12px; }
+.citybranding-panel-body .label { white-space: normal; }
+
+
+.citybranding-warning {color: #e21d1d; font-size: small;}
+.citybranding-info {color: #999999; font-size: small;}
+
+.citybranding-card-id {
+  font-size:14px;
+  line-height: 140%;
+  padding: 0 6px 0 6px;
+  border-radius: 4px;
+  z-index:20;
+  color:#ffffff;
+  background-color: rgb(117,117,117);
+  background-color: rgba(0,0,0,0.54);
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  letter-spacing: 0.3pt;
+}
+
+.citybranding-card-edit-icon {
+  padding: 0 6px 0 6px;
+  z-index: 20;
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  text-decoration: none;
+}
+
+.citybranding-card-edit-icon a {
+  margin:0 auto;
+}
+
+.citybranding-card-msg-icon {
+  padding: 6px 6px 0 6px;
+  z-index: 20;
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  text-decoration: none;
+  font-size: 24px;
+  color: rgb(226,18,36);
+}
+
+.citybranding-issue-msg {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  cursor: pointer;
+}
+
+.citybranding-msg-tooltip {
+  background: #181512;
+  bottom: 100%;
+  color: #fff;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 20px;
+  pointer-events: none;
+  -webkit-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  transform: translateY(10px);
+  transition: all .25s ease-out;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  border-radius: 3px;
+  text-align: center;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.citybranding-grid-msg-tooltip {
+  display: block;
+  left: 60px;
+  bottom: -100px;
+  position: absolute;
+  width: auto;
+}
+
+.citybranding-grid-msg-tooltip :before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.citybranding-grid-msg-tooltip :after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #181512 10px;
+  bottom: -10px;
+  right: 5px;
+  content: " ";
+  height: 0;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+
+
+.citybranding-issue-msg:hover .citybranding-msg-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+}
+
+/* IE can just show/hide with no transition */
+.lte8 .citybranding-issue-msg .citybranding-msg-tooltip {
+  display: none;
+}
+
+.lte8 .citybranding-issue-msg:hover .citybranding-msg-tooltip {
+  display: block;
+}
+
+
+
+.citybranding-card-description {
+  overflow: hidden;
+  height: 48px;
+}
+
+.citybranding-card-description:before {
+  content:"";
+  float: left;
+  width: 5px; height: 200px;
+}
+
+.citybranding-card-description > *:first-child {
+  float: right;
+  width: 100%;
+  margin-left: -5px;
+}
+
+.citybranding-card-description:after {
+  content: "\02026";
+
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+
+  float: right; position: relative;
+  top: -25px; left: 100%;
+  width: 3em; margin-left: -3em;
+  padding-right: 5px;
+
+  text-align: right;
+
+  background-size: 100% 100%;
+
+  /* 512x1 image, gradient for IE9. Transparent at 0% -> white at 50% -> white at 100%.*/
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAABCAMAAACfZeZEAAAABGdBTUEAALGPC/xhBQAAAwBQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wDWRdwAAAP90Uk5TgsRjMZXhS30YrvDUP3Emow1YibnM9+ggOZxrBtpRRo94gxItwLOoX/vsHdA2yGgL8+TdKUK8VFufmHSGgAQWJNc9tk+rb5KMCA8aM0iwpWV6dwP9+fXuFerm3yMs0jDOysY8wr5FTldeoWKabgEJ8RATG+IeIdsn2NUqLjQ3OgBDumC3SbRMsVKsValZplydZpZpbJOQco2KdYeEe36BDAL8/vgHBfr2CvTyDu8R7esU6RcZ5ecc4+Af3iLcJSjZ1ivT0S/PMs3LNck4x8U7wz7Bv0G9RLtHuEq1TbJQr1OtVqqnWqRdoqBhnmSbZ5mXapRtcJGOc4t2eYiFfH9AS7qYlgAAARlJREFUKM9jqK9fEGS7VNrDI2+F/nyB1Z4Fa5UKN4TbbeLY7FW0Tatkp3jp7mj7vXzl+4yrDsYoVx+JYz7mXXNSp/a0RN25JMcLPP8umzRcTZW77tNyk63tdprzXdmO+2ZdD9MFe56Y9z3LUG96mcX02n/CW71JH6Qmf8px/cw77ZvVzB+BCj8D5vxhn/vXZh6D4uzf1rN+Cc347j79q/zUL25TPrJMfG/5LvuNZP8rixeZz/mf+vU+Vut+5NL5gPOeb/sd1dZbTs03hBuvmV5JuaRyMfk849nEM7qnEk6IHI8/qn049hB35QGHiv0yZXuMdkXtYC3ebrglcqvYxoj1muvC1nDlrzJYGbpcdHHIMo2FwYv+j3QAAOBSfkZYITwUAAAAAElFTkSuQmCC);
+
+  background: -webkit-gradient(linear, left top, right top,
+  from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+  background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+}
+
+.citybranding-panel a {border-bottom: none;}
+
+.citybranding-grid-title {
+  display: block;
+  margin: 0 0 4px;
+  line-height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.citybranding-grid-cat-label {
+  text-align: center;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(33,33,33);
+  color: rgba(0,0,0,0.87);
+}
+
+.citybranding-panel-body .label {
+  white-space: nowrap;
+}
+
+.citybranding-panel-body p {
+  line-height: 120%;
+}
+
+.citybranding-card-section-style {
+  margin-bottom: 6px;
+}
+
+.citybranding-no-img-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.panel-thumbnail {
+  min-height: 240px;
+  min-width: 100%;
+  max-height: 240px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.citybranding-card-cat-icon {
+  height: 24px;
+  padding-right: 6px;
+}
+
+.citybranding-card-img {
+  position: absolute;
+  min-height: 240px;
+  min-width: 100%;
+  left: 50%;
+  top: 50%;
+  height: auto;
+  width: auto;
+  max-width: none;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+
+.masonry .panel { position: relative; z-index:90;}
+.issue-unmoderated { /*background-color: #efefef;*/ }
 
 
 /* ribbon */
+
 .ribbon-wrapper-corner {
   width: 85px;
   height: 88px;
@@ -158,20 +419,20 @@ img.flip {
   top: 15px;
   width: 120px;
   background-color: #0099CC;/* #BFDC7A*/
-/*  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
-  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
-  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
-  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
-  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); */
+  /*  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45));
+    background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45);
+    background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); */
   /*color: #6a6340;*/
-  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
-  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0 0 3px rgba(0,0,0,0.3);
+  box-shadow:         0 0 3px rgba(0,0,0,0.3);
 }
 
 .ribbon-corner:before, .ribbon-corner:after {
   content: "";
-  border-top:   3px solid #0099CC;   
+  border-top:   3px solid #0099CC;
   border-left:  3px solid transparent;
   border-right: 3px solid transparent;
   position:absolute;
@@ -185,6 +446,7 @@ img.flip {
   right: 0;
 }
 
+
 .book-ribbon {
   font: 12px Sans-Serif;
   line-height: 16px;
@@ -193,6 +455,7 @@ img.flip {
   right: 1.0em;
   top: -0.25em;
   width: 30px;
+  z-index: 10;
 }
 .book-ribbon-left {left: 0.85em;}
 

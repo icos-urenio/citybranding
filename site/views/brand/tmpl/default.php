@@ -208,9 +208,9 @@ $src = $dom.$pan.$arg.$preview;
 					}
 					?>
 					<?php if (!is_null($img)) : ?>
-						<div class="crop-height">
+                        <div class="panel-thumbnail">
 							<a href="<?php echo $img['link'];?>">
-								<img class="scale" src="<?php echo $img['src'];?>" alt="POI photo" />
+								<img class="citybranding-card-img" src="<?php echo $img['src'];?>" alt="POI photo" />
 							</a>
 						</div>
 					<?php endif; ?>
@@ -232,14 +232,14 @@ $src = $dom.$pan.$arg.$preview;
 					<span class="lead">
 
 						<?php if ($canEdit && $canEditOnStatus) : ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rPoi['id']); ?>">
+							<a class="citybranding-grid-title" href="<?php echo JRoute::_('index.php?option=com_citybranding&task=poi.edit&id='.(int) $rPoi['id']); ?>">
 								<i class="icon-edit"></i> <?php echo $this->escape($rPoi['title']); ?></a>
 						<?php else : ?>
-							<h5><a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']); ?>">
+							<h5><a class="citybranding-grid-title" href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']); ?>">
 									<?php echo $this->escape($rPoi['title']); ?>
 								</a></h5>
 						<?php endif; ?>
-						<br />
+
 						<a href="<?php echo JRoute::_('index.php?option=com_citybranding&view=poi&id='.(int) $rPoi['id']);?>">
 							(<i class="fa fa-tachometer"></i> <?php echo round($rPoi['distance']*1609.344) ;?> meters)
 						</a>

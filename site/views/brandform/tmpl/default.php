@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 require_once JPATH_COMPONENT_SITE . '/helpers/citybranding.php';
 
 JHtml::_('behavior.keepalive');
-//JHtml::_('behavior.tooltip');
+JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 //JHtml::_('formbehavior.chosen', 'select');
 //include popup overlay

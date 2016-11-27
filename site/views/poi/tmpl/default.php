@@ -195,9 +195,9 @@ $src = $dom.$pan.$arg.$preview;
 	</div>
 </div>
 
-<p></p>
+<div style="min-height: 200px;">
 <p><?php echo $this->item->description; ?></p>
-
+</div>
 
 <h4><?php echo JText::_('COM_CITYBRANDING_BRANDS_CLOSE') . ' ' . $this->item->title;?></h4>
 <?php
