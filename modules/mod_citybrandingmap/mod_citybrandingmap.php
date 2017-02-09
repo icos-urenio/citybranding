@@ -43,7 +43,7 @@ else{
 
 //clusterer
 if($clusterer){
-	$doc->addScript('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js');
+	$doc->addScript('https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js');
 }
 
 $jinput = JFactory::getApplication()->input;

@@ -56,7 +56,7 @@ function citybranding_mod_map_initialize() {
         infoBox(citybranding_mod_map, poi, data);
 
         if(data.moderation == 1){
-            poi.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+            poi.setIcon('https://maps.google.com/mapfiles/ms/icons/blue-dot.png');
         }
     }
 
